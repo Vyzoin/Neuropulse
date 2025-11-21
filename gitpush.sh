@@ -1,5 +1,5 @@
 #!/bin/bash
-# Script Git automatisé avec fonctions
+# Script Git automatisé avec création de branche, commit, push et nettoyage
 
 
 
@@ -46,4 +46,4 @@ push_vers_depot
 retour_main
 suppression_branche_locale
 
-echo "Opération Git terminée avec succès."
+echo "Opération Git terminée avec succès. A toi de jouer maintenant, va faire ton PR  !"
