@@ -7,7 +7,7 @@
 ##  Installation et lancement
 
 ###  Prérequis
-- [Godot Engine 4.x](https://godotengine.org/download)
+- [Phaser ](https://docs.phaser.io/phaser/getting-started/what-is-phaser)
 - Navigateur web moderne (Chrome, Firefox, Edge…)
 - Git
 
