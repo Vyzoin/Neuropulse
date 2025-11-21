@@ -15,7 +15,7 @@
 
 ```bash
 git clone https://codeberg.org/NEUROPULSE/Neuropulse.git
-cd neuropulse
+
 
 
 
