@@ -1,40 +1,49 @@
 #!/bin/bash
-# C'est un simple script qui permet d'effectuer un git push sur le depôt en gerant les branches distantes et locales.
+# Script Git automatisé avec fonctions
 
 
 
-function creation_branche_locale   { 
+
+
+function creation_branche_locale {
+    read -p "Entrez le nom de la nouvelle branche locale: feature/" saisie
+    nom_branche="feature/$saisie"
     git checkout -b "$nom_branche"
     echo "Branche locale '$nom_branche' créée et basculée dessus."
-}
-function suppression_branche_locale  {
-    git branch -d "$nom_branche"
-    echo "Branche locale '$nom_branche' supprimée localement."
+    echo "------------------------------------------------------------------------"
 }
 
-
-
-function ajout_message_commit  {
+function ajout_message_commit {
+    read -p "Entrez le message du commit: " message_commit
     git add .
     git commit -m "$message_commit"
-    echo "Modifications ajoutées et commit effectuée avec le message: '$message_commit'."
+    echo "Commit effectué avec le message: '$message_commit'."
+    echo "------------------------------------------------------------------------"
 }
 
 function push_vers_depot {
     git push origin "$nom_branche"
     echo "Modifications poussées vers le dépôt distant sur la branche '$nom_branche'."
+    echo "------------------------------------------------------------------------"
+}
+
+function retour_main {
+    git switch main
+    echo "Rebasculé sur la branche 'main'."
+}
+
+function suppression_branche_locale {
+    git branch -D "$nom_branche"
+    echo "Branche locale '$nom_branche' supprimée localement."
+    echo "------------------------------------------------------------------------"
 }
 
 
 
+creation_branche_locale
+ajout_message_commit
+push_vers_depot
+retour_main
+suppression_branche_locale
 
-
-read -p "Entrez le nom de la nouvelle branche locale: " nom_branche
-creation_branche_locale 
-read -p "Entrez le message du commit: " message_commit
-ajout_message_commit 
-push_vers_depot 
-suppression_branche_locale 
-
-
-
+echo "Opération Git terminée avec succès."
