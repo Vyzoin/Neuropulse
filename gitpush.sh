@@ -11,10 +11,7 @@ function suppression_branche_locale  {
     git branch -d "$nom_branche"
     echo "Branche locale '$nom_branche' supprimée localement."
 }
-function suppression_branche_distante  {
-    git push origin --delete "$nom_branche"
-    echo "Branche distante '$nom_branche' supprimée sur le dépôt distant."
-}
+
 
 
 function ajout_message_commit  {
@@ -37,7 +34,6 @@ creation_branche_locale
 read -p "Entrez le message du commit: " message_commit
 ajout_message_commit 
 push_vers_depot 
-suppression_branche_distante 
 suppression_branche_locale 
 
 
