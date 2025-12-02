@@ -9,13 +9,12 @@
 ###  Prérequis
 - [Phaser ](https://docs.phaser.io/phaser/getting-started/what-is-phaser)
 - Navigateur web moderne (Chrome, Firefox, Edge…)
-- Git
+- Git (Codeberg)
+
+- L'utilisateur n'aura rien à télécharger de son côté
 
 ###  Cloner le dépôt
 
 ```bash
 git clone https://codeberg.org/NEUROPULSE/Neuropulse.git
-
-
-
 
