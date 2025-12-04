@@ -5,10 +5,47 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Neuropulse</title>
-    <!--     <link rel="stylesheet" type="text/css" href="main.css"> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
 <body>
+    <div class="container-fluid h-100">
+        <!-- Header -->
+        <div class="row header-row mt-3">
+            <div class="col-4">
+                <button class="ButtonHome w-50">GUIDE</button>
+                <button class="ButtonHome w-50 d-block mt-2">PARAMETRES</button>
+            </div>
+            <div class="col-4 text-center">
+                <h1 class="title fw-bold text-white">NEUROPULSE</h1>
+            </div>
+            <div class="col-4 text-end">
+                <button class="ButtonHome w-50">S'INSCRIRE</button>
+                <button id="loginbtn" class="ButtonHome w-50 mt-2">SE CONNECTER</button>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="row main-content">
+            <div id="gameContainer" class="col-12 d-flex justify-content-center align-items-center"></div>
+            <div class="col-12 text-center">
+                <p class="text-white">Vous n'êtes pas connecté</p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="row footer-row">
+            <div class="col-12 text-center">
+                <button id="startButton" class="btn ButtonHome btn-lg w-25">JOUER</button>
+            </div>
+            <div class="col-12 text-center mt-3">
+                <small class="text-white">Copyright...<br>Made by N.Sillaire, A.VIVIEN, O.LAADRAOUI</small>
+            </div>
+        </div>
+    </div>
+
     <script src="js_client/phaser.js"></script>
     <script src="js_client/main.js"></script>
 </body>

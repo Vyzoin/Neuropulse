@@ -1,0 +1,138 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url('assets/background_home.png');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    overflow: hidden;
+}
+
+html, body {
+    height: 100%;
+}
+
+.container-fluid {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    padding: 20px;
+}
+
+.header-row {
+    flex: 0 0 auto;
+    margin-bottom: 20px;
+}
+
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.footer-row {
+    flex: 0 0 auto;
+}
+
+#gameContainer {
+    width: 100%;
+    height: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#gameContainer.active {
+    height: 100vh;
+}
+
+.ButtonHome {
+    margin-top: 20px;
+    padding: 14px 28px;
+    font-size: 18px;
+    z-index: 10;
+    color: #e9f2ff;
+    background: linear-gradient(180deg, #0b1836 0%, #1b0630 60%, #2b0038 100%);
+    border: 1px solid rgba(140, 50, 220, 0.35);
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
+    box-shadow:
+        0 4px 14px rgba(30, 0, 70, 0.5),
+        0 0 28px rgba(100, 10, 220, 0.18),
+        inset 0 -3px 8px rgba(0,0,0,0.5);
+    text-shadow: 0 1px 0 rgba(0,0,0,0.6), 0 0 10px rgba(140,50,220,0.55);
+    backdrop-filter: blur(4px) saturate(120%);
+}
+
+.ButtonHome:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow:
+        0 10px 40px rgba(30, 0, 70, 0.7),
+        0 0 80px rgba(120, 40, 220, 0.45),
+        inset 0 -6px 16px rgba(0,0,0,0.6);
+    filter: brightness(1.06);
+    color: #fff;
+}
+
+.ButtonHome:active {
+    transform: translateY(-2px) scale(0.99);
+    box-shadow:
+        0 6px 20px rgba(30, 0, 70, 0.6),
+        0 0 50px rgba(120, 40, 220, 0.35);
+}
+
+body.game-active {
+    background-image: none;
+    background-color: #000;
+}
+
+body.game-active > .container-fluid {
+    justify-content: flex-start;
+}
+
+@keyframes neonPulse {
+    0%   { box-shadow: 0 0 18px rgba(120,40,220,0.22); }
+    50%  { box-shadow: 0 0 36px rgba(120,40,220,0.42); }
+    100% { box-shadow: 0 0 18px rgba(120,40,220,0.22); }
+}
+.ButtonHome.pulse {
+    animation: neonPulse 2.8s ease-in-out infinite;
+}
+
+.header-row .ButtonHome {
+    box-shadow:
+        0 2px 8px rgba(30,0,70,0.45),
+        0 0 18px rgba(120,40,220,0.12);
+}
+
+.ButtonHome:focus {
+    outline: none;
+    box-shadow:
+        0 0 0 6px rgba(120,40,220,0.08),
+        0 0 30px rgba(120,40,220,0.22);
+}
+
+.ButtonHome::after {
+    content: "";
+    position: absolute;
+    left: -40%;
+    top: -40%;
+    width: 180%;
+    height: 180%;
+    pointer-events: none;
+    background:
+        radial-gradient(circle at 20% 25%, rgba(0,180,255,0.10), transparent 8%),
+        radial-gradient(circle at 80% 80%, rgba(180,40,255,0.10), transparent 12%);
+    mix-blend-mode: screen;
+    opacity: 0.9;
+    transition: transform .6s ease, opacity .4s ease;
+}

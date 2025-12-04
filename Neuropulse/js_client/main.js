@@ -1,7 +1,15 @@
+// --- Config Phaser (scale adapté) ---
 var config = {
     type: Phaser.AUTO,
     width: 800,
     height: 600,
+    scale: {
+        mode: Phaser.Scale.FIT,
+        autoCenter: Phaser.Scale.CENTER_BOTH,
+        parent: null,
+        width: 800,
+        height: 600
+    },
     physics: {
         default: 'arcade',
         arcade: {
@@ -16,14 +24,61 @@ var config = {
     }
 };
 
-const game = new Phaser.Game(config);
-
+var game = null; // Le jeu ne se démarre pas immédiatement
 var cursor;
 var player;
 var lastDirection = 'down';
 var runAnim = 15;
 
+// --- Gestionnaire de démarrage ---
+document.addEventListener('DOMContentLoaded', function() {
+    const startButton = document.getElementById('startButton');
+    const uiContainer = document.querySelector('.container-fluid') || document.querySelector('body > div');
+    if (!startButton) {
+        console.warn('Start button introuvable.');
+        return;
+    }
+
+    startButton.addEventListener('click', function () {
+        console.log('JOUER cliqué');
+
+        // masquer l'UI (si présente)
+        if (uiContainer) uiContainer.style.display = 'none';
+        document.body.classList.add('game-active');
+
+        // Créer / trouver un conteneur plein écran pour Phaser
+        let host = document.getElementById('phaser-host');
+        if (!host) {
+            host = document.createElement('div');
+            host.id = 'phaser-host';
+            host.style.position = 'fixed';
+            host.style.top = '0';
+            host.style.left = '0';
+            host.style.width = '100%';
+            host.style.height = '100%';
+            host.style.zIndex = '9999';
+            host.style.background = '#000';
+            document.body.appendChild(host);
+        } else {
+            // s'assurer qu'il est visible si déjà présent
+            host.style.display = 'block';
+        }
+
+        // assigner parent de scale pour que Phaser insère le canvas dans le host
+        config.scale.parent = 'phaser-host';
+
+        // lancer le jeu seulement une fois
+        if (!game) {
+            console.log('Création du jeu Phaser...');
+            game = new Phaser.Game(config);
+        } else {
+            console.log('Le jeu existe déjà.');
+        }
+    });
+});
+
 function preload() {
+    console.log('preload start');
     this.load.image('background', 'assets/background.png');
     this.load.spritesheet('static_down', 'assets/character/static_down.png', {
         frameWidth: 96,
@@ -58,6 +113,7 @@ function preload() {
 }
 
 function create() {
+    console.log('create start');
     cursor = this.input.keyboard.createCursorKeys();
 
     this.anims.create({
