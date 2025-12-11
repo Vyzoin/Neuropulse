@@ -18,3 +18,20 @@
 ```bash
 git clone https://codeberg.org/NEUROPULSE/Neuropulse.git
 
+
+
+#### Pense bête 
+
+**Pour tester la connexion bdd:** http://localhost:3000/db-test
+
+Lancer le back (node.js) avec le reload automatique 
+```bash
+npm run dev 
+```
+
+Se connecter à la base de donnée (Postgres)
+```bash 
+psql -U nom_de_user -d nom_de_la_bdd
+```
+
+
