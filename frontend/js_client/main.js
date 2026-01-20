@@ -90,34 +90,34 @@ const margin = 5;
 
 function preload() {
     console.log('preload start');
-    this.load.image('background', '../background.png');
-    this.load.spritesheet('static_down', '../character/static_down.png', {
+    this.load.image('background', '../assets/background.png');
+    this.load.spritesheet('static_down', '../assets/character/static_down.png', {
         frameWidth: 96,
         frameHeight: 80
     });
-    this.load.spritesheet('static_left', '../character/static_left.png', {
+    this.load.spritesheet('static_left', '../assets/character/static_left.png', {
         frameWidth: 96,
         frameHeight: 80
     });
-    this.load.spritesheet('static_right', '../character/static_right.png', {
+    this.load.spritesheet('static_right', '../assets/character/static_right.png', {
         frameWidth: 96,
         frameHeight: 80
     });
-    this.load.spritesheet('static_up', '../character/static_up.png', {
+    this.load.spritesheet('static_up', '../assets/character/static_up.png', {
         frameWidth: 96,
         frameHeight: 80
     });
-    this.load.spritesheet('run_down', '../character/run_down.png', {
+    this.load.spritesheet('run_down', '../assets/character/run_down.png', {
         frameWidth: 96,
         frameHeight: 80
     });
-    this.load.spritesheet('run_left', '../character/run_left.png', {
+    this.load.spritesheet('run_left', '../assets/character/run_left.png', {
         frameWidth: 96,
         frameHeight: 80
-    }); this.load.spritesheet('run_right', '../character/run_right.png', {
+    }); this.load.spritesheet('run_right', '../assets/character/run_right.png', {
         frameWidth: 96,
         frameHeight: 80
-    }); this.load.spritesheet('run_up', '../character/run_up.png', {
+    }); this.load.spritesheet('run_up', '../assets/character/run_up.png', {
         frameWidth: 96,
         frameHeight: 80
     });
