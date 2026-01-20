@@ -31,7 +31,7 @@ var lastDirection = 'down';
 var runAnim = 15;
 
 // --- Gestionnaire de démarrage ---
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const startButton = document.getElementById('startButton');
     const uiContainer = document.querySelector('.container-fluid') || document.querySelector('body > div');
     if (!startButton) {
@@ -77,6 +77,17 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+const VIEW_WIDTH = 800;
+const VIEW_HEIGHT = 600;
+
+const MAP_COLS = 3;
+const MAP_ROWS = 3;
+
+let currentX = 1;
+let currentY = 1;
+
+const margin = 5;
+
 function preload() {
     console.log('preload start');
     this.load.image('background', 'assets/background.png');
@@ -103,16 +114,24 @@ function preload() {
     this.load.spritesheet('run_left', 'assets/character/run_left.png', {
         frameWidth: 96,
         frameHeight: 80
-    });this.load.spritesheet('run_right', 'assets/character/run_right.png', {
+    }); this.load.spritesheet('run_right', 'assets/character/run_right.png', {
         frameWidth: 96,
         frameHeight: 80
-    });this.load.spritesheet('run_up', 'assets/character/run_up.png', {
+    }); this.load.spritesheet('run_up', 'assets/character/run_up.png', {
         frameWidth: 96,
         frameHeight: 80
     });
 }
 
 function create() {
+    var MAP_COLS = 3;
+    var MAP_ROWS = 3;
+
+    var currentX = 1;
+    var currentY = 1;
+
+    var margin = 5;
+    /* Animations */
     console.log('create start');
     cursor = this.input.keyboard.createCursorKeys();
 
@@ -173,6 +192,13 @@ function create() {
     player.setOrigin(0.5, 0.5);
     player.setCollideWorldBounds(true);
     player.play('static_down_anim');
+
+    this.physics.world.setBounds(0, 0, VIEW_WIDTH * MAP_COLS, VIEW_HEIGHT * MAP_ROWS);
+    this.cameras.main.setBounds(0, 0, VIEW_WIDTH * MAP_COLS, VIEW_HEIGHT * MAP_ROWS);
+
+    // placer la caméra sur la zone initiale
+    this.cameras.main.scrollX = currentX * VIEW_WIDTH;
+    this.cameras.main.scrollY = currentY * VIEW_HEIGHT;
 }
 
 function update() {
@@ -211,4 +237,46 @@ function update() {
 
         player.play(idleAnim, true);
     }
+    checkZoneChange.call(this);
+
+}
+
+function checkZoneChange() {
+    if (player.x >= (currentX + 1) * VIEW_WIDTH - margin) {
+        changeZone.call(this, 1, 0);
+    }
+    if (player.x <= currentX * VIEW_WIDTH + margin) {
+        changeZone.call(this, -1, 0);
+    }
+    if (player.y >= (currentY + 1) * VIEW_HEIGHT - margin) {
+        changeZone.call(this, 0, 1);
+    }
+    if (player.y <= currentY * VIEW_HEIGHT + margin) {
+        changeZone.call(this, 0, -1);
+    }
+}
+
+function changeZone(dx, dy) {
+    const newX = currentX + dx;
+    const newY = currentY + dy;
+
+    // limites
+    if (newX < 0 || newX >= MAP_COLS || newY < 0 || newY >= MAP_ROWS) return;
+
+    currentX = newX;
+    currentY = newY;
+
+    // déplacer la caméra doucement
+    this.cameras.main.pan(
+        currentX * VIEW_WIDTH + VIEW_WIDTH/2,
+        currentY * VIEW_HEIGHT + VIEW_HEIGHT/2,
+        300,
+        'Power2'
+    );
+
+    // replacer le joueur pour qu'il ne reste pas collé au bord
+    if (dx === 1) player.x = currentX * VIEW_WIDTH + 10;
+    if (dx === -1) player.x = (currentX + 1) * VIEW_WIDTH - 10;
+    if (dy === 1) player.y = currentY * VIEW_HEIGHT + 10;
+    if (dy === -1) player.y = (currentY + 1) * VIEW_HEIGHT - 10;
 }
