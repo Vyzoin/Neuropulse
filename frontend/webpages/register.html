@@ -11,26 +11,30 @@
 </head>
 
 <body>
-    <div class="mx-5">
+    <div class="container-flex text-center pb-5 ">
         <button onclick="window.location='index.html'" class="ButtonHome w-50">Menu d'accueil</button>
+     </div>
+     <div class ="container pt-5">
         <form action="">
             <div class="mb-3">
-                <label for="user" class="form-label">Adresse Email</label>
-                <input type="email" class="form-control" id="user" aria-describedby="emailHelp">
-            </div>
-            <div>
-                <label for="username">Pseudo souhaité</label>
-                <input type="text" id="username" class="form-control">
+                <label for="user" class="form-label pb-2 px-3 text-white fw-bold">Adresse Email</label>
+                <input type="email" class="form-control" id="user" aria-describedby="emailHelp" placeholder="exemple@neuropulse.com">
             </div>
             <div class="mb-3">
-                <label for="pass" class="form-label">Mot de passe</label>
-                <input type="password" class="form-control" id="password">
+                <label for="username" class="form-label pb-2 px-3 text-white fw-bold">Pseudo souhaité</label>
+                <input type="text" id="username" class="form-control" placeholder="NeuropulseForEver">
             </div>
             <div class="mb-3">
-                <label for="confirmPass" class="form-label">Confirmer le mot de passe</label>
-                <input type="password" class="form-control" id="confirmpassword">
+                <label for="pass" class="form-label pb-2 px-3 text-white fw-bold">Mot de passe</label>
+                <input type="password" class="form-control" id="password"placeholder="Mot de passe sécurisé ">
             </div>
-            <button type="submit" class="btn btn-primary">S'enregistrer</button>
+            <div class="mb-3">
+                <label for="confirmPass" class="form-label pb-2 px-3 text-white fw-bold">Confirmer le mot de passe</label>
+                <input type="password" class="form-control" id="confirmpassword"placeholder="Confirmer votre mot de passe sécurisé">
+            </div>
+            <div class="container text-center p-5">
+                <button type="submit" class="btn btn-primary w-25">S'enregistrer</button>
+            </div>
         </form>
     </div>
 </body>
