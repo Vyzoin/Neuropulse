@@ -7,7 +7,7 @@ pnpm-debug.log*
 package-lock.json
 yarn.lock
 pnpm-lock.yaml
-
+frontend/js_client/phaser.js
 # --- Build / Distribution ---
 dist/
 build/
