@@ -1,80 +1,82 @@
 // --- Config Phaser (scale adapté) ---
 var config = {
-    type: Phaser.AUTO,
+  type: Phaser.AUTO,
+  width: 800,
+  height: 600,
+  scale: {
+    mode: Phaser.Scale.FIT,
+    autoCenter: Phaser.Scale.CENTER_BOTH,
+    parent: null,
     width: 800,
     height: 600,
-    scale: {
-        mode: Phaser.Scale.FIT,
-        autoCenter: Phaser.Scale.CENTER_BOTH,
-        parent: null,
-        width: 800,
-        height: 600
+  },
+  physics: {
+    default: "arcade",
+    arcade: {
+      gravity: { y: 0 },
+      debug: false,
     },
-    physics: {
-        default: 'arcade',
-        arcade: {
-            gravity: { y: 0 },
-            debug: false
-        }
-    },
-    scene: {
-        preload: preload,
-        create: create,
-        update: update
-    }
+  },
+  scene: {
+    preload: preload,
+    create: create,
+    update: update,
+  },
 };
 
 var game = null; // Le jeu ne se démarre pas immédiatement
 var cursor;
 var player;
-var lastDirection = 'down';
+var lastDirection = "down";
 var runAnim = 15;
 
 // --- Gestionnaire de démarrage ---
-document.addEventListener('DOMContentLoaded', function () {
-    const startButton = document.getElementById('startButton');
-    const uiContainer = document.querySelector('.container-fluid') || document.querySelector('body > div');
-    if (!startButton) {
-        console.warn('Start button introuvable.');
-        return;
+document.addEventListener("DOMContentLoaded", function () {
+  const startButton = document.getElementById("startButton");
+  const uiContainer =
+    document.querySelector(".container-fluid") ||
+    document.querySelector("body > div");
+  if (!startButton) {
+    console.warn("Start button introuvable.");
+    return;
+  }
+
+  startButton.addEventListener("click", function () {
+    console.log("JOUER cliqué");
+
+    // masquer l'UI (si présente)
+    if (uiContainer) uiContainer.style.display = "none";
+    document.body.classList.add("game-active");
+
+    // Créer / trouver un conteneur plein écran pour Phaser
+    let host = document.getElementById("phaser-host");
+    if (!host) {
+      host = document.createElement("div");
+      host.id = "phaser-host";
+      host.style.position = "fixed";
+      host.style.top = "0";
+      host.style.left = "0";
+      host.style.width = "100%";
+      host.style.height = "100%";
+      host.style.zIndex = "9999";
+      host.style.background = "#000";
+      document.body.appendChild(host);
+    } else {
+      // s'assurer qu'il est visible si déjà présent
+      host.style.display = "block";
     }
 
-    startButton.addEventListener('click', function () {
-        console.log('JOUER cliqué');
+    // assigner parent de scale pour que Phaser insère le canvas dans le host
+    config.scale.parent = "phaser-host";
 
-        // masquer l'UI (si présente)
-        if (uiContainer) uiContainer.style.display = 'none';
-        document.body.classList.add('game-active');
-
-        // Créer / trouver un conteneur plein écran pour Phaser
-        let host = document.getElementById('phaser-host');
-        if (!host) {
-            host = document.createElement('div');
-            host.id = 'phaser-host';
-            host.style.position = 'fixed';
-            host.style.top = '0';
-            host.style.left = '0';
-            host.style.width = '100%';
-            host.style.height = '100%';
-            host.style.zIndex = '9999';
-            host.style.background = '#000';
-            document.body.appendChild(host);
-        } else {
-            // s'assurer qu'il est visible si déjà présent
-            host.style.display = 'block';
-        }
-
-        // assigner parent de scale pour que Phaser insère le canvas dans le host
-        config.scale.parent = 'phaser-host';
-
-        // lancer le jeu seulement une fois
-        if (!game) {
-            console.log('Création du jeu Phaser...');
-            game = new Phaser.Game(config);
-        } else {
-            console.log('Le jeu existe déjà.');
-        }
-    });
+    // lancer le jeu seulement une fois
+    if (!game) {
+      console.log("Création du jeu Phaser...");
+      game = new Phaser.Game(config);
+    } else {
+      console.log("Le jeu existe déjà.");
+    }
+  });
 });
 
 const VIEW_WIDTH = 800;
@@ -89,194 +91,219 @@ let currentY = 1;
 const margin = 5;
 
 function preload() {
-    console.log('preload start');
-    this.load.image('background', '../assets/background.png');
-    this.load.spritesheet('static_down', '../assets/character/static_down.png', {
-        frameWidth: 96,
-        frameHeight: 80
-    });
-    this.load.spritesheet('static_left', '../assets/character/static_left.png', {
-        frameWidth: 96,
-        frameHeight: 80
-    });
-    this.load.spritesheet('static_right', '../assets/character/static_right.png', {
-        frameWidth: 96,
-        frameHeight: 80
-    });
-    this.load.spritesheet('static_up', '../assets/character/static_up.png', {
-        frameWidth: 96,
-        frameHeight: 80
-    });
-    this.load.spritesheet('run_down', '../assets/character/run_down.png', {
-        frameWidth: 96,
-        frameHeight: 80
-    });
-    this.load.spritesheet('run_left', '../assets/character/run_left.png', {
-        frameWidth: 96,
-        frameHeight: 80
-    }); this.load.spritesheet('run_right', '../assets/character/run_right.png', {
-        frameWidth: 96,
-        frameHeight: 80
-    }); this.load.spritesheet('run_up', '../assets/character/run_up.png', {
-        frameWidth: 96,
-        frameHeight: 80
-    });
+  console.log("preload start");
+  this.load.image("background", "../assets/background.png");
+  this.load.spritesheet("static_down", "../assets/character/static_down.png", {
+    frameWidth: 96,
+    frameHeight: 80,
+  });
+  this.load.spritesheet("static_left", "../assets/character/static_left.png", {
+    frameWidth: 96,
+    frameHeight: 80,
+  });
+  this.load.spritesheet(
+    "static_right",
+    "../assets/character/static_right.png",
+    {
+      frameWidth: 96,
+      frameHeight: 80,
+    },
+  );
+  this.load.spritesheet("static_up", "../assets/character/static_up.png", {
+    frameWidth: 96,
+    frameHeight: 80,
+  });
+  this.load.spritesheet("run_down", "../assets/character/run_down.png", {
+    frameWidth: 96,
+    frameHeight: 80,
+  });
+  this.load.spritesheet("run_left", "../assets/character/run_left.png", {
+    frameWidth: 96,
+    frameHeight: 80,
+  });
+  this.load.spritesheet("run_right", "../assets/character/run_right.png", {
+    frameWidth: 96,
+    frameHeight: 80,
+  });
+  this.load.spritesheet("run_up", "../assets/character/run_up.png", {
+    frameWidth: 96,
+    frameHeight: 80,
+  });
 }
 
 function create() {
-    var MAP_COLS = 3;
-    var MAP_ROWS = 3;
+  var MAP_COLS = 3;
+  var MAP_ROWS = 3;
 
-    var currentX = 1;
-    var currentY = 1;
+  var currentX = 1;
+  var currentY = 1;
 
-    var margin = 5;
-    /* Animations */
-    console.log('create start');
-    cursor = this.input.keyboard.createCursorKeys();
+  var margin = 5;
+  /* Animations */
+  console.log("create start");
+  cursor = this.input.keyboard.createCursorKeys();
 
-    this.anims.create({
-        key: 'static_down_anim',
-        frames: this.anims.generateFrameNumbers('static_down', { start: 0, end: 7 }),
-        frameRate: 10,
-        repeat: -1
-    });
-    this.anims.create({
-        key: 'static_left_anim',
-        frames: this.anims.generateFrameNumbers('static_left', { start: 0, end: 7 }),
-        frameRate: 10,
-        repeat: -1
-    });
-    this.anims.create({
-        key: 'static_right_anim',
-        frames: this.anims.generateFrameNumbers('static_right', { start: 0, end: 7 }),
-        frameRate: 10,
-        repeat: -1
-    });
-    this.anims.create({
-        key: 'static_up_anim',
-        frames: this.anims.generateFrameNumbers('static_up', { start: 0, end: 7 }),
-        frameRate: 10,
-        repeat: -1
-    });
-    this.anims.create({
-        key: 'run_down_anim',
-        frames: this.anims.generateFrameNumbers('run_down', { start: 0, end: 7 }),
-        frameRate: runAnim,
-        repeat: -1
-    });
-    this.anims.create({
-        key: 'run_left_anim',
-        frames: this.anims.generateFrameNumbers('run_left', { start: 0, end: 7 }),
-        frameRate: runAnim,
-        repeat: -1
-    });
-    this.anims.create({
-        key: 'run_right_anim',
-        frames: this.anims.generateFrameNumbers('run_right', { start: 0, end: 7 }),
-        frameRate: runAnim,
-        repeat: -1
-    });
-    this.anims.create({
-        key: 'run_up_anim',
-        frames: this.anims.generateFrameNumbers('run_up', { start: 0, end: 7 }),
-        frameRate: runAnim,
-        repeat: -1
-    });
+  this.anims.create({
+    key: "static_down_anim",
+    frames: this.anims.generateFrameNumbers("static_down", {
+      start: 0,
+      end: 7,
+    }),
+    frameRate: 10,
+    repeat: -1,
+  });
+  this.anims.create({
+    key: "static_left_anim",
+    frames: this.anims.generateFrameNumbers("static_left", {
+      start: 0,
+      end: 7,
+    }),
+    frameRate: 10,
+    repeat: -1,
+  });
+  this.anims.create({
+    key: "static_right_anim",
+    frames: this.anims.generateFrameNumbers("static_right", {
+      start: 0,
+      end: 7,
+    }),
+    frameRate: 10,
+    repeat: -1,
+  });
+  this.anims.create({
+    key: "static_up_anim",
+    frames: this.anims.generateFrameNumbers("static_up", { start: 0, end: 7 }),
+    frameRate: 10,
+    repeat: -1,
+  });
+  this.anims.create({
+    key: "run_down_anim",
+    frames: this.anims.generateFrameNumbers("run_down", { start: 0, end: 7 }),
+    frameRate: runAnim,
+    repeat: -1,
+  });
+  this.anims.create({
+    key: "run_left_anim",
+    frames: this.anims.generateFrameNumbers("run_left", { start: 0, end: 7 }),
+    frameRate: runAnim,
+    repeat: -1,
+  });
+  this.anims.create({
+    key: "run_right_anim",
+    frames: this.anims.generateFrameNumbers("run_right", { start: 0, end: 7 }),
+    frameRate: runAnim,
+    repeat: -1,
+  });
+  this.anims.create({
+    key: "run_up_anim",
+    frames: this.anims.generateFrameNumbers("run_up", { start: 0, end: 7 }),
+    frameRate: runAnim,
+    repeat: -1,
+  });
 
-    var ImgBackground = this.add.image(400, 300, 'background');
-    ImgBackground.setOrigin(0.5, 0.5);
-    ImgBackground.setScale(0.70);
+  var ImgBackground = this.add.image(400, 300, "background");
+  ImgBackground.setOrigin(0.5, 0.5);
+  ImgBackground.setScale(0.7);
 
-    player = this.physics.add.sprite(400, 300, 'static_down', 0);
-    player.setOrigin(0.5, 0.5);
-    player.setCollideWorldBounds(true);
-    player.play('static_down_anim');
+  player = this.physics.add.sprite(400, 300, "static_down", 0);
+  player.setOrigin(0.5, 0.5);
+  player.setCollideWorldBounds(true);
+  player.play("static_down_anim");
 
-    this.physics.world.setBounds(0, 0, VIEW_WIDTH * MAP_COLS, VIEW_HEIGHT * MAP_ROWS);
-    this.cameras.main.setBounds(0, 0, VIEW_WIDTH * MAP_COLS, VIEW_HEIGHT * MAP_ROWS);
+  this.physics.world.setBounds(
+    0,
+    0,
+    VIEW_WIDTH * MAP_COLS,
+    VIEW_HEIGHT * MAP_ROWS,
+  );
+  this.cameras.main.setBounds(
+    0,
+    0,
+    VIEW_WIDTH * MAP_COLS,
+    VIEW_HEIGHT * MAP_ROWS,
+  );
 
-    // placer la caméra sur la zone initiale
-    this.cameras.main.scrollX = currentX * VIEW_WIDTH;
-    this.cameras.main.scrollY = currentY * VIEW_HEIGHT;
+  // placer la caméra sur la zone initiale
+  this.cameras.main.scrollX = currentX * VIEW_WIDTH;
+  this.cameras.main.scrollY = currentY * VIEW_HEIGHT;
 }
 
 function update() {
-    if (cursor.left.isDown) {
-        console.log("left key pressed");
-        player.play('run_left_anim', true);
-        player.setVelocityX(-100);
-        player.setVelocityY(0);
-        lastDirection = 'left';
-    } else if (cursor.right.isDown) {
-        console.log("right key pressed");
-        player.play('run_right_anim', true);
-        player.setVelocityX(100);
-        player.setVelocityY(0);
-        lastDirection = 'right';
-    } else if (cursor.up.isDown) {
-        console.log("up key pressed");
-        player.play('run_up_anim', true);
-        player.setVelocityY(-100);
-        player.setVelocityX(0);
-        lastDirection = 'up';
-    } else if (cursor.down.isDown) {
-        console.log("down key pressed");
-        player.play('run_down_anim', true);
-        player.setVelocityY(100);
-        player.setVelocityX(0);
-        lastDirection = 'down';
-    } else {
-        player.setVelocity(0, 0);
-        const idleAnim = {
-            down: 'static_down_anim',
-            up: 'static_up_anim',
-            left: 'static_left_anim',
-            right: 'static_right_anim'
-        }[lastDirection] || 'static_down_anim';
+  if (cursor.left.isDown) {
+    console.log("left key pressed");
+    player.play("run_left_anim", true);
+    player.setVelocityX(-100);
+    player.setVelocityY(0);
+    lastDirection = "left";
+  } else if (cursor.right.isDown) {
+    console.log("right key pressed");
+    player.play("run_right_anim", true);
+    player.setVelocityX(100);
+    player.setVelocityY(0);
+    lastDirection = "right";
+  } else if (cursor.up.isDown) {
+    console.log("up key pressed");
+    player.play("run_up_anim", true);
+    player.setVelocityY(-100);
+    player.setVelocityX(0);
+    lastDirection = "up";
+  } else if (cursor.down.isDown) {
+    console.log("down key pressed");
+    player.play("run_down_anim", true);
+    player.setVelocityY(100);
+    player.setVelocityX(0);
+    lastDirection = "down";
+  } else {
+    player.setVelocity(0, 0);
+    const idleAnim =
+      {
+        down: "static_down_anim",
+        up: "static_up_anim",
+        left: "static_left_anim",
+        right: "static_right_anim",
+      }[lastDirection] || "static_down_anim";
 
-        player.play(idleAnim, true);
-    }
-    checkZoneChange.call(this);
-
+    player.play(idleAnim, true);
+  }
+  checkZoneChange.call(this);
 }
 
 function checkZoneChange() {
-    if (player.x >= (currentX + 1) * VIEW_WIDTH - margin) {
-        changeZone.call(this, 1, 0);
-    }
-    if (player.x <= currentX * VIEW_WIDTH + margin) {
-        changeZone.call(this, -1, 0);
-    }
-    if (player.y >= (currentY + 1) * VIEW_HEIGHT - margin) {
-        changeZone.call(this, 0, 1);
-    }
-    if (player.y <= currentY * VIEW_HEIGHT + margin) {
-        changeZone.call(this, 0, -1);
-    }
+  if (player.x >= (currentX + 1) * VIEW_WIDTH - margin) {
+    changeZone.call(this, 1, 0);
+  }
+  if (player.x <= currentX * VIEW_WIDTH + margin) {
+    changeZone.call(this, -1, 0);
+  }
+  if (player.y >= (currentY + 1) * VIEW_HEIGHT - margin) {
+    changeZone.call(this, 0, 1);
+  }
+  if (player.y <= currentY * VIEW_HEIGHT + margin) {
+    changeZone.call(this, 0, -1);
+  }
 }
 
 function changeZone(dx, dy) {
-    const newX = currentX + dx;
-    const newY = currentY + dy;
+  const newX = currentX + dx;
+  const newY = currentY + dy;
 
-    // limites
-    if (newX < 0 || newX >= MAP_COLS || newY < 0 || newY >= MAP_ROWS) return;
+  // limites
+  if (newX < 0 || newX >= MAP_COLS || newY < 0 || newY >= MAP_ROWS) return;
 
-    currentX = newX;
-    currentY = newY;
+  currentX = newX;
+  currentY = newY;
 
-    // déplacer la caméra doucement
-    this.cameras.main.pan(
-        currentX * VIEW_WIDTH + VIEW_WIDTH/2,
-        currentY * VIEW_HEIGHT + VIEW_HEIGHT/2,
-        300,
-        'Power2'
-    );
+  // déplacer la caméra doucement
+  this.cameras.main.pan(
+    currentX * VIEW_WIDTH + VIEW_WIDTH / 2,
+    currentY * VIEW_HEIGHT + VIEW_HEIGHT / 2,
+    300,
+    "Power2",
+  );
 
-    // replacer le joueur pour qu'il ne reste pas collé au bord
-    if (dx === 1) player.x = currentX * VIEW_WIDTH + 10;
-    if (dx === -1) player.x = (currentX + 1) * VIEW_WIDTH - 10;
-    if (dy === 1) player.y = currentY * VIEW_HEIGHT + 10;
-    if (dy === -1) player.y = (currentY + 1) * VIEW_HEIGHT - 10;
+  // replacer le joueur pour qu'il ne reste pas collé au bord
+  if (dx === 1) player.x = currentX * VIEW_WIDTH + 10;
+  if (dx === -1) player.x = (currentX + 1) * VIEW_WIDTH - 10;
+  if (dy === 1) player.y = currentY * VIEW_HEIGHT + 10;
+  if (dy === -1) player.y = (currentY + 1) * VIEW_HEIGHT - 10;
 }

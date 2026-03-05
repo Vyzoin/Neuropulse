@@ -1,17 +1,26 @@
- NeuroPulse
+ ## NeuroPulse
 
-**NeuroPulse** est un jeu RPG narratif développé avec **Godot Engine 4.x**, jouable directement dans un navigateur grâce à l’export HTML5/WebAssembly. Le joueur incarne un humain confronté à une IA génératrice qui lui a volé son emploi. Son objectif : découvrir ses failles et la vaincre.
+**NeuroPulse** est un jeu RPG narratif développé avec **Phaser.js**, jouable directement dans un navigateur grâce à l’export HTML5/WebAssembly sur ordinateur **uniquement**. 
+Le joueur incarne un humain confronté à une IA génératrice qui lui a volé son emploi. 
+Son objectif : découvrir ses failles et la vaincre.
 
 ---
 
 ##  Installation et lancement
 
-###  Prérequis
-- [Phaser ](https://docs.phaser.io/phaser/getting-started/what-is-phaser)
+## Technologies utilisées
+- Framework de développement : Phaser (JavaScript)
+- Front-end : HTML5, CSS / Bootstrap, JavaScript
+- Back-end : Node.js
+- Base de données : PostgreSQL
+
+###  Prérequis pour lancement en local
+- IDE (VSCode, WebStorm, etc.)
+- Wamp / Xampp (pour la base de données on ne peux pas utiliser Live Server)
 - Navigateur web moderne (Chrome, Firefox, Edge…)
 - Git (Codeberg)
 
-- L'utilisateur n'aura rien à télécharger de son côté
+L'utilisateur n'aura rien à télécharger de son côté lorsque le jeu sera publié.
 
 ###  Cloner le dépôt
 
@@ -29,7 +38,7 @@ Lancer le back (node.js) avec le reload automatique
 npm run dev 
 ```
 
-Se connecter à la base de donnée (Postgres)
+Se connecter à la base de donnée (PostgreSQL)
 ```bash 
 psql -U nom_de_user -d nom_de_la_bdd
 ```
