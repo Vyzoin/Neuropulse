@@ -6,45 +6,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Neuropulse</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="style.css">
+    <script defer src="../js_client/auth.js"></script>
 </head>
 
 <body>
-    <div class="container-fluid h-100">
-        <!-- Header -->
-        <div class="row header-row mt-3">
-            <div class="col-4">
-                <button onclick="window.location='guide.html'" class="ButtonHome w-50">GUIDE</button>
-                <button onclick="window.location='settings.html'" class="ButtonHome w-50 d-block mt-2">PARAMETRES</button>
-            </div>
-            <div class="col-4 text-center">
-                <h1 class="title fw-bold text-white">NEUROPULSE</h1>
-            </div>
-            <div class="col-4 text-end">
-                <button onclick="window.location='register.html'" class="ButtonHome w-50">S'INSCRIRE</button>
-                <button onclick="window.location='login.html'" id="loginbtn" class="ButtonHome w-50 mt-2">SE CONNECTER</button>
-            </div>
+<div class="container-fluid h-100">
+    <!-- Header -->
+    <div class="row header-row mt-3">
+        <div class="col-4">
+            <button onclick="window.location='guide.html'" class="ButtonHome w-50">GUIDE</button>
+            <button onclick="window.location='settings.html'" class="ButtonHome w-50 d-block mt-2">PARAMETRES</button>
         </div>
+        <div class="col-4 text-center">
+            <h1 class="title fw-bold text-white">NEUROPULSE</h1>
+        </div>
+        <div class="col-4 text-end">
+            <button onclick="window.location='register.html'" class="ButtonHome w-50">S'INSCRIRE</button>
+            <button onclick="window.location='login.html'" id="loginbtn" class="ButtonHome w-50 mt-2">SE CONNECTER
+            </button>
+        </div>
+    </div>
 
-        <!-- Main Content -->
-        <div class="row main-content">
-            <div id="gameContainer" class="col-12 d-flex justify-content-center align-items-center"></div>
-            <div class="col-12 text-center">
+    <!-- Main Content -->
+    <div class="row main-content">
+        <div id="gameContainer" class="col-12 d-flex justify-content-center align-items-center"></div>
+        <!-- Section non connecté -->
+        <div id="notConnectedSection" class="col-12">
+            <div class="text-center">
+                <p class="text-white">Hey jeune hacker, venez commencer une nouvelle partie ou connectez vous pour
+                    continuer votre aventure.</p>
+            </div>
+            <div class="text-center">
                 <p class="text-white">Vous n'êtes pas connecté</p>
             </div>
         </div>
 
-        <!-- Footer -->
-        <div class="row footer-row">
-            <div class="col-12 text-center">
-                <button onclick="window.location='character_save.html'" id="startButton" class="btn ButtonHome btn-lg w-25">JOUER</button>
-            </div>
-            <div class="col-12 text-center mt-3">
-                <small class="text-white">Copyright...<br>Made by N.SILLAIRE, A.VIVIEN, O.LAADRAOUI</small>
+        <!-- Section connecté -->
+        <div id="connectedSection" class="col-12" style="display: none;">
+            <div class="text-center">
+                <p class="text-white">Bienvenue! Vous êtes connecté</p>
             </div>
         </div>
     </div>
+
+    <!-- Footer -->
+    <div class="row footer-row">
+        <div class="col-12 text-center">
+            <button onclick="window.location='character_save.html'" id="startButton" class="btn ButtonHome btn-lg w-25">
+                JOUER
+            </button>
+        </div>
+        <div class="col-12 text-center mt-3">
+            <small class="text-white">Copyright...<br>Made by N.SILLAIRE, A.VIVIEN, O.LAADRAOUI</small>
+        </div>
+    </div>
+</div>
 </body>
 
 </html>
