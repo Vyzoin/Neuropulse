@@ -1,7 +1,7 @@
 // Vérifier si l'utilisateur est connecté
 function checkAuthStatus() {
     const token = localStorage.getItem('authToken'); // ou sessionStorage selon votre implémentation
-    const isConnected = !!token; // Convertir en booléen
+    const isConnected = !!token;
 
     const notConnectedSection = document.getElementById('notConnectedSection');
     const connectedSection = document.getElementById('connectedSection');
