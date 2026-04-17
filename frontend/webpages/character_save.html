@@ -1,46 +1,158 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guide</title>
+    <title>Sauvegardes - Neuropulse</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
 <body>
-    <div class="mx-5">
+    <div class="container-fluid">
         <div class="position-fixed top-0 start-0 p-3" style="z-index: 1000;">
             <button onclick="window.location='index.html'" class="ButtonHome mt-0">Menu d'accueil</button>
         </div>
 
-        <h1 class="mt-4">Choix de la sauvegarde</h1>
-        <div class="d-flex">
-            <div class="col-4">
-                <h2>Première sauvegarde</h2>
-                <button onclick="window.location='create_character.html'" class="btn ButtonHome btn-lg w-50">Créer un nouveau personnage</button>
-                <button class="btn ButtonHome btn-lg w-50">Modifier le personnage</button>
-                <button class="btn ButtonHome btn-lg w-50">JOUER</button>
+        <div class="text-center mt-5 pt-4 mb-4">
+            <h1
+                style="background: linear-gradient(180deg, #e9f2ff 0%, #b19aff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 2.5rem; letter-spacing: 4px;">
+                CHOIX DE LA SAUVEGARDE
+            </h1>
+            <p class="text-white mt-2">Sélectionnez un slot pour commencer votre aventure</p>
+        </div>
+
+        <div class="row g-4 px-4 mb-5">
+            <!-- Première sauvegarde -->
+            <div class="col-lg-4 col-md-6">
+                <div class="save-slot h-100">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h2>
+                            <span
+                                style="background: linear-gradient(180deg, #e9f2ff 0%, #b19aff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                                SLOT 1
+                            </span>
+                        </h2>
+                        <span class="badge bg-success">DISPONIBLE</span>
+                    </div>
+
+                    <div class="cyber-divider mb-3"></div>
+
+                    <div class="mb-3 p-3"
+                        style="background: rgba(140, 50, 220, 0.1); border-radius: 8px; min-height: 120px;">
+                        <p class="text-center text-white-50 m-0">
+                            <span style="font-size: 3rem; opacity: 0.3;">⚡</span><br>
+                            Emplacement vide
+                        </p>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button onclick="window.location='create_character.html'" class="btn btn-primary">
+                            ➕ Créer un nouveau personnage
+                        </button>
+                        <button class="btn btn-secondary" disabled style="opacity: 0.5;">
+                            ✏️ Modifier le personnage
+                        </button>
+                        <button class="ButtonHome w-100" disabled style="opacity: 0.5;">
+                            ▶️ JOUER
+                        </button>
+                    </div>
+                </div>
             </div>
-            <div class="col-4">
-                <h2>Deuxième sauvegarde</h2>
-                <button onclick="window.location='create_character.html'" class="btn ButtonHome btn-lg w-50">Créer un nouveau personnage</button>
-                <button class="btn ButtonHome btn-lg w-50">Modifier le personnage</button>
-                <button class="btn ButtonHome btn-lg w-50">JOUER</button>
+
+            <!-- Deuxième sauvegarde -->
+            <div class="col-lg-4 col-md-6">
+                <div class="save-slot h-100">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h2>
+                            <span
+                                style="background: linear-gradient(180deg, #e9f2ff 0%, #b19aff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                                SLOT 2
+                            </span>
+                        </h2>
+                        <span class="badge bg-success">DISPONIBLE</span>
+                    </div>
+
+                    <div class="cyber-divider mb-3"></div>
+
+                    <div class="mb-3 p-3"
+                        style="background: rgba(140, 50, 220, 0.1); border-radius: 8px; min-height: 120px;">
+                        <p class="text-center text-white-50 m-0">
+                            <span style="font-size: 3rem; opacity: 0.3;">⚡</span><br>
+                            Emplacement vide
+                        </p>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button onclick="window.location='create_character.html'" class="btn btn-primary">
+                            ➕ Créer un nouveau personnage
+                        </button>
+                        <button class="btn btn-secondary" disabled style="opacity: 0.5;">
+                            ✏️ Modifier le personnage
+                        </button>
+                        <button class="ButtonHome w-100" disabled style="opacity: 0.5;">
+                            ▶️ JOUER
+                        </button>
+                    </div>
+                </div>
             </div>
-            <div class="col-4">
-                <h2>Troisième sauvegarde</h2>
-                <button onclick="window.location='create_character.html'" class="btn ButtonHome btn-lg w-50">Créer un nouveau personnage</button>
-                <button class="btn ButtonHome btn-lg w-50">Modifier le personnage</button>
-                <button class="btn ButtonHome btn-lg w-50">JOUER</button>
+
+            <!-- Troisième sauvegarde -->
+            <div class="col-lg-4 col-md-6">
+                <div class="save-slot h-100">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h2>
+                            <span
+                                style="background: linear-gradient(180deg, #e9f2ff 0%, #b19aff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                                SLOT 3
+                            </span>
+                        </h2>
+                        <span class="badge bg-success">DISPONIBLE</span>
+                    </div>
+
+                    <div class="cyber-divider mb-3"></div>
+
+                    <div class="mb-3 p-3"
+                        style="background: rgba(140, 50, 220, 0.1); border-radius: 8px; min-height: 120px;">
+                        <p class="text-center text-white-50 m-0">
+                            <span style="font-size: 3rem; opacity: 0.3;">⚡</span><br>
+                            Emplacement vide
+                        </p>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button onclick="window.location='create_character.html'" class="btn btn-primary">
+                            ➕ Créer un nouveau personnage
+                        </button>
+                        <button class="btn btn-secondary" disabled style="opacity: 0.5;">
+                            ✏️ Modifier le personnage
+                        </button>
+                        <button class="ButtonHome w-100" disabled style="opacity: 0.5;">
+                            ▶️ JOUER
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
-        <button id="startButton" class="btn ButtonHome btn-lg w-25">TEMPORAIRE</button>
+
+        <!-- Bouton temporaire pour le développement -->
+        <div class="text-center mb-5 pb-4">
+            <div class="alert mx-auto"
+                style="max-width: 600px; background: rgba(140, 50, 220, 0.15); border: 1px solid rgba(140, 50, 220, 0.4); color: #e9f2ff;">
+                <strong>🛠️ Mode développement</strong>
+                <p class="mb-2 mt-2 small">Accès rapide au jeu sans sauvegarde</p>
+                <button id="startButton" class="ButtonHome w-100">
+                    ⚡ LANCER LE JEU (TEMPORAIRE)
+                </button>
+            </div>
+        </div>
     </div>
+
     <script src="../js_client/phaser.js"></script>
     <script src="../js_client/main.js"></script>
+
 </body>
 
 </html>

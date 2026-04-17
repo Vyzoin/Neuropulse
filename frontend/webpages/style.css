@@ -1,138 +1,797 @@
 body {
-    margin: 0;
-    padding: 0;
-    background-image: url('../assets/background_home.png');
-    background-size: cover;
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 100vh;
-    overflow: hidden;
+  margin: 0;
+  padding: 0;
+  background-image: url("../assets/background_home.png");
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  overflow-x: hidden;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-html, body {
-    height: 100%;
+html,
+body {
+  height: 100%;
+}
+
+/* Effets de lueur néon */
+@keyframes neonPulse {
+  0% {
+    box-shadow: 0 0 18px rgba(120, 40, 220, 0.22);
+  }
+  50% {
+    box-shadow: 0 0 36px rgba(120, 40, 220, 0.42);
+  }
+  100% {
+    box-shadow: 0 0 18px rgba(120, 40, 220, 0.22);
+  }
+}
+
+@keyframes glowText {
+  0%,
+  100% {
+    text-shadow:
+      0 0 10px rgba(140, 50, 220, 0.5),
+      0 0 20px rgba(140, 50, 220, 0.3);
+  }
+  50% {
+    text-shadow:
+      0 0 20px rgba(140, 50, 220, 0.8),
+      0 0 30px rgba(140, 50, 220, 0.5),
+      0 0 40px rgba(140, 50, 220, 0.3);
+  }
+}
+
+@keyframes scanline {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100vh);
+  }
+}
+
+/* Ligne de scan cyberpunk */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(140, 50, 220, 0.4),
+    transparent
+  );
+  animation: scanline 8s linear infinite;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* Overlay cyberpunk subtil */
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(140, 50, 220, 0.03) 2px,
+    rgba(140, 50, 220, 0.03) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
 }
 
 .container-fluid {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    padding: 20px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 20px;
+  position: relative;
+  z-index: 2;
 }
 
 .header-row {
-    flex: 0 0 auto;
-    margin-bottom: 20px;
+  flex: 0 0 auto;
+  margin-bottom: 20px;
 }
 
 .main-content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
 .footer-row {
-    flex: 0 0 auto;
+  flex: 0 0 auto;
 }
 
-#gameContainer {
-    width: 100%;
-    height: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+/* Titre principal avec effet néon */
+.title {
+  font-size: 3.5rem;
+  letter-spacing: 8px;
+  background: linear-gradient(180deg, #e9f2ff 0%, #b19aff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 20px rgba(140, 50, 220, 0.6));
+  animation: glowText 3s ease-in-out infinite;
+  position: relative;
 }
 
-#gameContainer.active {
-    height: 100vh;
+.title::after {
+  content: "NEUROPULSE";
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -1;
+  background: linear-gradient(180deg, #8c32dc 0%, #1b0630 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: blur(8px);
+  opacity: 0.7;
 }
 
+/* Cartes avec effet glassmorphism */
+.card {
+  background: rgba(11, 24, 54, 0.75) !important;
+  backdrop-filter: blur(10px) saturate(150%);
+  border: 1px solid rgba(140, 50, 220, 0.3) !important;
+  border-radius: 16px !important;
+  box-shadow:
+    0 8px 32px rgba(11, 24, 54, 0.5),
+    0 0 24px rgba(140, 50, 220, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(140, 50, 220, 0.1),
+    transparent
+  );
+  transition: left 0.5s;
+}
+
+.card:hover::before {
+  left: 100%;
+}
+
+.card-body {
+  position: relative;
+  z-index: 1;
+}
+
+.card-title {
+  color: #e9f2ff;
+  text-shadow: 0 0 10px rgba(140, 50, 220, 0.5);
+}
+
+.card p,
+.card label,
+.card span {
+  color: #d0d8e8;
+}
+
+/* Boutons principaux */
 .ButtonHome {
-    margin-top: 20px;
-    padding: 14px 28px;
-    font-size: 18px;
-    z-index: 10;
-    color: #e9f2ff;
-    background: linear-gradient(180deg, #0b1836 0%, #1b0630 60%, #2b0038 100%);
-    border: 1px solid rgba(140, 50, 220, 0.35);
-    border-radius: 12px;
-    font-weight: 700;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
-    box-shadow:
-        0 4px 14px rgba(30, 0, 70, 0.5),
-        0 0 28px rgba(100, 10, 220, 0.18),
-        inset 0 -3px 8px rgba(0,0,0,0.5);
-    text-shadow: 0 1px 0 rgba(0,0,0,0.6), 0 0 10px rgba(140,50,220,0.55);
-    backdrop-filter: blur(4px) saturate(120%);
+  margin-top: 20px;
+  padding: 14px 28px;
+  font-size: 18px;
+  z-index: 10;
+  color: #e9f2ff;
+  background: linear-gradient(180deg, #0b1836 0%, #1b0630 60%, #2b0038 100%);
+  border: 1px solid rgba(140, 50, 220, 0.35);
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    filter 0.18s ease;
+  box-shadow:
+    0 4px 14px rgba(30, 0, 70, 0.5),
+    0 0 28px rgba(100, 10, 220, 0.18),
+    inset 0 -3px 8px rgba(0, 0, 0, 0.5);
+  text-shadow:
+    0 1px 0 rgba(0, 0, 0, 0.6),
+    0 0 10px rgba(140, 50, 220, 0.55);
+  backdrop-filter: blur(4px) saturate(120%);
+}
+
+.ButtonHome::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(140, 50, 220, 0.3),
+    transparent
+  );
+  transition: left 0.5s;
+}
+
+.ButtonHome:hover::before {
+  left: 100%;
 }
 
 .ButtonHome:hover {
-    transform: translateY(-4px) scale(1.02);
-    box-shadow:
-        0 10px 40px rgba(30, 0, 70, 0.7),
-        0 0 80px rgba(120, 40, 220, 0.45),
-        inset 0 -6px 16px rgba(0,0,0,0.6);
-    filter: brightness(1.06);
-    color: #fff;
+  transform: translateY(-4px) scale(1.02);
+  box-shadow:
+    0 10px 40px rgba(30, 0, 70, 0.7),
+    0 0 80px rgba(120, 40, 220, 0.45),
+    inset 0 -6px 16px rgba(0, 0, 0, 0.6);
+  filter: brightness(1.06);
+  color: #fff;
 }
 
 .ButtonHome:active {
-    transform: translateY(-2px) scale(0.99);
-    box-shadow:
-        0 6px 20px rgba(30, 0, 70, 0.6),
-        0 0 50px rgba(120, 40, 220, 0.35);
+  transform: translateY(-2px) scale(0.99);
+  box-shadow:
+    0 6px 20px rgba(30, 0, 70, 0.6),
+    0 0 50px rgba(120, 40, 220, 0.35);
 }
 
-body.game-active {
-    background-image: none;
-    background-color: #000;
-}
-
-body.game-active > .container-fluid {
-    justify-content: flex-start;
-}
-
-@keyframes neonPulse {
-    0%   { box-shadow: 0 0 18px rgba(120,40,220,0.22); }
-    50%  { box-shadow: 0 0 36px rgba(120,40,220,0.42); }
-    100% { box-shadow: 0 0 18px rgba(120,40,220,0.22); }
-}
 .ButtonHome.pulse {
-    animation: neonPulse 2.8s ease-in-out infinite;
-}
-
-.header-row .ButtonHome {
-    box-shadow:
-        0 2px 8px rgba(30,0,70,0.45),
-        0 0 18px rgba(120,40,220,0.12);
+  animation: neonPulse 2.8s ease-in-out infinite;
 }
 
 .ButtonHome:focus {
-    outline: none;
-    box-shadow:
-        0 0 0 6px rgba(120,40,220,0.08),
-        0 0 30px rgba(120,40,220,0.22);
+  outline: none;
+  box-shadow:
+    0 0 0 6px rgba(120, 40, 220, 0.08),
+    0 0 30px rgba(120, 40, 220, 0.22);
 }
 
 .ButtonHome::after {
-    content: "";
-    position: absolute;
-    left: -40%;
-    top: -40%;
-    width: 180%;
-    height: 180%;
-    pointer-events: none;
-    background:
-        radial-gradient(circle at 20% 25%, rgba(0,180,255,0.10), transparent 8%),
-        radial-gradient(circle at 80% 80%, rgba(180,40,255,0.10), transparent 12%);
-    mix-blend-mode: screen;
-    opacity: 0.9;
-    transition: transform .6s ease, opacity .4s ease;
+  content: "";
+  position: absolute;
+  left: -40%;
+  top: -40%;
+  width: 180%;
+  height: 180%;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 20% 25%, rgba(0, 180, 255, 0.1), transparent 8%),
+    radial-gradient(circle at 80% 80%, rgba(180, 40, 255, 0.1), transparent 12%);
+  mix-blend-mode: screen;
+  opacity: 0.9;
+  transition:
+    transform 0.6s ease,
+    opacity 0.4s ease;
+}
+
+/* Boutons Bootstrap personnalisés */
+.btn-primary {
+  background: linear-gradient(180deg, #0b1836 0%, #1b0630 60%, #2b0038 100%);
+  border: 1px solid rgba(140, 50, 220, 0.4);
+  color: #e9f2ff;
+  font-weight: 600;
+  padding: 12px 24px;
+  border-radius: 10px;
+  box-shadow:
+    0 4px 14px rgba(30, 0, 70, 0.5),
+    0 0 20px rgba(100, 10, 220, 0.15);
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(180deg, #0d1f4a 0%, #250845 60%, #350048 100%);
+  border-color: rgba(140, 50, 220, 0.6);
+  box-shadow:
+    0 6px 20px rgba(30, 0, 70, 0.7),
+    0 0 40px rgba(120, 40, 220, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Inputs et formulaires */
+.form-control,
+.form-select {
+  background: rgba(11, 24, 54, 0.6) !important;
+  border: 1px solid rgba(140, 50, 220, 0.3);
+  color: #e9f2ff !important;
+  border-radius: 8px;
+  padding: 12px 16px;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+}
+
+.form-control:focus,
+.form-select:focus {
+  background: rgba(11, 24, 54, 0.8) !important;
+  border-color: rgba(140, 50, 220, 0.6);
+  box-shadow:
+    0 0 0 0.2rem rgba(140, 50, 220, 0.15),
+    0 0 20px rgba(140, 50, 220, 0.2);
+  color: #fff !important;
+}
+
+.form-control::placeholder {
+  color: rgba(233, 242, 255, 0.5);
+}
+
+.form-label {
+  color: #e9f2ff;
+  font-weight: 600;
+  margin-bottom: 8px;
+  text-shadow: 0 0 5px rgba(140, 50, 220, 0.3);
+}
+
+/* Range slider personnalisé */
+.form-range {
+  height: 6px;
+  background: linear-gradient(
+    90deg,
+    rgba(140, 50, 220, 0.3) 0%,
+    rgba(140, 50, 220, 0.6) 100%
+  );
+  border-radius: 3px;
+  outline: none;
+}
+
+.form-range::-webkit-slider-thumb {
+  width: 18px;
+  height: 18px;
+  background: linear-gradient(135deg, #8c32dc 0%, #b19aff 100%);
+  border: 2px solid #e9f2ff;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(140, 50, 220, 0.5);
+}
+
+.form-range::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  background: linear-gradient(135deg, #8c32dc 0%, #b19aff 100%);
+  border: 2px solid #e9f2ff;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(140, 50, 220, 0.5);
+}
+
+/* Textes */
+.text-white {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+h1,
+h2,
+h3 {
+  color: #e9f2ff;
+  text-shadow: 0 0 15px rgba(140, 50, 220, 0.4);
+}
+
+/* Sections de sauvegarde de personnage */
+.save-slot {
+  background: rgba(11, 24, 54, 0.7);
+  border: 1px solid rgba(140, 50, 220, 0.3);
+  border-radius: 12px;
+  padding: 20px;
+  margin: 10px;
+  backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.save-slot::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(
+    45deg,
+    transparent,
+    rgba(140, 50, 220, 0.3),
+    transparent
+  );
+  border-radius: 12px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.save-slot:hover::before {
+  opacity: 1;
+}
+
+.save-slot:hover {
+  transform: translateY(-5px);
+  box-shadow:
+    0 10px 30px rgba(30, 0, 70, 0.6),
+    0 0 40px rgba(140, 50, 220, 0.2);
+}
+
+.save-slot h2 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  color: #b19aff;
+}
+
+/* Container de jeu */
+#gameContainer {
+  width: 100%;
+  height: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#gameContainer.active {
+  height: 100vh;
+}
+
+body.game-active {
+  background-image: none;
+  background-color: #000;
+}
+
+body.game-active > .container-fluid {
+  justify-content: flex-start;
+}
+
+/* Effets de bordure lumineux */
+.glow-border {
+  position: relative;
+}
+
+.glow-border::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(45deg, #8c32dc, #b19aff, #8c32dc);
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+  filter: blur(4px);
+}
+
+.glow-border:hover::before {
+  opacity: 0.7;
+}
+
+/* Styles pour select */
+.form-select option {
+  background: #0b1836;
+  color: #e9f2ff;
+}
+
+/* Amélioration des petits textes */
+small {
+  color: rgba(233, 242, 255, 0.7);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Effets de focus améliorés */
+input:focus,
+select:focus,
+button:focus {
+  outline: none;
+}
+
+/* Animation pour les cartes */
+@keyframes cardEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card {
+  animation: cardEntrance 0.5s ease-out;
+}
+
+/* Style pour les sections connecté/non connecté */
+#notConnectedSection,
+#connectedSection {
+  backdrop-filter: blur(5px);
+  padding: 20px;
+  border-radius: 12px;
+}
+
+/* Amélioration responsive */
+@media (max-width: 768px) {
+  .title {
+    font-size: 2rem;
+    letter-spacing: 4px;
+  }
+
+  .ButtonHome {
+    font-size: 16px;
+    padding: 12px 20px;
+  }
+
+  .save-slot {
+    margin: 10px 0;
+  }
+}
+
+/* Loading indicator (pour usage futur) */
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.8);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+}
+
+.loading-ring {
+  border: 3px solid rgba(140, 50, 220, 0.3);
+  border-top-color: #8c32dc;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Dividers cyberpunk */
+.cyber-divider {
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(140, 50, 220, 0.5),
+    transparent
+  );
+  margin: 20px 0;
+  position: relative;
+}
+
+.cyber-divider::before,
+.cyber-divider::after {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: #8c32dc;
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+  box-shadow: 0 0 10px rgba(140, 50, 220, 0.8);
+}
+
+.cyber-divider::before {
+  left: 0;
+}
+
+.cyber-divider::after {
+  right: 0;
+}
+
+
+.btn-secondary:hover:not(:disabled) {
+  background: rgba(80, 80, 100, 0.7);
+  border-color: rgba(140, 50, 220, 0.3);
+}
+
+.form-check-input {
+  width: 3em;
+  height: 1.5em;
+  background-color: rgba(60, 60, 80, 0.6);
+  border: 1px solid rgba(140, 50, 220, 0.3);
+  cursor: pointer;
+}
+
+.form-check-input:checked {
+  background-color: #8c32dc;
+  border-color: #8c32dc;
+  box-shadow: 0 0 10px rgba(140, 50, 220, 0.5);
+}
+
+.form-check-input:focus {
+  border-color: rgba(140, 50, 220, 0.6);
+  box-shadow: 0 0 0 0.2rem rgba(140, 50, 220, 0.15);
+}
+
+.form-check-label {
+  color: #e9f2ff;
+  cursor: pointer;
+}
+
+.key-input {
+  max-width: 150px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.key-input:focus {
+  background: rgba(140, 50, 220, 0.2) !important;
+}
+
+.btn-secondary {
+  background: rgba(60, 60, 80, 0.6);
+  border: 1px solid rgba(140, 50, 220, 0.2);
+  color: #d0d8e8;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background: rgba(80, 80, 100, 0.7);
+  border-color: rgba(140, 50, 220, 0.3);
+  color: #e9f2ff;
+}
+
+.btn-sm {
+  padding: 6px 12px;
+  font-size: 0.875rem;
+}
+
+.avatar-selector,
+.class-selector {
+  display: block;
+  padding: 15px;
+  background: rgba(140, 50, 220, 0.1);
+  border: 2px solid rgba(140, 50, 220, 0.3);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.avatar-selector {
+  width: 70px;
+  height: 70px;
+  padding: 10px;
+}
+
+.avatar-icon {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.class-icon {
+  font-size: 1.8rem;
+  margin-bottom: 5px;
+}
+
+.class-selector strong {
+  display: block;
+  color: #e9f2ff;
+  font-size: 0.9rem;
+}
+
+.class-selector small {
+  color: #d0d8e8;
+  font-size: 0.75rem;
+}
+
+.avatar-selector:hover,
+.class-selector:hover {
+  background: rgba(140, 50, 220, 0.2);
+  border-color: rgba(140, 50, 220, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(140, 50, 220, 0.2);
+}
+
+input[type="radio"]:checked+.avatar-selector,
+input[type="radio"]:checked+.class-selector {
+  background: rgba(140, 50, 220, 0.3);
+  border-color: #8c32dc;
+  box-shadow: 0 0 20px rgba(140, 50, 220, 0.4);
+}
+
+.btn-secondary {
+  background: rgba(60, 60, 80, 0.6);
+  border: 1px solid rgba(140, 50, 220, 0.2);
+  color: #d0d8e8;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background: rgba(80, 80, 100, 0.7);
+  border-color: rgba(140, 50, 220, 0.3);
+  color: #e9f2ff;
+}
+
+.avatar-selector {
+  display: block;
+  padding: 15px;
+  width: 70px;
+  height: 70px;
+  background: rgba(140, 50, 220, 0.1);
+  border: 2px solid rgba(140, 50, 220, 0.3);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.avatar-icon {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.avatar-selector:hover {
+  background: rgba(140, 50, 220, 0.2);
+  border-color: rgba(140, 50, 220, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(140, 50, 220, 0.2);
+}
+
+input[type="radio"]:checked + .avatar-selector {
+  background: rgba(140, 50, 220, 0.3);
+  border-color: #8c32dc;
+  box-shadow: 0 0 20px rgba(140, 50, 220, 0.4);
+}
+
+.btn-secondary {
+  background: rgba(60, 60, 80, 0.6);
+  border: 1px solid rgba(140, 50, 220, 0.2);
+  color: #d0d8e8;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background: rgba(80, 80, 100, 0.7);
+  border-color: rgba(140, 50, 220, 0.3);
+  color: #e9f2ff;
+}
+
+.btn-danger {
+  background: rgba(220, 50, 50, 0.6);
+  border: 1px solid rgba(220, 50, 50, 0.4);
+  color: #ffb3b3;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-danger:hover {
+  background: rgba(220, 50, 50, 0.8);
+  border-color: rgba(220, 50, 50, 0.6);
+  color: #fff;
+  box-shadow: 0 0 20px rgba(220, 50, 50, 0.3);
 }

@@ -4,49 +4,169 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Créer un personnage</title>
+    <title>Créer un personnage - Neuropulse</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
 <body>
 
-<div class="position-fixed top-0 start-0 p-3" style="z-index: 1000;">
-    <button onclick="window.location='index.html'" class="ButtonHome mt-0">Menu d'accueil</button>
-</div>
+    <div class="position-fixed top-0 start-0 p-3" style="z-index: 1000;">
+        <button onclick="window.location='character_save.html'" class="ButtonHome mt-0">Retour aux
+            sauvegardes</button>
+    </div>
 
-<div class="container d-flex justify-content-center align-items-center min-vh-100">
-    <div class="card w-100" style="max-width: 450px;">
-        <div class="card-body p-5">
-            <h1 class="card-title text-center mb-4">Créer un personnage</h1>
-            <form>
-                <div class="mb-3">
-                    <input type="text" id="firstname" class="form-control" placeholder="Prénom du personnage" required>
+    <div class="container d-flex justify-content-center align-items-center min-vh-100">
+        <div class="card w-100" style="max-width: 550px;">
+            <div class="card-body p-5">
+                <div class="text-center mb-4">
+                    <h1 class="card-title"
+                        style="background: linear-gradient(180deg, #e9f2ff 0%, #b19aff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 2rem;">
+                        CRÉER UN PERSONNAGE
+                    </h1>
+                    <p class="small mt-2" style="color: #d0d8e8;">Configurez votre identité dans le réseau</p>
                 </div>
 
-                <div class="mb-3">
-                    <input type="text" id="lastname" class="form-control" placeholder="Nom du personnage" required>
-                </div>
+                <div class="cyber-divider mb-4"></div>
 
-                <div class="mb-3">
-                    <label for="SexSelect" class="form-label">Sexe du personnage</label>
-                    <select id="SexSelect" class="form-select" required>
-                        <option value="">-- Sélectionnez une option --</option>
-                        <option value="male">Masculin</option>
-                        <option value="female">Féminin</option>
-                    </select>
-                </div>
+                <form>
+                    <!-- Avatar sélection -->
+                    <div class="mb-4">
+                        <label class="form-label">Avatar</label>
+                        <div class="d-flex justify-content-center gap-3">
+                            <div class="text-center">
+                                <input type="radio" name="avatar" id="avatar1" value="1" class="d-none" checked>
+                                <label for="avatar1" class="avatar-selector">
+                                    <div class="avatar-icon">🤖</div>
+                                </label>
+                            </div>
+                            <div class="text-center">
+                                <input type="radio" name="avatar" id="avatar2" value="2" class="d-none">
+                                <label for="avatar2" class="avatar-selector">
+                                    <div class="avatar-icon">👾</div>
+                                </label>
+                            </div>
+                            <div class="text-center">
+                                <input type="radio" name="avatar" id="avatar3" value="3" class="d-none">
+                                <label for="avatar3" class="avatar-selector">
+                                    <div class="avatar-icon">🎮</div>
+                                </label>
+                            </div>
+                            <div class="text-center">
+                                <input type="radio" name="avatar" id="avatar4" value="4" class="d-none">
+                                <label for="avatar4" class="avatar-selector">
+                                    <div class="avatar-icon">⚡</div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
 
-                <button type="submit" class="btn btn-primary w-100">Sauvegarder le personnage</button>
-            </form>
+                    <div class="cyber-divider mb-4"></div>
+
+                    <!-- Prénom -->
+                    <div class="mb-3">
+                        <label for="firstname" class="form-label">
+                            <span style="color: #b19aff;">►</span> Prénom du personnage
+                        </label>
+                        <input type="text" id="firstname" class="form-control" placeholder="Ex: Neo, Trinity, Cipher..."
+                            required>
+                        <small class="text-white-50 d-block mt-1">Votre nom de code dans le réseau</small>
+                    </div>
+
+                    <!-- Nom -->
+                    <div class="mb-3">
+                        <label for="lastname" class="form-label">
+                            <span style="color: #b19aff;">►</span> Nom du personnage
+                        </label>
+                        <input type="text" id="lastname" class="form-control"
+                            placeholder="Ex: Anderson, Smith, Morpheus..." required>
+                        <small class="text-white-50 d-block mt-1">Votre identité officielle</small>
+                    </div>
+
+                    <!-- Sexe -->
+                    <div class="mb-4">
+                        <label for="SexSelect" class="form-label">
+                            <span style="color: #b19aff;">►</span> Sexe du personnage
+                        </label>
+                        <select id="SexSelect" class="form-select" required>
+                            <option value="">-- Sélectionnez une option --</option>
+                            <option value="male">♂ Masculin</option>
+                            <option value="female">♀ Féminin</option>
+                            <option value="other">⚧ Autre</option>
+                        </select>
+                    </div>
+
+                    <div class="cyber-divider mb-4"></div>
+
+                    <!-- Classe de personnage -->
+                    <div class="mb-4">
+                        <label class="form-label">
+                            <span style="color: #b19aff;">►</span> Classe
+                        </label>
+                        <div class="row g-2">
+                            <div class="col-6">
+                                <input type="radio" name="class" id="class1" value="hacker" class="d-none" checked>
+                                <label for="class1" class="class-selector w-100">
+                                    <div class="class-icon">💻</div>
+                                    <strong>Hacker</strong>
+                                    <small class="d-block">Maître du code</small>
+                                </label>
+                            </div>
+                            <div class="col-6">
+                                <input type="radio" name="class" id="class2" value="fighter" class="d-none">
+                                <label for="class2" class="class-selector w-100">
+                                    <div class="class-icon">⚔️</div>
+                                    <strong>Guerrier</strong>
+                                    <small class="d-block">Combattant aguerri</small>
+                                </label>
+                            </div>
+                            <div class="col-6">
+                                <input type="radio" name="class" id="class3" value="engineer" class="d-none">
+                                <label for="class3" class="class-selector w-100">
+                                    <div class="class-icon">🔧</div>
+                                    <strong>Ingénieur</strong>
+                                    <small class="d-block">Expert technique</small>
+                                </label>
+                            </div>
+                            <div class="col-6">
+                                <input type="radio" name="class" id="class4" value="infiltrator" class="d-none">
+                                <label for="class4" class="class-selector w-100">
+                                    <div class="class-icon">🥷</div>
+                                    <strong>Infiltrateur</strong>
+                                    <small class="d-block">As de la furtivité</small>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cyber-divider mb-4"></div>
+
+                    <!-- Info box -->
+                    <div class="alert mb-4"
+                        style="background: rgba(140, 50, 220, 0.1); border: 1px solid rgba(140, 50, 220, 0.3); color: #e9f2ff;">
+                        <strong>💡 Astuce :</strong> Votre classe déterminera vos compétences de départ et votre style
+                        de jeu. Choisissez avec soin !
+                    </div>
+
+                    <!-- Boutons -->
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="ButtonHome w-100 mt-0">
+                            ✅ Créer le personnage
+                        </button>
+                        <button type="button" onclick="window.location='character_save.html'" class="btn btn-secondary">
+                            ❌ Annuler
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-</div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcVqwB08s2jKFEV0NuE"
         crossorigin="anonymous"></script>
+
 </body>
 
 </html>

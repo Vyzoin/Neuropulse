@@ -1,0 +1,5 @@
+PGHOST=localhost
+PGPORT=5432
+PGDATABASE=neuropulse
+PGUSER=neuropulse_user
+PGPASSWORD=oyKgaE33E1N@8qIcfPR4
