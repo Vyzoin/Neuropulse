@@ -177,16 +177,31 @@ function create() {
         frameRate: runAnim,
         repeat: -1
     });
-    this.anims.create({
+     this.anims.create({
         key: 'run_up_anim',
         frames: this.anims.generateFrameNumbers('run_up', { start: 0, end: 7 }),
         frameRate: runAnim,
         repeat: -1
     });
 
-    var ImgBackground = this.add.image(400, 300, 'background');
-    ImgBackground.setOrigin(0.5, 0.5);
-    ImgBackground.setScale(0.70);
+    // Position au centre de la carte entière (1200, 900)
+    const fullMapWidth = VIEW_WIDTH * MAP_COLS;
+    const fullMapHeight = VIEW_HEIGHT * MAP_ROWS;
+
+    const bgFull = this.add.image(fullMapWidth / 2, fullMapHeight / 2, 'background');
+    bgFull.setOrigin(0.5, 0.5);
+
+    // Obtenir les dimensions originales de l'image
+    const originalWidth = bgFull.texture.source[0].width;
+    const originalHeight = bgFull.texture.source[0].height;
+
+    // Calculer l'échelle pour que l'image remplisse exactement la carte
+    const scaleX = fullMapWidth / originalWidth;
+    const scaleY = fullMapHeight / originalHeight;
+    const finalScale = Math.max(scaleX, scaleY); // Utiliser le plus grand pour couvrir complètement
+
+    bgFull.setScale(finalScale);
+
 
     player = this.physics.add.sprite(400, 300, 'static_down', 0);
     player.setOrigin(0.5, 0.5);
