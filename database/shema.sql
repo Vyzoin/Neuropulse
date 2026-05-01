@@ -1,0 +1,68 @@
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY,
+  email_adress VARCHAR(255) UNIQUE NOT NULL,
+  username VARCHAR(100) UNIQUE NOT NULL,
+  password VARCHAR(255) NOT NULL,
+  created_at TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE player (
+  id SERIAL PRIMARY KEY,
+  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  name VARCHAR(100) NOT NULL,
+  firstname VARCHAR(100) NOT NULL,
+  sexe VARCHAR(10) NOT NULL
+);
+
+CREATE TABLE inventory (
+  id SERIAL PRIMARY KEY,
+  player_id INTEGER REFERENCES player(id) ON DELETE CASCADE
+);
+
+CREATE TABLE item (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
+  price NUMERIC(10,2),
+  type VARCHAR(50),
+  is_for_sale BOOLEAN DEFAULT FALSE
+);
+
+CREATE TABLE slot (
+  id SERIAL PRIMARY KEY,
+  inventory_id INTEGER REFERENCES inventory(id) ON DELETE CASCADE,
+  item_id INTEGER REFERENCES item(id) ON DELETE SET NULL
+);
+
+CREATE TABLE advancement (
+  id SERIAL PRIMARY KEY,
+  player_id INTEGER REFERENCES player(id) ON DELETE CASCADE,
+  percentage NUMERIC(5,2),
+  chapter VARCHAR(100)
+);
+
+CREATE TABLE enemy (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
+  pv INTEGER
+);
+
+CREATE TABLE weapon (
+  id INTEGER PRIMARY KEY REFERENCES item(id) ON DELETE CASCADE,
+  damage INTEGER
+);
+
+CREATE TABLE consumable (
+  id INTEGER PRIMARY KEY REFERENCES item(id) ON DELETE CASCADE,
+  care_point INTEGER
+);
+
+CREATE TABLE backup (
+  id SERIAL PRIMARY KEY,
+  player_id INTEGER REFERENCES player(id) ON DELETE CASCADE,
+  timestamp TIMESTAMP DEFAULT NOW(),
+  state TEXT
+);
+
+CREATE TABLE shop (
+  id SERIAL PRIMARY KEY
+);
