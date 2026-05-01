@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,14 +8,12 @@
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
-
 <body>
-<!-- Bouton Menu d'accueil en haut à gauche -->
+
 <div class="position-fixed top-0 start-0 p-3" style="z-index: 1000;">
     <button onclick="window.location='index.html'" class="ButtonHome mt-0">Menu d'accueil</button>
 </div>
 
-<!-- Formulaire centré -->
 <div class="container d-flex justify-content-center align-items-center min-vh-100">
     <div class="card w-100 bg-white" style="max-width: 450px;--bs-bg-opacity: .8;">
         <div class="card-body p-5">
@@ -24,21 +21,46 @@
             <form action="">
                 <div class="mb-0">
                     <label for="user" class="form-label fw-bold mt-2">Adresse Email</label>
-                    <input type="email" class="form-control" id="user" aria-describedby="emailHelp" placeholder="Entrez votre adresse email ici">
+                    <input type="email" class="form-control" id="user" placeholder="Entrez votre adresse email ici">
                 </div>
-
                 <div class="mb-3 mt-0">
                     <label for="password" class="form-label fw-bold mt-2">Mot de passe</label>
                     <input type="password" class="form-control" id="password" placeholder="Entrez votre mot de passe ici">
                 </div>
-
+                <p id="loginMsg" class="text-danger text-center mb-2"></p>
                 <div class="text-center">
-                    <button type="submit" class="ButtonHome w-100 mt-0">Se connecter</button>
+                    <button type="button" id="loginBtn" class="ButtonHome w-100 mt-0">Se connecter</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
-</body>
 
+<script>
+document.getElementById('loginBtn').addEventListener('click', async () => {
+    const email = document.getElementById('user').value.trim();
+    const password = document.getElementById('password').value;
+    const msg = document.getElementById('loginMsg');
+
+    if (!email || !password) {
+        msg.textContent = 'Veuillez remplir tous les champs';
+        return;
+    }
+
+    const res = await fetch('http://localhost:3000/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ email, password })
+    });
+
+    const data = await res.json();
+    if (data.success) {
+        window.location.href = 'index.html';
+    } else {
+        msg.textContent = data.message;
+    }
+});
+</script>
+</body>
 </html>
