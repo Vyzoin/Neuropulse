@@ -25,7 +25,8 @@
                 </div>
                 <div class="mb-3 mt-0">
                     <label for="password" class="form-label fw-bold mt-2">Mot de passe</label>
-                    <input type="password" class="form-control" id="password" placeholder="Entrez votre mot de passe ici">
+                    <input type="password" class="form-control" id="password"
+                           placeholder="Entrez votre mot de passe ici">
                 </div>
                 <p id="loginMsg" class="text-danger text-center mb-2"></p>
                 <div class="text-center">
@@ -37,30 +38,33 @@
 </div>
 
 <script>
-document.getElementById('loginBtn').addEventListener('click', async () => {
-    const email = document.getElementById('user').value.trim();
-    const password = document.getElementById('password').value;
-    const msg = document.getElementById('loginMsg');
+    document.getElementById('loginBtn').addEventListener('click', async () => {
+        const email = document.getElementById('user').value.trim();
+        const password = document.getElementById('password').value;
+        const msg = document.getElementById('loginMsg');
 
-    if (!email || !password) {
-        msg.textContent = 'Veuillez remplir tous les champs';
-        return;
-    }
+        if (!email || !password) {
+            msg.textContent = 'Veuillez remplir tous les champs';
+            return;
+        }
 
-    const res = await fetch('http://localhost:3000/api/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'include',
-        body: JSON.stringify({ email, password })
+        const res = await fetch('http://localhost:3000/api/auth/login', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            credentials: 'include',
+            body: JSON.stringify({email, password})
+        });
+
+        const data = await res.json();
+        if (data.success) {
+            window.location.href = 'index.html';
+        } else {
+            msg.textContent = data.message;
+        }
     });
-
-    const data = await res.json();
-    if (data.success) {
-        window.location.href = 'index.html';
-    } else {
-        msg.textContent = data.message;
-    }
-});
 </script>
+
+<script src="../js_client/traduction.js"></script>
+<script src="../js_client/script_language.js"></script>
 </body>
 </html>
