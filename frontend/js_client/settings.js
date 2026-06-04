@@ -50,3 +50,28 @@ function resetControls() {
     document.getElementById('mapControl').value = 'M';
     alert('✅ Contrôles réinitialisés !');
 }
+
+
+//Bouton sélection de langue
+const selectLangue = document.getElementById('languageSelect');
+
+if (selectLangue) {
+    // 1. Au chargement de la page, on aligne le <select> sur la langue actuelle
+    const langueSauvegardee = localStorage.getItem('langue') || 'fr';
+    selectLangue.value = langueSauvegardee;
+
+    // 2. On écoute le changement de choix dans le menu déroulant
+    selectLangue.addEventListener('change', (evenement) => {
+        // evenement.target.value contient 'fr' ou 'en' selon le choix cliqué
+        const nouvelleLangue = evenement.target.value;
+
+        // 3. Sauvegarder le nouveau choix dans le LocalStorage
+        localStorage.setItem('langue', nouvelleLangue);
+
+        // 4. Mettre à jour la variable globale (si elle est utilisée dans script.js)
+        langueActuelle = nouvelleLangue;
+
+        // 5. Appeler la fonction de traduction globale (définie dans script.js)
+        traduirePage();
+    });
+}

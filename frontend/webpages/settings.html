@@ -14,14 +14,14 @@
 <body>
 
 <div class="position-fixed top-0 start-0 p-3" style="z-index: 1000;">
-    <button onclick="window.location='index.html'" class="ButtonHome mt-0">Menu d'accueil</button>
+    <button onclick="window.location='index.html'" class="ButtonHome mt-0" data-key="home">Menu d'accueil</button>
 </div>
 
 <div class="container mt-5 pt-4">
     <div class="card mx-auto mb-5" style="max-width: 900px; --bs-bg-opacity: .8;">
         <div class="card-body p-4">
             <div class="text-center mb-4">
-                <h1 style="background: linear-gradient(180deg, #e9f2ff 0%, #b19aff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 2.5rem; letter-spacing: 3px;">
+                <h1 data-key="settings" style="background: linear-gradient(180deg, #e9f2ff 0%, #b19aff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 2.5rem; letter-spacing: 3px;">
                     PARAMÈTRES
                 </h1>
                 <p class="small mt-2" style="color: #d0d8e8;">Personnalisez votre expérience de jeu</p>
@@ -67,8 +67,8 @@
                     <div class="col-md-6">
                         <label for="languageSelect" class="form-label">Langue du jeu</label>
                         <select id="languageSelect" class="form-select">
-                            <option value="french" selected>🇫🇷 Français</option>
-                            <option value="english">🇬🇧 English</option>
+                            <option value="french" selected>Français</option>
+                            <option value="english">English</option>
                         </select>
                     </div>
                 </div>
@@ -158,6 +158,10 @@
 </div>
 
 <div class="mb-5"></div>
+
+<script src="../js_client/traduction.js"></script>
+<script src="../js_client/script_language.js"></script>
+<script src="../js_client/settings.js"></script>
 
 </body>
 </html>
