@@ -16,15 +16,15 @@
     <!-- Header -->
     <div class="row header-row">
         <div class="col-4">
-            <button onclick="window.location='guide.html'" class="ButtonHome w-50 mt-0">GUIDE</button>
-            <button onclick="window.location='settings.html'" class="ButtonHome w-50 d-block mt-2">PARAMETRES</button>
+            <button onclick="window.location='guide.html'" class="ButtonHome w-50 mt-0" data-key="guide">GUIDE</button>
+            <button onclick="window.location='settings.html'" class="ButtonHome w-50 d-block mt-2" data-key="settings">PARAMETRES</button>
         </div>
         <div class="col-4 text-center">
             <h1 class="title fw-bold text-white mt-5">NEUROPULSE</h1>
         </div>
         <div class="col-4 text-end">
-            <button onclick="window.location='register.html'" class="ButtonHome w-50 mt-0">INSCRIPTION</button>
-            <button onclick="window.location='login.html'" id="loginbtn" class="ButtonHome w-50 mt-2">CONNEXION
+            <button onclick="window.location='register.html'" class="ButtonHome w-50 mt-0" data-key="register">INSCRIPTION</button>
+            <button onclick="window.location='login.html'" id="loginbtn" class="ButtonHome w-50 mt-2" data-key="login">CONNEXION
             </button>
         </div>
     </div>
@@ -35,7 +35,7 @@
         <!-- Section non connecté -->
         <div id="notConnectedSection" class="col-8">
             <div class="text-center">
-                <p class="text-white">Hey jeune hacker, venez commencer une nouvelle partie ou connectez vous pour
+                <p class="text-white" data-key="welcome_unconnected">Hey jeune hacker, venez commencer une nouvelle partie ou connectez vous pour
                     continuer votre aventure.</p>
             </div>
         </div>
@@ -43,7 +43,7 @@
         <!-- Section connecté -->
         <div id="connectedSection" class="col-12" style="display: none;">
             <div class="text-center">
-                <p class="text-white">Bienvenue! Vous êtes connecté</p>
+                <p class="text-white" data-key="welcome_connected">Bienvenue! Vous �tes connect�</p>
             </div>
         </div>
     </div>
@@ -52,11 +52,11 @@
     <div class="row footer-row">
         <div class="col-12 text-center">
             <button onclick="window.location='character_save.html'" id="startButton" class="btn ButtonHome btn-lg w-25">
-                JOUER
+                <span data-key="play">JOUER</span>
             </button>
         </div>
         <div class="col-12 text-center mt-3">
-            <small class="text-white">Copyright...<br>Made by N.SILLAIRE, A.VIVIEN, O.LAADRAOUI</small>
+            <small class="text-white" data-key="copyright" data-html="true">Copyright...<br>Made by N.SILLAIRE, A.VIVIEN, O.LAADRAOUI</small>
         </div>
     </div>
 </div>
@@ -66,3 +66,4 @@
 </body>
 
 </html>
+
