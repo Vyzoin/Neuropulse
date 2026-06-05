@@ -13,7 +13,7 @@
 <body>
 
     <div class="position-fixed top-0 start-0 p-3" style="z-index: 1000;">
-        <button onclick="window.location='character_save.html'" class="ButtonHome mt-0">Retour aux
+        <button onclick="window.location='character_save.html'" class="ButtonHome mt-0" data-key="create_back">Retour aux
             sauvegardes</button>
     </div>
 
@@ -23,9 +23,9 @@
                 <div class="text-center mb-4">
                     <h1 class="card-title"
                         style="background: linear-gradient(180deg, #e9f2ff 0%, #b19aff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 2rem;">
-                        CRÉER UN PERSONNAGE
+                        <span data-key="create_title">CRÉER UN PERSONNAGE</span>
                     </h1>
-                    <p class="small mt-2" style="color: #d0d8e8;">Configurez votre identité dans le réseau</p>
+                    <p class="small mt-2" style="color: #d0d8e8;" data-key="create_subtitle">Configurez votre identité dans le réseau</p>
                 </div>
 
                 <form>
@@ -35,33 +35,33 @@
                     <!-- Prénom -->
                     <div class="mb-3">
                         <label for="firstname" class="form-label">
-                            <span style="color: #b19aff;">►</span> Prénom du personnage
+                            <span style="color: #b19aff;">►</span> <span data-key="first_name_label">Prénom du personnage</span>
                         </label>
-                        <input type="text" id="firstname" class="form-control" placeholder="Ex: Neo, Trinity, Cipher..."
+                        <input type="text" id="firstname" class="form-control" data-placeholder="first_name_placeholder" placeholder="Ex: Neo, Trinity, Cipher..."
                             required>
-                        <small class="text-white-50 d-block mt-1">Votre nom de code dans le réseau</small>
+                        <small class="text-white-50 d-block mt-1" data-key="first_name_hint">Votre nom de code dans le réseau</small>
                     </div>
 
                     <!-- Nom -->
                     <div class="mb-3">
                         <label for="lastname" class="form-label">
-                            <span style="color: #b19aff;">►</span> Nom du personnage
+                            <span style="color: #b19aff;">►</span> <span data-key="last_name_label">Nom du personnage</span>
                         </label>
-                        <input type="text" id="lastname" class="form-control"
+                        <input type="text" id="lastname" class="form-control" data-placeholder="last_name_placeholder"
                             placeholder="Ex: Anderson, Smith, Morpheus..." required>
-                        <small class="text-white-50 d-block mt-1">Votre identité officielle</small>
+                        <small class="text-white-50 d-block mt-1" data-key="last_name_hint">Votre identité officielle</small>
                     </div>
 
                     <!-- Sexe -->
                     <div class="mb-4">
                         <label for="SexSelect" class="form-label">
-                            <span style="color: #b19aff;">►</span> Sexe du personnage
+                            <span style="color: #b19aff;">►</span> <span data-key="sex_label">Sexe du personnage</span>
                         </label>
                         <select id="SexSelect" class="form-select" required>
-                            <option value="">-- Sélectionnez une option --</option>
-                            <option value="male">♂ Masculin</option>
-                            <option value="female">♀ Féminin</option>
-                            <option value="other">⚧ Autre</option>
+                            <option value="" data-key="sex_default">-- Sélectionnez une option --</option>
+                            <option value="male" data-key="sex_male">♂ Masculin</option>
+                            <option value="female" data-key="sex_female">♀ Féminin</option>
+                            <option value="other" data-key="sex_other">⚧ Autre</option>
                         </select>
                     </div>
 
@@ -70,10 +70,10 @@
                     <!-- Boutons -->
                     <div class="d-grid gap-2">
                         <button type="submit" class="ButtonHome w-100 mt-0">
-                            ✅ Créer le personnage
+                            <span data-key="create_button">✅ Créer le personnage</span>
                         </button>
                         <button type="button" onclick="window.location='character_save.html'" class="btn btn-secondary">
-                            ❌ Annuler
+                            <span data-key="cancel_button">❌ Annuler</span>
                         </button>
                     </div>
                 </form>

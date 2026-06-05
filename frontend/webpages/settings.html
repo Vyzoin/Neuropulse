@@ -24,18 +24,18 @@
                 <h1 data-key="settings" style="background: linear-gradient(180deg, #e9f2ff 0%, #b19aff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 2.5rem; letter-spacing: 3px;">
                     PARAMÈTRES
                 </h1>
-                <p class="small mt-2" style="color: #d0d8e8;">Personnalisez votre expérience de jeu</p>
+                <p class="small mt-2" style="color: #d0d8e8;" data-key="settings_subtitle">Personnalisez votre expérience de jeu</p>
             </div>
 
             <div class="cyber-divider mb-4"></div>
 
             <!-- Section Audio -->
             <div class="mb-4">
-                <h2 class="h4 mb-3 text-white">Audio</h2>
+                <h2 class="h4 mb-3 text-white" data-key="audio_section">Audio</h2>
 
                 <div class="mb-3">
                     <div class="d-flex align-items-center justify-content-between mb-2">
-                        <label for="volumeControl" class="form-label mb-0">Volume principal</label>
+                        <label for="volumeControl" class="form-label mb-0" data-key="main_volume">Volume principal</label>
                         <span id="volumeValue" class="badge" style="background: rgba(140, 50, 220, 0.3); color: #e9f2ff;">50%</span>
                     </div>
                     <input type="range" class="form-range" id="volumeControl" min="0" max="100" value="50">
@@ -43,7 +43,7 @@
 
                 <div class="mb-3">
                     <div class="d-flex align-items-center justify-content-between mb-2">
-                        <label for="musicVolume" class="form-label mb-0">Volume musique</label>
+                        <label for="musicVolume" class="form-label mb-0" data-key="music_volume">Volume musique</label>
                         <span id="musicValue" class="badge" style="background: rgba(140, 50, 220, 0.3); color: #e9f2ff;">70%</span>
                     </div>
                     <input type="range" class="form-range" id="musicVolume" min="0" max="100" value="70">
@@ -51,7 +51,7 @@
 
                 <div class="mb-3">
                     <div class="d-flex align-items-center justify-content-between mb-2">
-                        <label for="sfxVolume" class="form-label mb-0">Volume effets sonores</label>
+                        <label for="sfxVolume" class="form-label mb-0" data-key="sfx_volume">Volume effets sonores</label>
                         <span id="sfxValue" class="badge" style="background: rgba(140, 50, 220, 0.3); color: #e9f2ff;">80%</span>
                     </div>
                     <input type="range" class="form-range" id="sfxVolume" min="0" max="100" value="80">
@@ -61,14 +61,14 @@
             <div class="cyber-divider mb-4"></div>
             <!-- Section Langue -->
             <div class="mb-4">
-                <h2 class="h4 mb-3 text-white">Langue et région</h2>
+                <h2 class="h4 mb-3 text-white" data-key="language_region">Langue et région</h2>
 
                 <div class="row g-3">
                     <div class="col-md-6">
-                        <label for="languageSelect" class="form-label">Langue du jeu</label>
+                        <label for="languageSelect" class="form-label" data-key="game_language">Langue du jeu</label>
                         <select id="languageSelect" class="form-select">
-                            <option value="french" selected>Français</option>
-                            <option value="english">English</option>
+                            <option value="french" selected data-key="language_french">Français</option>
+                            <option value="english" data-key="language_english">English</option>
                         </select>
                     </div>
                 </div>
@@ -78,65 +78,65 @@
 
             <!-- Section Contrôles -->
             <div class="mb-4">
-                <h2 class="h4 mb-3 text-white">Contrôles</h2>
+                <h2 class="h4 mb-3 text-white" data-key="controls">Contrôles</h2>
 
                 <div class="alert mb-3" style="background: rgba(140, 50, 220, 0.1); border: 1px solid rgba(140, 50, 220, 0.3); color: #e9f2ff;">
-                    <small><strong>💡 Astuce :</strong> Cliquez sur un champ et appuyez sur la touche souhaitée pour la redéfinir</small>
+                    <small><strong data-key="guide_important">💡 Astuce :</strong> <span data-key="controls_tip">Cliquez sur un champ et appuyez sur la touche souhaitée pour la redéfinir</span></small>
                 </div>
 
                 <div class="row g-2">
                     <div class="col-md-6">
                         <div class="d-flex align-items-center">
-                            <span class="flex-grow-1">Déplacer vers le haut</span>
+                            <span class="flex-grow-1" data-key="move_up">D�placer vers le haut</span>
                             <input type="text" class="form-control text-center key-input" id="moveUpControl" value="Z" readonly>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="d-flex align-items-center">
-                            <span class="flex-grow-1">Déplacer vers le bas</span>
+                            <span class="flex-grow-1" data-key="move_down">D�placer vers le bas</span>
                             <input type="text" class="form-control text-center key-input" id="moveDownControl" value="S" readonly>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="d-flex align-items-center">
-                            <span class="flex-grow-1">Déplacer vers la gauche</span>
+                            <span class="flex-grow-1" data-key="move_left">D�placer vers la gauche</span>
                             <input type="text" class="form-control text-center key-input" id="moveLeftControl" value="Q" readonly>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="d-flex align-items-center">
-                            <span class="flex-grow-1">Déplacer vers la droite</span>
+                            <span class="flex-grow-1" data-key="move_right">D�placer vers la droite</span>
                             <input type="text" class="form-control text-center key-input" id="moveRightControl" value="D" readonly>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="d-flex align-items-center">
-                            <span class="flex-grow-1">Attaquer</span>
+                            <span class="flex-grow-1" data-key="attack">Attaquer</span>
                             <input type="text" class="form-control text-center key-input" id="attackControl" value="Clic gauche" readonly>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="d-flex align-items-center">
-                            <span class="flex-grow-1">Interagir</span>
+                            <span class="flex-grow-1" data-key="interact">Interagir</span>
                             <input type="text" class="form-control text-center key-input" id="interactControl" value="E" readonly>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="d-flex align-items-center">
-                            <span class="flex-grow-1">Inventaire</span>
+                            <span class="flex-grow-1" data-key="inventory">Inventaire</span>
                             <input type="text" class="form-control text-center key-input" id="inventoryControl" value="I" readonly>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="d-flex align-items-center">
-                            <span class="flex-grow-1">Carte</span>
+                            <span class="flex-grow-1" data-key="map">Carte</span>
                             <input type="text" class="form-control text-center key-input" id="mapControl" value="M" readonly>
                         </div>
                     </div>
                 </div>
 
                 <div class="text-center mt-3">
-                    <button class="btn btn-sm btn-secondary" onclick="resetControls()">
+                    <button class="btn btn-sm btn-secondary" onclick="resetControls()" data-key="factory_reset" >
                         🔄 Réinitialiser aux valeurs par défaut
                     </button>
                 </div>
@@ -147,10 +147,10 @@
             <!-- Boutons d'action -->
             <div class="d-flex gap-2 justify-content-center flex-wrap">
                 <button class="ButtonHome" onclick="saveSettings()">
-                    💾 Sauvegarder les paramètres
+                    <span data-key="save_settings">?? Sauvegarder les param�tres</span>
                 </button>
                 <button class="ButtonHome" onclick="resetSettings()">
-                    🔄 Réinitialiser tout
+                    <span data-key="reset_all">?? Réinitialiser tout</span>
                 </button>
             </div>
         </div>
@@ -165,3 +165,6 @@
 
 </body>
 </html>
+
+
+
