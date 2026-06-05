@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,26 +11,26 @@
 <body>
 
 <div class="position-fixed top-0 start-0 p-3" style="z-index: 1000;">
-    <button onclick="window.location='index.html'" class="ButtonHome mt-0">Menu d'accueil</button>
+    <button onclick="window.location='index.html'" class="ButtonHome mt-0" data-key="home">Menu d'accueil</button>
 </div>
 
 <div class="container d-flex justify-content-center align-items-center min-vh-100">
     <div class="card w-100 bg-white" style="max-width: 450px;--bs-bg-opacity: .8;">
         <div class="card-body p-5">
-            <h1 class="title fw-bold text-center mb-0">Connectez-vous</h1>
+            <h1 class="title fw-bold text-center mb-0" data-key="login_title">Connectez-vous</h1>
             <form action="">
                 <div class="mb-0">
-                    <label for="user" class="form-label fw-bold mt-2">Adresse Email</label>
-                    <input type="email" class="form-control" id="user" placeholder="Entrez votre adresse email ici">
+                    <label for="user" class="form-label fw-bold mt-2" data-key="email_label">Adresse Email</label>
+                    <input type="email" class="form-control" id="user" data-placeholder="email_placeholder_login" placeholder="Entrez votre adresse email ici">
                 </div>
                 <div class="mb-3 mt-0">
-                    <label for="password" class="form-label fw-bold mt-2">Mot de passe</label>
+                    <label for="password" class="form-label fw-bold mt-2" data-key="password_label">Mot de passe</label>
                     <input type="password" class="form-control" id="password"
-                           placeholder="Entrez votre mot de passe ici">
+                           data-placeholder="password_placeholder_login" placeholder="Entrez votre mot de passe ici">
                 </div>
                 <p id="loginMsg" class="text-danger text-center mb-2"></p>
                 <div class="text-center">
-                    <button type="button" id="loginBtn" class="ButtonHome w-100 mt-0">Se connecter</button>
+                    <button type="button" id="loginBtn" class="ButtonHome w-100 mt-0" data-key="login_button">Se connecter</button>
                 </div>
             </form>
         </div>
@@ -44,7 +44,7 @@
         const msg = document.getElementById('loginMsg');
 
         if (!email || !password) {
-            msg.textContent = 'Veuillez remplir tous les champs';
+            msg.textContent = window.traductions?.[window.langueActuelle]?.login_missing_fields || 'Veuillez remplir tous les champs';
             return;
         }
 

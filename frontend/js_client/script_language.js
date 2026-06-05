@@ -1,18 +1,38 @@
 window.langueActuelle = localStorage.getItem('langue') || 'fr';
-// 2. Fonction globale pour traduire la page actuelle
+
+function traduireCle(cle) {
+    return window.traductions?.[langueActuelle]?.[cle] || window.traductions?.french?.[cle] || '';
+}
+
 function traduirePage() {
-    const elementsATraduire = document.querySelectorAll('[data-key]');
+    const elementsATraduire = document.querySelectorAll('[data-key], [data-placeholder], [data-value]');
 
     elementsATraduire.forEach(element => {
         const cle = element.getAttribute('data-key');
-        // On vérifie que la traduction existe pour éviter les bugs
-        if (window.traductions && window.traductions[langueActuelle] && window.traductions[langueActuelle][cle]) {
-            element.textContent = window.traductions[langueActuelle][cle];
+        if (cle) {
+            const traduction = traduireCle(cle);
+
+            if (traduction) {
+                if (element.hasAttribute('data-html')) {
+                    element.innerHTML = traduction;
+                } else {
+                    element.textContent = traduction;
+                }
+            }
+        }
+
+        const placeholderKey = element.getAttribute('data-placeholder');
+        if (placeholderKey) {
+            element.placeholder = traduireCle(placeholderKey);
+        }
+
+        const valueKey = element.getAttribute('data-value');
+        if (valueKey) {
+            element.value = traduireCle(valueKey);
         }
     });
 }
 
-// 3. On lance la traduction automatiquement dès que le HTML est prêt
 document.addEventListener('DOMContentLoaded', () => {
     traduirePage();
 });
