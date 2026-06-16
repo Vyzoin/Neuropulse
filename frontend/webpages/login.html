@@ -44,22 +44,28 @@
         const msg = document.getElementById('loginMsg');
 
         if (!email || !password) {
-            msg.textContent = window.traductions?.[window.langueActuelle]?.login_missing_fields || 'Veuillez remplir tous les champs';
+            msg.textContent = 'Veuillez remplir tous les champs';
             return;
         }
 
-        const res = await fetch('http://localhost:3000/api/auth/login', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            credentials: 'include',
-            body: JSON.stringify({email, password})
-        });
+        try {
+            const res = await fetch('http://localhost:3000/api/auth/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password })
+            });
 
-        const data = await res.json();
-        if (data.success) {
-            window.location.href = 'index.html';
-        } else {
-            msg.textContent = data.message;
+            const data = await res.json();
+
+            if (data.success) {
+                localStorage.setItem('token', data.token);
+                window.location.href = 'index.html';
+            } else {
+                msg.textContent = data.message;
+            }
+        } catch (err) {
+            msg.textContent = 'Impossible de contacter le serveur';
+            console.error(err);
         }
     });
 </script>
