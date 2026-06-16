@@ -11,12 +11,14 @@ CREATE TABLE player (
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   name VARCHAR(100) NOT NULL,
   firstname VARCHAR(100) NOT NULL,
-  sexe VARCHAR(10) NOT NULL
+  sexe VARCHAR(10) NOT NULL,
+  slot INTEGER DEFAULT 1,
+  CONSTRAINT unique_user_slot UNIQUE (user_id, slot)
 );
 
 CREATE TABLE inventory (
   id SERIAL PRIMARY KEY,
-  player_id INTEGER REFERENCES player(id) ON DELETE CASCADE
+  player_id INTEGER UNIQUE REFERENCES player(id) ON DELETE CASCADE
 );
 
 CREATE TABLE item (
