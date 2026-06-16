@@ -191,7 +191,8 @@ body::after {
 
 .card p,
 .card label,
-.card span {
+.card span,
+.card .small {
   color: #d0d8e8;
 }
 
@@ -794,4 +795,97 @@ input[type="radio"]:checked + .avatar-selector {
   border-color: rgba(220, 50, 50, 0.6);
   color: #fff;
   box-shadow: 0 0 20px rgba(220, 50, 50, 0.3);
+}
+
+/* Disabled button opacity */
+.btn:disabled {
+  opacity: 0.5;
+}
+
+/* Navigation corner (position-fixed top-left) */
+.top-nav {
+  z-index: 1000;
+}
+
+/* Gradient page heading */
+.page-title {
+  background: linear-gradient(180deg, #e9f2ff 0%, #b19aff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Neon badge */
+.badge-neon {
+  background: rgba(140, 50, 220, 0.3);
+  color: #e9f2ff;
+}
+
+/* Alert box variants */
+.alert-neon {
+  background: rgba(140, 50, 220, 0.1);
+  border: 1px solid rgba(140, 50, 220, 0.3);
+  color: #e9f2ff;
+}
+
+.alert-neon-strong {
+  background: rgba(140, 50, 220, 0.15);
+  border: 1px solid rgba(140, 50, 220, 0.4);
+  color: #e9f2ff;
+  border-radius: 8px;
+}
+
+.alert-danger-neon {
+  background: rgba(220, 50, 50, 0.1);
+  border: 1px solid rgba(220, 50, 50, 0.3);
+  color: #ffb3b3;
+}
+
+/* Accent text colors */
+
+
+.text-neon {
+  color: #8c32dc;
+}
+
+/* Save slot preview box */
+.save-preview {
+  background: rgba(140, 50, 220, 0.1);
+  border-radius: 8px;
+  min-height: 120px;
+}
+
+/* Empty save slot icon */
+.save-icon-empty {
+  font-size: 3rem;
+  opacity: 0.3;
+}
+
+/* Character stat display box */
+.stat-box {
+  background: rgba(140, 50, 220, 0.1);
+  border-radius: 8px;
+  border: 1px solid rgba(140, 50, 220, 0.3);
+}
+
+.stat-icon {
+  font-size: 1.5rem;
+  color: #8c32dc;
+}
+
+.stat-value {
+  color: #b19aff;
+  font-size: 1.5rem;
+}
+
+/* Guide / settings control panel (left accent border) */
+.control-box {
+  background: rgba(140, 50, 220, 0.1);
+  border-radius: 8px;
+  border-left: 3px solid #8c32dc;
+}
+
+/* Wide card container shared across pages */
+.card-wide {
+  max-width: 900px;
 }

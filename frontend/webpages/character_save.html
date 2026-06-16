@@ -12,13 +12,12 @@
 
 <body>
     <div class="container-fluid">
-        <div class="position-fixed top-0 start-0 p-3" style="z-index: 1000;">
+        <div class="position-fixed top-0 start-0 p-3 top-nav">
             <button onclick="window.location='index.html'" class="ButtonHome mt-0" data-key="home">Menu d'accueil</button>
         </div>
 
         <div class="text-center mt-5 pt-4 mb-4">
-            <h1
-                style="background: linear-gradient(180deg, #e9f2ff 0%, #b19aff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 2.5rem; letter-spacing: 4px;">
+            <h1 class="page-title" style="font-size: 2.5rem; letter-spacing: 4px;">
                 <span data-key="save_title">CHOIX DE LA SAUVEGARDE</span>
             </h1>
             <p class="text-white mt-2" data-key="save_subtitle">Sélectionnez un slot pour commencer votre aventure</p>
@@ -30,8 +29,7 @@
                 <div class="save-slot h-100">
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <h2>
-                            <span
-                                style="background: linear-gradient(180deg, #e9f2ff 0%, #b19aff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                            <span class="page-title">
                                 <span data-key="save_slot">SLOT</span> 1
                             </span>
                         </h2>
@@ -40,10 +38,9 @@
 
                     <div class="cyber-divider mb-3"></div>
 
-                    <div class="mb-3 p-3"
-                        style="background: rgba(140, 50, 220, 0.1); border-radius: 8px; min-height: 120px;">
+                    <div class="mb-3 p-3 save-preview">
                         <p class="text-center text-white-50 m-0">
-                            <span style="font-size: 3rem; opacity: 0.3;">⚡</span><br>
+                            <span class="save-icon-empty">⚡</span><br>
                             <span data-key="save_empty">Emplacement vide</span>
                         </p>
                     </div>
@@ -52,10 +49,10 @@
                         <button onclick="window.location='create_character.html'" class="btn btn-primary" data-key="save_create">
                             ➕ Créer un nouveau personnage
                         </button>
-                        <button class="btn btn-secondary" disabled style="opacity: 0.5;">
+                        <button class="btn btn-secondary" disabled>
                             <span data-key="save_edit">✏️ Modifier le personnage</span>
                         </button>
-                        <button class="ButtonHome w-100" disabled style="opacity: 0.5;">
+                        <button class="ButtonHome w-100" disabled>
                             <span data-key="save_play">▶️ JOUER</span>
                         </button>
                     </div>
@@ -67,8 +64,7 @@
                 <div class="save-slot h-100">
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <h2>
-                            <span
-                                style="background: linear-gradient(180deg, #e9f2ff 0%, #b19aff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                            <span class="page-title">
                                 <span data-key="save_slot">SLOT</span> 2
                             </span>
                         </h2>
@@ -77,10 +73,9 @@
 
                     <div class="cyber-divider mb-3"></div>
 
-                    <div class="mb-3 p-3"
-                        style="background: rgba(140, 50, 220, 0.1); border-radius: 8px; min-height: 120px;">
+                    <div class="mb-3 p-3 save-preview">
                         <p class="text-center text-white-50 m-0">
-                            <span style="font-size: 3rem; opacity: 0.3;">⚡</span><br>
+                            <span class="save-icon-empty">⚡</span><br>
                             <span data-key="save_empty">Emplacement vide</span>
                         </p>
                     </div>
@@ -89,10 +84,10 @@
                         <button onclick="window.location='create_character.html'" class="btn btn-primary" data-key="save_create">
                             ➕ Créer un nouveau personnage
                         </button>
-                        <button class="btn btn-secondary" disabled style="opacity: 0.5;">
+                        <button class="btn btn-secondary" disabled>
                             <span data-key="save_edit">✏️ Modifier le personnage</span>
                         </button>
-                        <button class="ButtonHome w-100" disabled style="opacity: 0.5;">
+                        <button class="ButtonHome w-100" disabled>
                             <span data-key="save_play">▶️ JOUER</span>
                         </button>
                     </div>
@@ -104,8 +99,7 @@
                 <div class="save-slot h-100">
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <h2>
-                            <span
-                                style="background: linear-gradient(180deg, #e9f2ff 0%, #b19aff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                            <span class="page-title">
                                 <span data-key="save_slot">SLOT</span> 3
                             </span>
                         </h2>
@@ -114,10 +108,9 @@
 
                     <div class="cyber-divider mb-3"></div>
 
-                    <div class="mb-3 p-3"
-                        style="background: rgba(140, 50, 220, 0.1); border-radius: 8px; min-height: 120px;">
+                    <div class="mb-3 p-3 save-preview">
                         <p class="text-center text-white-50 m-0">
-                            <span style="font-size: 3rem; opacity: 0.3;">⚡</span><br>
+                            <span class="save-icon-empty">⚡</span><br>
                             <span data-key="save_empty">Emplacement vide</span>
                         </p>
                     </div>
@@ -126,10 +119,10 @@
                         <button onclick="window.location='create_character.html'" class="btn btn-primary" data-key="save_create">
                             ➕ Créer un nouveau personnage
                         </button>
-                        <button class="btn btn-secondary" onclick="window.location='edit_character.html'" disabled style="opacity: 0.5;">
+                        <button class="btn btn-secondary" onclick="window.location='edit_character.html'" disabled>
                             <span data-key="save_edit">✏️ Modifier le personnage</span>
                         </button>
-                        <button class="ButtonHome w-100" disabled style="opacity: 0.5;">
+                        <button class="ButtonHome w-100" disabled>
                             <span data-key="save_play">▶️ JOUER</span>
                         </button>
                     </div>
@@ -139,8 +132,7 @@
 
         <!-- Bouton temporaire pour le développement -->
         <div class="text-center mb-5 pb-4">
-            <div class="alert mx-auto"
-                style="max-width: 600px; background: rgba(140, 50, 220, 0.15); border: 1px solid rgba(140, 50, 220, 0.4); color: #e9f2ff;">
+            <div class="alert mx-auto alert-neon-strong" style="max-width: 600px;">
                 <strong data-key="development_mode">🛠️ Mode développement</strong>
                 <p class="mb-2 mt-2 small" data-key="development_access">Accès rapide au jeu sans sauvegarde</p>
                 <button id="startButton" class="ButtonHome w-100">

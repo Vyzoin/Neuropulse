@@ -12,7 +12,7 @@
 
 <body>
 
-    <div class="position-fixed top-0 start-0 p-3" style="z-index: 1000;">
+    <div class="position-fixed top-0 start-0 p-3 top-nav">
         <button onclick="window.location='character_save.html'" class="ButtonHome mt-0" data-key="create_back">Retour aux
             sauvegardes</button>
     </div>
@@ -21,11 +21,10 @@
         <div class="card w-100" style="max-width: 550px;">
             <div class="card-body p-5">
                 <div class="text-center mb-4">
-                    <h1 class="card-title"
-                        style="background: linear-gradient(180deg, #e9f2ff 0%, #b19aff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 2rem;">
+                    <h1 class="card-title page-title" style="font-size: 2rem;">
                         <span data-key="create_title">CRÉER UN PERSONNAGE</span>
                     </h1>
-                    <p class="small mt-2" style="color: #d0d8e8;" data-key="create_subtitle">Configurez votre identité dans le réseau</p>
+                    <p class="small mt-2" data-key="create_subtitle">Configurez votre identité dans le réseau</p>
                 </div>
 
                 <form>
@@ -35,7 +34,7 @@
                     <!-- Prénom -->
                     <div class="mb-3">
                         <label for="firstname" class="form-label">
-                            <span style="color: #b19aff;">►</span> <span data-key="first_name_label">Prénom du personnage</span>
+                            <span class="text-accent">►</span> <span data-key="first_name_label">Prénom du personnage</span>
                         </label>
                         <input type="text" id="firstname" class="form-control" data-placeholder="first_name_placeholder" placeholder="Ex: Neo, Trinity, Cipher..."
                             required>
@@ -45,7 +44,7 @@
                     <!-- Nom -->
                     <div class="mb-3">
                         <label for="lastname" class="form-label">
-                            <span style="color: #b19aff;">►</span> <span data-key="last_name_label">Nom du personnage</span>
+                            <span class="text-accent">►</span> <span data-key="last_name_label">Nom du personnage</span>
                         </label>
                         <input type="text" id="lastname" class="form-control" data-placeholder="last_name_placeholder"
                             placeholder="Ex: Anderson, Smith, Morpheus..." required>
@@ -55,7 +54,7 @@
                     <!-- Sexe -->
                     <div class="mb-4">
                         <label for="SexSelect" class="form-label">
-                            <span style="color: #b19aff;">►</span> <span data-key="sex_label">Sexe du personnage</span>
+                            <span class="text-accent">►</span> <span data-key="sex_label">Sexe du personnage</span>
                         </label>
                         <select id="SexSelect" class="form-select" required>
                             <option value="" data-key="sex_default">-- Sélectionnez une option --</option>
