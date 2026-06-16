@@ -11,7 +11,7 @@
 </head>
 
 <body>
-<div class="position-fixed top-0 start-0 p-3" style="z-index: 1000;">
+<div class="position-fixed top-0 start-0 p-3 top-nav">
     <button onclick="window.location='character_save.html'" class="ButtonHome mt-0" data-key="create_back">Retour aux sauvegardes</button>
 </div>
 
@@ -19,16 +19,16 @@
     <div class="card w-100" style="max-width: 600px;">
         <div class="card-body p-5">
             <div class="text-center mb-4">
-                <h1 style="background: linear-gradient(180deg, #e9f2ff 0%, #b19aff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 2rem;">
+                <h1 class="page-title" style="font-size: 2rem;">
                     <span data-key="edit_title">MODIFIER LE PERSONNAGE</span>
                 </h1>
-                <p class="small mt-2" style="color: #d0d8e8;" data-key="edit_subtitle">Mettez à jour votre identité numérique</p>
+                <p class="small mt-2" data-key="edit_subtitle">Mettez à jour votre identité numérique</p>
             </div>
 
             <div class="cyber-divider mb-4"></div>
 
             <!-- Aperçu du personnage actuel -->
-            <div class="alert mb-4" style="background: rgba(140, 50, 220, 0.15); border: 1px solid rgba(140, 50, 220, 0.4); color: #e9f2ff;">
+            <div class="alert mb-4 alert-neon-strong">
                 <div class="row align-items-center">
                     <div class="col-auto">
                         <div style="font-size: 3rem;">🤖</div>
@@ -36,8 +36,8 @@
                     <div class="col">
                         <strong data-key="current_character">Personnage actuel</strong>
                         <div class="small mt-1">
-                            <span style="color: #b19aff;" data-key="level">Niveau 5</span> •
-                            <span style="color: #b19aff;" data-key="class_label">Classe: Hacker</span>
+                            <span class="text-accent" data-key="level">Niveau 5</span> •
+                            <span class="text-accent" data-key="class_label">Classe: Hacker</span>
                         </div>
                     </div>
                 </div>
@@ -47,7 +47,7 @@
                 <!-- Avatar sélection -->
                 <div class="mb-4">
                     <label class="form-label">
-                        <span style="color: #b19aff;">►</span> <span data-key="change_avatar">Changer d'avatar</span>
+                        <span class="text-accent">►</span> <span data-key="change_avatar">Changer d'avatar</span>
                     </label>
                     <div class="d-flex justify-content-center gap-3 flex-wrap">
                         <div class="text-center">
@@ -82,7 +82,7 @@
                 <!-- Prénom -->
                 <div class="mb-3">
                     <label for="firstname" class="form-label">
-                        <span style="color: #b19aff;">►</span> <span data-key="first_name_label">Prénom du personnage</span>
+                        <span class="text-accent">►</span> <span data-key="first_name_label">Prénom du personnage</span>
                     </label>
                     <input type="text" id="firstname" class="form-control" data-placeholder="first_name_label" placeholder="Prénom du personnage" value="Neo">
                 </div>
@@ -90,7 +90,7 @@
                 <!-- Nom -->
                 <div class="mb-3">
                     <label for="lastname" class="form-label">
-                        <span style="color: #b19aff;">►</span> <span data-key="last_name_label">Nom du personnage</span>
+                        <span class="text-accent">►</span> <span data-key="last_name_label">Nom du personnage</span>
                     </label>
                     <input type="text" id="lastname" class="form-control" data-placeholder="last_name_label" placeholder="Nom du personnage" value="Anderson">
                 </div>
@@ -98,7 +98,7 @@
                 <!-- Sexe -->
                 <div class="mb-4">
                     <label for="SexSelect" class="form-label">
-                        <span style="color: #b19aff;">►</span> <span data-key="sex_label">Sexe du personnage</span>
+                        <span class="text-accent">►</span> <span data-key="sex_label">Sexe du personnage</span>
                     </label>
                     <select id="SexSelect" class="form-select">
                             <option value="male" selected data-key="sex_male">♂ Masculin</option>
@@ -112,28 +112,28 @@
                 <!-- Statistiques (read-only) -->
                 <div class="mb-4">
                     <label class="form-label mb-3">
-                        <span style="color: #b19aff;">►</span> <span data-key="current_stats">Statistiques actuelles</span>
+                        <span class="text-accent">►</span> <span data-key="current_stats">Statistiques actuelles</span>
                     </label>
                     <div class="row g-3">
                         <div class="col-4">
-                            <div class="text-center p-3" style="background: rgba(140, 50, 220, 0.1); border-radius: 8px; border: 1px solid rgba(140, 50, 220, 0.3);">
-                                <div style="font-size: 1.5rem; color: #8c32dc;">🧠</div>
-                                <strong style="color: #b19aff; font-size: 1.5rem;">15</strong>
-                                <div class="small" style="color: #d0d8e8;" data-key="intelligence">Intelligence</div>
+                            <div class="text-center p-3 stat-box">
+                                <div class="stat-icon">🧠</div>
+                                <strong class="stat-value">15</strong>
+                                <div class="small" data-key="intelligence">Intelligence</div>
                             </div>
                         </div>
                         <div class="col-4">
-                            <div class="text-center p-3" style="background: rgba(140, 50, 220, 0.1); border-radius: 8px; border: 1px solid rgba(140, 50, 220, 0.3);">
-                                <div style="font-size: 1.5rem; color: #8c32dc;">💪</div>
-                                <strong style="color: #b19aff; font-size: 1.5rem;">10</strong>
-                                <div class="small" style="color: #d0d8e8;" data-key="strength">Force</div>
+                            <div class="text-center p-3 stat-box">
+                                <div class="stat-icon">💪</div>
+                                <strong class="stat-value">10</strong>
+                                <div class="small" data-key="strength">Force</div>
                             </div>
                         </div>
                         <div class="col-4">
-                            <div class="text-center p-3" style="background: rgba(140, 50, 220, 0.1); border-radius: 8px; border: 1px solid rgba(140, 50, 220, 0.3);">
-                                <div style="font-size: 1.5rem; color: #8c32dc;">⚡</div>
-                                <strong style="color: #b19aff; font-size: 1.5rem;">12</strong>
-                                <div class="small" style="color: #d0d8e8;" data-key="agility">Agilité</div>
+                            <div class="text-center p-3 stat-box">
+                                <div class="stat-icon">⚡</div>
+                                <strong class="stat-value">12</strong>
+                                <div class="small" data-key="agility">Agilité</div>
                             </div>
                         </div>
                     </div>
@@ -142,7 +142,7 @@
                 <div class="cyber-divider mb-4"></div>
 
                 <!-- Avertissement -->
-                <div class="alert mb-4" style="background: rgba(220, 50, 50, 0.1); border: 1px solid rgba(220, 50, 50, 0.3); color: #ffb3b3;">
+                <div class="alert mb-4 alert-danger-neon">
                     <strong data-key="edit_warning">⚠️ Attention :</strong> La modification du personnage ne modifie que les informations cosmétiques. Vos statistiques et progression de jeu restent inchangées.
                 </div>
 

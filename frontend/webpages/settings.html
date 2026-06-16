@@ -13,18 +13,18 @@
 
 <body>
 
-<div class="position-fixed top-0 start-0 p-3" style="z-index: 1000;">
+<div class="position-fixed top-0 start-0 p-3 top-nav">
     <button onclick="window.location='index.html'" class="ButtonHome mt-0" data-key="home">Menu d'accueil</button>
 </div>
 
 <div class="container mt-5 pt-4">
-    <div class="card mx-auto mb-5" style="max-width: 900px; --bs-bg-opacity: .8;">
+    <div class="card mx-auto mb-5 card-wide">
         <div class="card-body p-4">
             <div class="text-center mb-4">
-                <h1 data-key="settings" style="background: linear-gradient(180deg, #e9f2ff 0%, #b19aff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 2.5rem; letter-spacing: 3px;">
+                <h1 data-key="settings" class="page-title" style="font-size: 2.5rem; letter-spacing: 3px;">
                     PARAMÈTRES
                 </h1>
-                <p class="small mt-2" style="color: #d0d8e8;" data-key="settings_subtitle">Personnalisez votre expérience de jeu</p>
+                <p class="small mt-2" data-key="settings_subtitle">Personnalisez votre expérience de jeu</p>
             </div>
 
             <div class="cyber-divider mb-4"></div>
@@ -36,7 +36,7 @@
                 <div class="mb-3">
                     <div class="d-flex align-items-center justify-content-between mb-2">
                         <label for="volumeControl" class="form-label mb-0" data-key="main_volume">Volume principal</label>
-                        <span id="volumeValue" class="badge" style="background: rgba(140, 50, 220, 0.3); color: #e9f2ff;">50%</span>
+                        <span id="volumeValue" class="badge badge-neon">50%</span>
                     </div>
                     <input type="range" class="form-range" id="volumeControl" min="0" max="100" value="50">
                 </div>
@@ -44,7 +44,7 @@
                 <div class="mb-3">
                     <div class="d-flex align-items-center justify-content-between mb-2">
                         <label for="musicVolume" class="form-label mb-0" data-key="music_volume">Volume musique</label>
-                        <span id="musicValue" class="badge" style="background: rgba(140, 50, 220, 0.3); color: #e9f2ff;">70%</span>
+                        <span id="musicValue" class="badge badge-neon">70%</span>
                     </div>
                     <input type="range" class="form-range" id="musicVolume" min="0" max="100" value="70">
                 </div>
@@ -52,7 +52,7 @@
                 <div class="mb-3">
                     <div class="d-flex align-items-center justify-content-between mb-2">
                         <label for="sfxVolume" class="form-label mb-0" data-key="sfx_volume">Volume effets sonores</label>
-                        <span id="sfxValue" class="badge" style="background: rgba(140, 50, 220, 0.3); color: #e9f2ff;">80%</span>
+                        <span id="sfxValue" class="badge badge-neon">80%</span>
                     </div>
                     <input type="range" class="form-range" id="sfxVolume" min="0" max="100" value="80">
                 </div>
@@ -80,7 +80,7 @@
             <div class="mb-4">
                 <h2 class="h4 mb-3 text-white" data-key="controls">Contrôles</h2>
 
-                <div class="alert mb-3" style="background: rgba(140, 50, 220, 0.1); border: 1px solid rgba(140, 50, 220, 0.3); color: #e9f2ff;">
+                <div class="alert mb-3 alert-neon">
                     <small><strong data-key="guide_important">💡 Astuce :</strong> <span data-key="controls_tip">Cliquez sur un champ et appuyez sur la touche souhaitée pour la redéfinir</span></small>
                 </div>
 
