@@ -10,12 +10,12 @@
 </head>
 <body>
 
-<div class="position-fixed top-0 start-0 p-3" style="z-index: 1000;">
+<div class="position-fixed top-0 start-0 p-3 top-nav">
     <button onclick="window.location='index.html'" class="ButtonHome mt-0" data-key="home">Menu d'accueil</button>
 </div>
 
 <div class="container d-flex justify-content-center align-items-center min-vh-100">
-    <div class="card w-100 bg-white" style="max-width: 450px;--bs-bg-opacity: .8;">
+    <div class="card w-100" style="max-width: 450px;">
         <div class="card-body p-5">
             <h1 class="title fw-bold text-center mb-0" data-key="login_title">Connectez-vous</h1>
             <form action="">
@@ -44,22 +44,28 @@
         const msg = document.getElementById('loginMsg');
 
         if (!email || !password) {
-            msg.textContent = window.traductions?.[window.langueActuelle]?.login_missing_fields || 'Veuillez remplir tous les champs';
+            msg.textContent = 'Veuillez remplir tous les champs';
             return;
         }
 
-        const res = await fetch('http://localhost:3000/api/auth/login', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            credentials: 'include',
-            body: JSON.stringify({email, password})
-        });
+        try {
+            const res = await fetch('http://localhost:3000/api/auth/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password })
+            });
 
-        const data = await res.json();
-        if (data.success) {
-            window.location.href = 'index.html';
-        } else {
-            msg.textContent = data.message;
+            const data = await res.json();
+
+            if (data.success) {
+                localStorage.setItem('token', data.token);
+                window.location.href = 'index.html';
+            } else {
+                msg.textContent = data.message;
+            }
+        } catch (err) {
+            msg.textContent = 'Impossible de contacter le serveur';
+            console.error(err);
         }
     });
 </script>

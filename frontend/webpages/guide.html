@@ -1,130 +1,126 @@
-<!DOCTYPE html>
-<html lang="fr">
+﻿    <!DOCTYPE html>
+    <html lang="fr">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guide - Neuropulse</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="style.css">
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Guide - Neuropulse</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+            integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
 
-<body>
-    <div class="position-fixed top-0 start-0 p-3" style="z-index: 1000;">
-        <button onclick="window.location='index.html'" class="ButtonHome mt-0" data-key="guide_back">Menu d'accueil</button>
-    </div>
+    <body>
+        <div class="position-fixed top-0 start-0 p-3 top-nav">
+            <button onclick="window.location='index.html'" class="ButtonHome mt-0" data-key="guide_back">Menu d'accueil</button>
+        </div>
 
-    <div class="container mt-5 pt-5">
-        <div class="card mx-auto" style="max-width: 900px;">
-            <div class="card-body p-4">
-                <h1 class="card-title text-center mb-4">
-                    <span
-                        style="background: linear-gradient(180deg, #e9f2ff 0%, #b19aff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
-                        <span data-key="guide_title">GUIDE DU JEU NEUROPULSE</span>
-                    </span>
-                </h1>
+        <div class="container mt-5 pt-5">
+            <div class="card mx-auto card-wide">
+                <div class="card-body p-4">
+                    <h1 class="card-title text-center mb-4">
+                        <span class="page-title">
+                            <span data-key="guide_title">GUIDE DU JEU NEUROPULSE</span>
+                        </span>
+                    </h1>
 
-                <div class="cyber-divider"></div>
+                    <div class="cyber-divider"></div>
 
-                <div class="mb-4">
-                    <h2 class="h3 mb-3 text-white text-center" data-key="guide_welcome">Bienvenue dans Neuropulse</h2>
-                    <p data-key="guide_intro">Plongez dans un univers cyberpunk où l'intelligence artificielle règne en maître. Neuropulse est
-                        un jeu d'aventure où vous incarnez un hacker cherchant à percer les secrets d'une
-                        mégacorporation.</p>
-                </div>
+                    <div class="mb-4">
+                        <h2 class="h3 mb-3 text-white text-center" data-key="guide_welcome">Bienvenue dans Neuropulse</h2>
+                        <p data-key="guide_intro">Plongez dans un univers cyberpunk où l'intelligence artificielle règne en maître. Neuropulse est
+                            un jeu d'aventure où vous incarnez un hacker cherchant à percer les secrets d'une
+                            mégacorporation.</p>
+                    </div>
 
-                <div class="cyber-divider"></div>
+                    <div class="cyber-divider"></div>
 
-                <div class="mb-4">
-                    <h2 class="h3 mb-3 text-white" data-key="guide_base_controls">Contr�les de base</h2>
-                    <div class="row g-3">
-                        <div class="col-md-6">
-                            <div class="p-3"
-                                style="background: rgba(140, 50, 220, 0.1); border-radius: 8px; border-left: 3px solid #8c32dc;">
-                                <strong style="color: #b19aff;" data-key="guide_movement">D�placement</strong>
-                                <div class="mt-2 text-white">
-                                    <span class="badge bg-dark me-2">Z</span> <span data-key="guide_move_up">Haut</span><br>
-                                    <span class="badge bg-dark me-2">S</span> <span data-key="guide_move_down">Bas</span><br>
-                                    <span class="badge bg-dark me-2">Q</span> <span data-key="guide_move_left">Gauche</span><br>
-                                    <span class="badge bg-dark me-2">D</span> <span data-key="guide_move_right">Droite</span>
+                    <div class="mb-4">
+                        <h2 class="h3 mb-3 text-white" data-key="guide_base_controls">Contrôles de base</h2>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="p-3 control-box">
+                                    <strong class="text-accent" data-key="guide_movement">Déplacement</strong>
+                                    <div class="mt-2 text-white">
+                                        <span class="badge bg-dark me-2">Z</span> <span data-key="guide_move_up">Haut</span><br>
+                                        <span class="badge bg-dark me-2">S</span> <span data-key="guide_move_down">Bas</span><br>
+                                        <span class="badge bg-dark me-2">Q</span> <span data-key="guide_move_left">Gauche</span><br>
+                                        <span class="badge bg-dark me-2">D</span> <span data-key="guide_move_right">Droite</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="p-3"
-                                style="background: rgba(140, 50, 220, 0.1); border-radius: 8px; border-left: 3px solid #8c32dc;">
-                                <strong style="color: #b19aff;" data-key="guide_actions">Actions</strong>
-                                <div class="mt-2 text-white">
-                                    <span class="badge bg-dark me-2">E</span> <span data-key="guide_interact">Interagir</span><br>
-                                    <span class="badge bg-dark me-2">Clic gauche</span> <span data-key="guide_attack">Attaquer</span><br>
-                                    <span class="badge bg-dark me-2">ESC</span> <span data-key="guide_pause">Menu pause</span>
+                            <div class="col-md-6">
+                                <div class="p-3 control-box">
+                                    <strong class="text-accent" data-key="guide_actions">Actions</strong>
+                                    <div class="mt-2 text-white">
+                                        <span class="badge bg-dark me-2">E</span> <span data-key="guide_interact">Interagir</span><br>
+                                        <span class="badge bg-dark me-2">Clic gauche</span> <span data-key="guide_attack">Attaquer</span><br>
+                                        <span class="badge bg-dark me-2">ESC</span> <span data-key="guide_pause">Menu pause</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="cyber-divider"></div>
+                    <div class="cyber-divider"></div>
 
-                <div class="mb-4">
-                    <h2 class="h3 mb-3 text-white" data-key="guide_objectives">Objectifs du jeu</h2>
-                    <ul class="list-unstyled text-white">
-                        <li class="mb-2">
-                            <span style="color: #8c32dc;">?</span> <strong data-key="guide_objective_infiltration">Infiltration :</strong> <span data-key="guide_objective_infiltration_desc">P�n�trez dans les syst�mes s�curis�s sans vous faire d�tecter</span>
-                        </li>
-                        <li class="mb-2">
-                            <span style="color: #8c32dc;">?</span> <strong data-key="guide_objective_combat">Combat :</strong> <span data-key="guide_objective_combat_desc">Affrontez les agents de s�curit� et les IA hostiles</span>
-                        </li>
-                        <li class="mb-2">
-                            <span style="color: #8c32dc;">?</span> <strong data-key="guide_objective_exploration">Exploration :</strong> <span data-key="guide_objective_exploration_desc">D�couvrez les secrets cach�s de la corporation</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="cyber-divider"></div>
-
-                <div class="mb-4">
-                    <h2 class="h3 mb-3 text-white" data-key="guide_tips">Conseils pour débuter</h2>
-                    <div class="alert"
-                        style="background: rgba(140, 50, 220, 0.15); border: 1px solid rgba(140, 50, 220, 0.4); color: #e9f2ff; border-radius: 8px;">
-                        <strong data-key="guide_important">⚠️ Important :</strong>
-                        <ul class="mb-0 mt-2">
-                            <li data-key="guide_tip_save">Sauvegardez régulièrement votre progression</li>
-                            <li data-key="guide_tip_explore">Explorez chaque zone pour trouver des objets cachés</li>
-                            <li data-key="guide_tip_observe">Observez les patterns des ennemis avant d'attaquer</li>
-                            <li data-key="guide_tip_escape">N'hésitez pas à fuir si vous êtes en difficulté</li>
-                            <li data-key="guide_tip_talk">Parlez aux PNJ pour obtenir des informations cruciales</li>
+                    <div class="mb-4">
+                        <h2 class="h3 mb-3 text-white" data-key="guide_objectives">Objectifs du jeu</h2>
+                        <ul class="list-unstyled text-white">
+                            <li class="mb-2">
+                                <span class="text-neon">?</span> <strong data-key="guide_objective_infiltration">Infiltration :</strong> <span data-key="guide_objective_infiltration_desc">Pénétrez dans les systèmes sécurisés sans vous faire détecter</span>
+                            </li>
+                            <li class="mb-2">
+                                <span class="text-neon">?</span> <strong data-key="guide_objective_combat">Combat :</strong> <span data-key="guide_objective_combat_desc">Affrontez les agents de sécurité et les IA hostiles</span>
+                            </li>
+                            <li class="mb-2">
+                                <span class="text-neon">?</span> <strong data-key="guide_objective_exploration">Exploration :</strong> <span data-key="guide_objective_exploration_desc">Découvrez les secrets cachés de la corporation</span>
+                            </li>
                         </ul>
                     </div>
-                </div>
 
-                <div class="cyber-divider"></div>
+                    <div class="cyber-divider"></div>
 
-                <div class="mb-4">
-                    <h2 class="h3 mb-3 text-white" data-key="guide_ui">Interface utilisateur</h2>
-                    <p><strong style="color: #b19aff;" data-key="guide_hp">Barre de sant� :</strong> <span data-key="guide_hp_desc">Affich�e en haut � gauche, surveillez-la constamment</span></p>
-                    <p><strong style="color: #b19aff;" data-key="guide_energy">�nergie neuronale :</strong> <span data-key="guide_energy_desc">N�cessaire pour utiliser des comp�tences sp�ciales</span></p>
-                    <p><strong style="color: #b19aff;" data-key="guide_minimap">Mini-carte :</strong> <span data-key="guide_minimap_desc">Situ�e en haut � droite, elle vous aide � naviguer</span></p>
-                    <p><strong style="color: #b19aff;" data-key="guide_inventory">Inventaire :</strong> <span data-key="guide_inventory_desc">Appuyez sur</span> <span class="badge bg-dark">I</span> <span data-key="guide_inventory_suffix">pour y acc�der</span></p>
-                </div>
+                    <div class="mb-4">
+                        <h2 class="h3 mb-3 text-white" data-key="guide_tips">Conseils pour débuter</h2>
+                        <div class="alert alert-neon-strong">
+                            <strong data-key="guide_important">⚠️ Important :</strong>
+                            <ul class="mb-0 mt-2">
+                                <li data-key="guide_tip_save">Sauvegardez régulièrement votre progression</li>
+                                <li data-key="guide_tip_explore">Explorez chaque zone pour trouver des objets cachés</li>
+                                <li data-key="guide_tip_observe">Observez les patterns des ennemis avant d'attaquer</li>
+                                <li data-key="guide_tip_escape">N'hésitez pas à fuir si vous êtes en difficulté</li>
+                                <li data-key="guide_tip_talk">Parlez aux PNJ pour obtenir des informations cruciales</li>
+                            </ul>
+                        </div>
+                    </div>
 
-                <div class="cyber-divider"></div>
+                    <div class="cyber-divider"></div>
 
-                <div class="text-center mt-4">
-                    <p class="mb-3" style="color: #b19aff; font-style: italic;">
-                        <span data-key="guide_quote">Dans Neuropulse, l'information est votre meilleure arme</span>
-                    </p>
+                    <div class="mb-4">
+                        <h2 class="h3 mb-3 text-white" data-key="guide_ui">Interface utilisateur</h2>
+                        <p><strong data-key="guide_hp">Barre de santé :</strong> <span data-key="guide_hp_desc">Affichée en haut à gauche, surveillez-la constamment</span></p>
+                        <p><strong data-key="guide_energy">énergie neuronale :</strong> <span data-key="guide_energy_desc">Nécessaire pour utiliser des compétences spéciales</span></p>
+                        <p><strong data-key="guide_minimap">Mini-carte :</strong> <span data-key="guide_minimap_desc">Située en haut à droite, elle vous aide à naviguer</span></p>
+                        <p><strong data-key="guide_inventory">Inventaire :</strong> <span data-key="guide_inventory_desc">Appuyez sur</span> <span class="badge bg-dark">I</span> <span data-key="guide_inventory_suffix">pour y accéder</span></p>
+                    </div>
+
+                    <div class="cyber-divider"></div>
+
+                    <div class="text-center mt-4">
+                        <p class="mb-3 text-accent" style="font-style: italic;">
+                            <span data-key="guide_quote">Dans Neuropulse, l'information est votre meilleure arme</span>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="mb-5"></div>
+        <div class="mb-5"></div>
 
-    <script src="../js_client/traduction.js"></script>
-    <script src="../js_client/script_language.js"></script>
-</body>
+        <script src="../js_client/traduction.js"></script>
+        <script src="../js_client/script_language.js"></script>
+    </body>
 
-</html>
+    </html>
 
