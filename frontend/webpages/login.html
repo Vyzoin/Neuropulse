@@ -10,12 +10,12 @@
 </head>
 <body>
 
-<div class="position-fixed top-0 start-0 p-3 top-nav">
+<div class="position-fixed top-0 start-0 p-3" style="z-index: 1000;">
     <button onclick="window.location='index.html'" class="ButtonHome mt-0" data-key="home">Menu d'accueil</button>
 </div>
 
 <div class="container d-flex justify-content-center align-items-center min-vh-100">
-    <div class="card w-100" style="max-width: 450px;">
+    <div class="card w-100 bg-white" style="max-width: 450px; --bs-bg-opacity: .8;">
         <div class="card-body p-5">
             <h1 class="title fw-bold text-center mb-0" data-key="login_title">Connectez-vous</h1>
             <form action="">
@@ -37,37 +37,46 @@
     </div>
 </div>
 
+<script src="../js_client/session.js"></script>
 <script>
-    document.getElementById('loginBtn').addEventListener('click', async () => {
-        const email = document.getElementById('user').value.trim();
-        const password = document.getElementById('password').value;
-        const msg = document.getElementById('loginMsg');
+// Si déjà connecté → redirige direct
+(async () => {
+    const me = await getMe();
+    if (me) window.location.href = 'character_save.html';
+})();
 
-        if (!email || !password) {
-            msg.textContent = 'Veuillez remplir tous les champs';
-            return;
+document.getElementById('loginBtn').addEventListener('click', async () => {
+    const email = document.getElementById('user').value.trim();
+    const password = document.getElementById('password').value;
+    const msg = document.getElementById('loginMsg');
+
+    if (!email || !password) {
+        msg.textContent = 'Veuillez remplir tous les champs';
+        return;
+    }
+
+    try {
+        const res = await fetch('http://localhost:3000/api/auth/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password })
+        });
+
+        const data = await res.json();
+
+        if (data.success) {
+            localStorage.setItem('token', data.token);
+            window.location.href = 'character_save.html'; // ← direct vers les saves
+        } else {
+            msg.style.color = '#f87171';
+            msg.textContent = data.message;
         }
-
-        try {
-            const res = await fetch('http://localhost:3000/api/auth/login', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, password })
-            });
-
-            const data = await res.json();
-
-            if (data.success) {
-                localStorage.setItem('token', data.token);
-                window.location.href = 'index.html';
-            } else {
-                msg.textContent = data.message;
-            }
-        } catch (err) {
-            msg.textContent = 'Impossible de contacter le serveur';
-            console.error(err);
-        }
-    });
+    } catch (err) {
+        msg.style.color = '#f87171';
+        msg.textContent = 'Impossible de contacter le serveur';
+        console.error(err);
+    }
+});
 </script>
 
 <script src="../js_client/traduction.js"></script>

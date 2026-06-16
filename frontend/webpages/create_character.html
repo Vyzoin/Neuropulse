@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,83 +8,113 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
-
 <body>
 
-    <div class="position-fixed top-0 start-0 p-3 top-nav">
-        <button onclick="window.location='character_save.html'" class="ButtonHome mt-0" data-key="create_back">Retour aux
-            sauvegardes</button>
-    </div>
+<div class="position-fixed top-0 start-0 p-3" style="z-index: 1000;">
+    <button onclick="window.location='character_save.html'" class="ButtonHome mt-0">Retour aux sauvegardes</button>
+</div>
 
-    <div class="container d-flex justify-content-center align-items-center min-vh-100">
-        <div class="card w-100" style="max-width: 550px;">
-            <div class="card-body p-5">
-                <div class="text-center mb-4">
-                    <h1 class="card-title page-title" style="font-size: 2rem;">
-                        <span data-key="create_title">CRÉER UN PERSONNAGE</span>
-                    </h1>
-                    <p class="small mt-2" data-key="create_subtitle">Configurez votre identité dans le réseau</p>
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="card w-100" style="max-width: 550px;">
+        <div class="card-body p-5">
+            <div class="text-center mb-4">
+                <h1 class="card-title"
+                    style="background: linear-gradient(180deg, #e9f2ff 0%, #b19aff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 2rem;">
+                    CRÉER UN PERSONNAGE
+                </h1>
+                <p class="small mt-2" style="color: #d0d8e8;">Configurez votre identité dans le réseau</p>
+                <p class="small mt-1 text-info" id="slotInfo"></p>
+            </div>
+
+            <form id="createForm">
+                <div class="cyber-divider mb-4"></div>
+
+                <div class="mb-3">
+                    <label for="firstname" class="form-label">
+                        <span style="color: #b19aff;">►</span> Prénom du personnage
+                    </label>
+                    <input type="text" id="firstname" class="form-control" placeholder="Ex: Neo, Trinity, Cipher..." required>
                 </div>
 
-                <form>
+                <div class="mb-3">
+                    <label for="lastname" class="form-label">
+                        <span style="color: #b19aff;">►</span> Nom du personnage
+                    </label>
+                    <input type="text" id="lastname" class="form-control" placeholder="Ex: Anderson, Smith, Morpheus..." required>
+                </div>
 
-                    <div class="cyber-divider mb-4"></div>
+                <div class="mb-4">
+                    <label for="SexSelect" class="form-label">
+                        <span style="color: #b19aff;">►</span> Sexe du personnage
+                    </label>
+                    <select id="SexSelect" class="form-select" required>
+                        <option value="">-- Sélectionnez une option --</option>
+                        <option value="Masculin">♂ Masculin</option>
+                        <option value="Feminin">♀ Féminin</option>
+                        <option value="Autre">⚧ Autre</option>
+                    </select>
+                </div>
 
-                    <!-- Prénom -->
-                    <div class="mb-3">
-                        <label for="firstname" class="form-label">
-                            <span class="text-accent">►</span> <span data-key="first_name_label">Prénom du personnage</span>
-                        </label>
-                        <input type="text" id="firstname" class="form-control" data-placeholder="first_name_placeholder" placeholder="Ex: Neo, Trinity, Cipher..."
-                            required>
-                        <small class="text-white-50 d-block mt-1" data-key="first_name_hint">Votre nom de code dans le réseau</small>
-                    </div>
+                <div class="cyber-divider mb-4"></div>
 
-                    <!-- Nom -->
-                    <div class="mb-3">
-                        <label for="lastname" class="form-label">
-                            <span class="text-accent">►</span> <span data-key="last_name_label">Nom du personnage</span>
-                        </label>
-                        <input type="text" id="lastname" class="form-control" data-placeholder="last_name_placeholder"
-                            placeholder="Ex: Anderson, Smith, Morpheus..." required>
-                        <small class="text-white-50 d-block mt-1" data-key="last_name_hint">Votre identité officielle</small>
-                    </div>
+                <p id="createMsg" class="text-danger text-center mb-2"></p>
 
-                    <!-- Sexe -->
-                    <div class="mb-4">
-                        <label for="SexSelect" class="form-label">
-                            <span class="text-accent">►</span> <span data-key="sex_label">Sexe du personnage</span>
-                        </label>
-                        <select id="SexSelect" class="form-select" required>
-                            <option value="" data-key="sex_default">-- Sélectionnez une option --</option>
-                            <option value="male" data-key="sex_male">♂ Masculin</option>
-                            <option value="female" data-key="sex_female">♀ Féminin</option>
-                            <option value="other" data-key="sex_other">⚧ Autre</option>
-                        </select>
-                    </div>
-
-                    <div class="cyber-divider mb-4"></div>
-
-                    <!-- Boutons -->
-                    <div class="d-grid gap-2">
-                        <button type="submit" class="ButtonHome w-100 mt-0">
-                            <span data-key="create_button">✅ Créer le personnage</span>
-                        </button>
-                        <button type="button" onclick="window.location='character_save.html'" class="btn btn-secondary">
-                            <span data-key="cancel_button">❌ Annuler</span>
-                        </button>
-                    </div>
-                </form>
-            </div>
+                <div class="d-grid gap-2">
+                    <button type="submit" class="ButtonHome w-100 mt-0">✅ Créer le personnage</button>
+                    <button type="button" onclick="window.location='character_save.html'" class="btn btn-secondary">❌ Annuler</button>
+                </div>
+            </form>
         </div>
     </div>
+</div>
 
-    <script src="../js_client/traduction.js"></script>
-    <script src="../js_client/script_language.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcVqwB08s2jKFEV0NuE"
-        crossorigin="anonymous"></script>
+<script>
+    const token = localStorage.getItem('token');
+    if (!token) window.location.href = 'login.html';
 
+    const slot = parseInt(localStorage.getItem('selectedSlot')) || 1;
+    document.getElementById('slotInfo').textContent = `Création dans le SLOT ${slot}`;
+
+    document.getElementById('createForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const firstname = document.getElementById('firstname').value.trim();
+        const name = document.getElementById('lastname').value.trim();
+        const sexe = document.getElementById('SexSelect').value;
+        const msg = document.getElementById('createMsg');
+
+        if (!firstname || !name || !sexe) {
+            msg.textContent = 'Veuillez remplir tous les champs';
+            return;
+        }
+
+        try {
+            const res = await fetch('http://localhost:3000/api/player', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({ name, firstname, sexe, slot })
+            });
+
+            const data = await res.json();
+
+            if (data.success) {
+                localStorage.removeItem('selectedSlot');
+                msg.style.color = '#4ade80';
+                msg.textContent = '✅ Personnage créé avec succès !';
+                setTimeout(() => window.location.href = 'character_save.html', 1000);
+            } else {
+                msg.style.color = '#f87171';
+                msg.textContent = data.message;
+            }
+        } catch (err) {
+            msg.style.color = '#f87171';
+            msg.textContent = 'Impossible de contacter le serveur';
+            console.error(err);
+        }
+    });
+</script>
 </body>
-
 </html>

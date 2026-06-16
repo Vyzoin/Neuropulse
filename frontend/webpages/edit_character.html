@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,170 +8,223 @@
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
-
 <body>
-<div class="position-fixed top-0 start-0 p-3 top-nav">
-    <button onclick="window.location='character_save.html'" class="ButtonHome mt-0" data-key="create_back">Retour aux sauvegardes</button>
+
+<div class="position-fixed top-0 start-0 p-3" style="z-index: 1000;">
+    <button onclick="window.location='character_save.html'" class="ButtonHome mt-0">Retour aux sauvegardes</button>
 </div>
 
 <div class="container d-flex justify-content-center align-items-center min-vh-100">
     <div class="card w-100" style="max-width: 600px;">
         <div class="card-body p-5">
             <div class="text-center mb-4">
-                <h1 class="page-title" style="font-size: 2rem;">
-                    <span data-key="edit_title">MODIFIER LE PERSONNAGE</span>
+                <h1 style="background: linear-gradient(180deg, #e9f2ff 0%, #b19aff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 2rem;">
+                    MODIFIER LE PERSONNAGE
                 </h1>
-                <p class="small mt-2" data-key="edit_subtitle">Mettez à jour votre identité numérique</p>
+                <p class="small mt-2" style="color: #d0d8e8;">Mettez à jour votre identité numérique</p>
+                <p id="slotInfo" class="small mt-1 text-info"></p>
             </div>
 
             <div class="cyber-divider mb-4"></div>
 
-            <!-- Aperçu du personnage actuel -->
-            <div class="alert mb-4 alert-neon-strong">
+            <div class="alert mb-4" style="background: rgba(140, 50, 220, 0.15); border: 1px solid rgba(140, 50, 220, 0.4); color: #e9f2ff;">
                 <div class="row align-items-center">
                     <div class="col-auto">
-                        <div style="font-size: 3rem;">🤖</div>
+                        <div style="font-size: 3rem;">👤</div>
                     </div>
                     <div class="col">
-                        <strong data-key="current_character">Personnage actuel</strong>
+                        <strong id="currentCharacterLabel">Personnage actuel</strong>
                         <div class="small mt-1">
-                            <span class="text-accent" data-key="level">Niveau 5</span> •
-                            <span class="text-accent" data-key="class_label">Classe: Hacker</span>
+                            <span style="color: #b19aff;">Modification du slot sélectionné</span>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <form>
-                <!-- Avatar sélection -->
-                <div class="mb-4">
-                    <label class="form-label">
-                        <span class="text-accent">►</span> <span data-key="change_avatar">Changer d'avatar</span>
-                    </label>
-                    <div class="d-flex justify-content-center gap-3 flex-wrap">
-                        <div class="text-center">
-                            <input type="radio" name="avatar" id="avatar1" value="1" class="d-none" checked>
-                            <label for="avatar1" class="avatar-selector">
-                                <div class="avatar-icon">🤖</div>
-                            </label>
-                        </div>
-                        <div class="text-center">
-                            <input type="radio" name="avatar" id="avatar2" value="2" class="d-none">
-                            <label for="avatar2" class="avatar-selector">
-                                <div class="avatar-icon">👾</div>
-                            </label>
-                        </div>
-                        <div class="text-center">
-                            <input type="radio" name="avatar" id="avatar3" value="3" class="d-none">
-                            <label for="avatar3" class="avatar-selector">
-                                <div class="avatar-icon">🎮</div>
-                            </label>
-                        </div>
-                        <div class="text-center">
-                            <input type="radio" name="avatar" id="avatar4" value="4" class="d-none">
-                            <label for="avatar4" class="avatar-selector">
-                                <div class="avatar-icon">⚡</div>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-
+            <form id="editForm">
                 <div class="cyber-divider mb-4"></div>
 
-                <!-- Prénom -->
                 <div class="mb-3">
                     <label for="firstname" class="form-label">
-                        <span class="text-accent">►</span> <span data-key="first_name_label">Prénom du personnage</span>
+                        <span style="color: #b19aff;">►</span> Prénom du personnage
                     </label>
-                    <input type="text" id="firstname" class="form-control" data-placeholder="first_name_label" placeholder="Prénom du personnage" value="Neo">
+                    <input type="text" id="firstname" class="form-control" placeholder="Prénom du personnage">
                 </div>
 
-                <!-- Nom -->
                 <div class="mb-3">
                     <label for="lastname" class="form-label">
-                        <span class="text-accent">►</span> <span data-key="last_name_label">Nom du personnage</span>
+                        <span style="color: #b19aff;">►</span> Nom du personnage
                     </label>
-                    <input type="text" id="lastname" class="form-control" data-placeholder="last_name_label" placeholder="Nom du personnage" value="Anderson">
+                    <input type="text" id="lastname" class="form-control" placeholder="Nom du personnage">
                 </div>
 
-                <!-- Sexe -->
                 <div class="mb-4">
                     <label for="SexSelect" class="form-label">
-                        <span class="text-accent">►</span> <span data-key="sex_label">Sexe du personnage</span>
+                        <span style="color: #b19aff;">►</span> Sexe du personnage
                     </label>
                     <select id="SexSelect" class="form-select">
-                            <option value="male" selected data-key="sex_male">♂ Masculin</option>
-                            <option value="female" data-key="sex_female">♀ Féminin</option>
-                            <option value="other" data-key="sex_other">⚧ Autre</option>
+                        <option value="Masculin">♂ Masculin</option>
+                        <option value="Feminin">♀ Féminin</option>
+                        <option value="Autre">⚧ Autre</option>
                     </select>
                 </div>
 
                 <div class="cyber-divider mb-4"></div>
 
-                <!-- Statistiques (read-only) -->
-                <div class="mb-4">
-                    <label class="form-label mb-3">
-                        <span class="text-accent">►</span> <span data-key="current_stats">Statistiques actuelles</span>
-                    </label>
-                    <div class="row g-3">
-                        <div class="col-4">
-                            <div class="text-center p-3 stat-box">
-                                <div class="stat-icon">🧠</div>
-                                <strong class="stat-value">15</strong>
-                                <div class="small" data-key="intelligence">Intelligence</div>
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <div class="text-center p-3 stat-box">
-                                <div class="stat-icon">💪</div>
-                                <strong class="stat-value">10</strong>
-                                <div class="small" data-key="strength">Force</div>
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <div class="text-center p-3 stat-box">
-                                <div class="stat-icon">⚡</div>
-                                <strong class="stat-value">12</strong>
-                                <div class="small" data-key="agility">Agilité</div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="alert mb-4" style="background: rgba(220, 50, 50, 0.1); border: 1px solid rgba(220, 50, 50, 0.3); color: #ffb3b3;">
+                    <strong>⚠️ Attention :</strong> La modification du personnage ne modifie que les informations cosmétiques.
                 </div>
 
-                <div class="cyber-divider mb-4"></div>
+                <p id="saveMsg" class="text-center mb-3"></p>
 
-                <!-- Avertissement -->
-                <div class="alert mb-4 alert-danger-neon">
-                    <strong data-key="edit_warning">⚠️ Attention :</strong> La modification du personnage ne modifie que les informations cosmétiques. Vos statistiques et progression de jeu restent inchangées.
-                </div>
-
-                <!-- Boutons -->
                 <div class="d-grid gap-2">
-                    <button type="submit" class="ButtonHome w-100 mt-0">
-                        <span data-key="save_changes">💾 Sauvegarder les modifications</span>
-                    </button>
-                    <button type="button" onclick="window.location='character_save.html'" class="btn btn-secondary">
-                        <span data-key="cancel_button">❌ Annuler</span>
-                    </button>
-                    <button type="button" class="btn btn-danger" onclick="confirmDelete()">
-                        <span data-key="delete_character">🗑️ Supprimer ce personnage</span>
-                    </button>
+                    <button type="submit" class="ButtonHome w-100 mt-0">💾 Sauvegarder les modifications</button>
+                    <button type="button" onclick="window.location='character_save.html'" class="btn btn-secondary">❌ Annuler</button>
+                    <button type="button" class="btn btn-danger" onclick="confirmDelete()">🗑️ Supprimer ce personnage</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
 
-<script src="../js_client/traduction.js"></script>
-<script src="../js_client/script_language.js"></script>
 <script>
-    function confirmDelete() {
-        if (confirm(window.traductions?.[window.langueActuelle]?.delete_confirm || '⚠️ Êtes-vous sûr de vouloir supprimer ce personnage ? Cette action est irréversible !')) {
-            alert(window.traductions?.[window.langueActuelle]?.delete_success || 'Personnage supprimé avec succès.');
-            window.location = 'character_save.html';
+    const token = localStorage.getItem('token');
+    const selectedSlot = parseInt(localStorage.getItem('selectedSlot')) || 1;
+    let currentPlayerId = null;
+
+    if (!token) {
+        window.location.href = 'login.html';
+    }
+
+    document.getElementById('slotInfo').textContent = `Modification du SLOT ${selectedSlot}`;
+
+    async function loadCharacter() {
+        const saveMsg = document.getElementById('saveMsg');
+
+        try {
+            const res = await fetch('http://localhost:3000/api/player/me', {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            const data = await res.json();
+
+            if (!data.success || !Array.isArray(data.players)) {
+                saveMsg.style.color = '#f87171';
+                saveMsg.textContent = 'Impossible de charger les personnages';
+                return;
+            }
+
+            const player = data.players.find(p => Number(p.slot) === selectedSlot);
+
+            if (!player) {
+                saveMsg.style.color = '#f87171';
+                saveMsg.textContent = 'Aucun personnage trouvé sur ce slot';
+                return;
+            }
+
+            currentPlayerId = player.id;
+            document.getElementById('firstname').value = player.firstname || '';
+            document.getElementById('lastname').value = player.name || '';
+            document.getElementById('SexSelect').value = player.sexe || 'Autre';
+            document.getElementById('currentCharacterLabel').textContent = `${player.firstname} ${player.name} — SLOT ${selectedSlot}`;
+        } catch (err) {
+            console.error(err);
+            saveMsg.style.color = '#f87171';
+            saveMsg.textContent = 'Impossible de contacter le serveur';
         }
     }
+
+    document.getElementById('editForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const firstname = document.getElementById('firstname').value.trim();
+        const name = document.getElementById('lastname').value.trim();
+        const sexe = document.getElementById('SexSelect').value;
+        const saveMsg = document.getElementById('saveMsg');
+
+        if (!firstname || !name || !sexe) {
+            saveMsg.style.color = '#f87171';
+            saveMsg.textContent = 'Veuillez remplir tous les champs';
+            return;
+        }
+
+        if (!currentPlayerId) {
+            saveMsg.style.color = '#f87171';
+            saveMsg.textContent = 'Impossible d’identifier le personnage';
+            return;
+        }
+
+        try {
+            const res = await fetch(`http://localhost:3000/api/player/${currentPlayerId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({ firstname, name, sexe })
+            });
+
+            const data = await res.json();
+
+            if (data.success) {
+                saveMsg.style.color = '#4ade80';
+                saveMsg.textContent = '✅ Modifications enregistrées avec succès';
+                setTimeout(() => {
+                    window.location.href = 'character_save.html';
+                }, 1000);
+            } else {
+                saveMsg.style.color = '#f87171';
+                saveMsg.textContent = data.message || 'Erreur lors de la sauvegarde';
+            }
+        } catch (err) {
+            console.error(err);
+            saveMsg.style.color = '#f87171';
+            saveMsg.textContent = 'Impossible de contacter le serveur';
+        }
+    });
+
+    function confirmDelete() {
+        if (confirm('⚠️ Êtes-vous sûr de vouloir supprimer ce personnage ? Cette action est irréversible !')) {
+            deleteCharacter();
+        }
+    }
+
+    async function deleteCharacter() {
+        const saveMsg = document.getElementById('saveMsg');
+
+        if (!currentPlayerId) {
+            saveMsg.style.color = '#f87171';
+            saveMsg.textContent = 'Impossible d’identifier le personnage';
+            return;
+        }
+
+        try {
+            const res = await fetch(`http://localhost:3000/api/player/${currentPlayerId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            const data = await res.json();
+
+            if (data.success) {
+                localStorage.removeItem('selectedSlot');
+                window.location.href = 'character_save.html';
+            } else {
+                saveMsg.style.color = '#f87171';
+                saveMsg.textContent = data.message || 'Suppression impossible';
+            }
+        } catch (err) {
+            console.error(err);
+            saveMsg.style.color = '#f87171';
+            saveMsg.textContent = 'Impossible de contacter le serveur';
+        }
+    }
+
+    loadCharacter();
 </script>
 </body>
-
 </html>
