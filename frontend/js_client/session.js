@@ -6,7 +6,7 @@ function getToken() {
 
 function logout() {
   localStorage.removeItem('token');
-  window.location.href = 'login.html';
+  window.location.href = 'index.html';
 }
 
 async function getMe() {

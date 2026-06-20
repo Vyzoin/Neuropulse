@@ -1,5 +1,6 @@
 window.traductions = {
     french: {
+        logout: "🔓 DÉCONNEXION",
         home: "Menu d'accueil",
         settings: "PARAMETRES",
         guide: "GUIDE",
@@ -7,8 +8,9 @@ window.traductions = {
         login: "CONNEXION",
         play: "JOUER",
         welcome_unconnected: "Hey jeune hacker, venez commencer une nouvelle partie ou connectez vous pour continuer votre aventure.",
-        welcome_connected: "Bienvenue ! Vous etes connecte",
-        copyright: "Copyright...<br>Made by N.SILLAIRE, A.VIVIEN, O.LAADRAOUI",
+        welcome_connected: "Bienvenue ! Vous êtes connecté",
+        hero_tagline_connected: "Votre aventure vous attend. Bonne chance !",
+        copyright: "Made by N.SILLAIRE, A.VIVIEN, O.LAADRAOUI",
         login_title: "Connectez-vous",
         email_label: "Adresse Email",
         email_placeholder_login: "Entrez votre adresse email ici",
@@ -132,6 +134,7 @@ window.traductions = {
         reset_all: "Réinitialiser tout"
     },
     english: {
+        logout:"🔓 LOGOUT",
         home: "Home",
         settings: "SETTINGS",
         guide: "GUIDE",
@@ -140,7 +143,8 @@ window.traductions = {
         play: "PLAY",
         welcome_unconnected: "Hey young hacker, start a new game or log in to continue your adventure.",
         welcome_connected: "Welcome! You are logged in",
-        copyright: "Copyright...<br>Made by N.SILLAIRE, A.VIVIEN, O.LAADRAOUI",
+        hero_tagline_connected: "Your adventure awaits. Good luck !",
+        copyright: "Made by N.SILLAIRE, A.VIVIEN, O.LAADRAOUI",
         login_title: "Sign in",
         email_label: "Email address",
         email_placeholder_login: "Enter your email address here",
