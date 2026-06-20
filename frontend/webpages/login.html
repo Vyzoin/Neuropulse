@@ -39,10 +39,10 @@
 
 <script src="../js_client/session.js"></script>
 <script>
-// Si déjà connecté → redirige direct
+// Si déjà connecté → retour à l'accueil
 (async () => {
     const me = await getMe();
-    if (me) window.location.href = 'character_save.html';
+    if (me) window.location.href = 'index.html';
 })();
 
 document.getElementById('loginBtn').addEventListener('click', async () => {
@@ -66,7 +66,7 @@ document.getElementById('loginBtn').addEventListener('click', async () => {
 
         if (data.success) {
             localStorage.setItem('token', data.token);
-            window.location.href = 'character_save.html'; // ← direct vers les saves
+            window.location.href = 'index.html';
         } else {
             msg.style.color = '#f87171';
             msg.textContent = data.message;

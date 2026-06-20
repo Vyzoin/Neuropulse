@@ -26,7 +26,6 @@
             <button id="navRegister" onclick="window.location='register.html'" class="ButtonHome w-50 mt-0" data-key="register">INSCRIPTION</button>
             <button id="navLogin" onclick="window.location='login.html'" class="ButtonHome w-50 mt-0" data-key="login">CONNEXION</button>
             <!-- Connecté -->
-            <span id="navWelcome" class="text-white fw-bold mt-1" style="display:none;"></span>
             <button id="navLogout" class="ButtonHome w-50 mt-0" style="display:none;" data-key="logout">🔓 DÉCONNEXION</button>
         </div>
     </div>
@@ -36,17 +35,14 @@
         <div id="gameContainer" class="col-12 d-flex justify-content-center align-items-center"></div>
 
         <!-- Section non connecté -->
-        <div id="notConnectedSection" class="col-8">
-            <div class="text-center">
-                <p class="text-white" data-key="welcome_unconnected">Hey jeune hacker, venez commencer une nouvelle partie ou connectez vous pour continuer votre aventure.</p>
-            </div>
+        <div id="notConnectedSection" class="col-8 text-center">
+            <p class="hero-tagline" data-key="welcome_unconnected">Hey jeune hacker, venez commencer une nouvelle partie ou connectez vous pour continuer votre aventure.</p>
         </div>
 
         <!-- Section connecté -->
-        <div id="connectedSection" class="col-12" style="display: none;">
-            <div class="text-center">
-                <p class="text-white" data-key="welcome_connected">Bienvenue ! Vous êtes connecté</p>
-            </div>
+        <div id="connectedSection" class="col-8 text-center" style="display: none;">
+            <p class="hero-welcome-name" id="welcomeUsername"></p>
+            <p class="hero-tagline" data-key="hero_tagline_connected">Votre aventure vous attend. Bonne chance, hacker.</p>
         </div>
     </div>
 
@@ -58,7 +54,7 @@
             </button>
         </div>
         <div class="col-12 text-center mt-3">
-            <small class="text-white" data-key="copyright">Copyright...<br>Made by N.SILLAIRE, A.VIVIEN, O.LAADRAOUI</small>
+            <small class="text-white" data-key="copyright">Made by N.SILLAIRE, A.VIVIEN, O.LAADRAOUI</small>
         </div>
     </div>
 </div>
@@ -72,6 +68,7 @@
     if (me) {
         document.getElementById('notConnectedSection').style.display = 'none';
         document.getElementById('connectedSection').style.display = 'block';
+        document.getElementById('welcomeUsername').textContent = `Bienvenue, ${me.username} !`;
     }
 })();
 </script>

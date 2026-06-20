@@ -525,6 +525,31 @@ button:focus {
   border-radius: 12px;
 }
 
+/* Tagline hero */
+.hero-tagline {
+  font-size: 1.05rem;
+  color: rgba(233, 242, 255, 0.75);
+  letter-spacing: 0.5px;
+  max-width: 560px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* Pseudo de bienvenue */
+.hero-welcome-name {
+  font-size: 2.4rem;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  background: linear-gradient(180deg, #e9f2ff 0%, #b19aff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 18px rgba(140, 50, 220, 0.55));
+  animation: glowText 3s ease-in-out infinite;
+  margin-bottom: 14px;
+}
+
 /* Amélioration responsive */
 @media (max-width: 768px) {
   .title {
@@ -805,6 +830,12 @@ input[type="radio"]:checked + .avatar-selector {
 /* Navigation corner (position-fixed top-left) */
 .top-nav {
   z-index: 1000;
+}
+
+/* Bouton retour accueil — taille fixe indépendante de la langue */
+[data-key="home"],
+[data-key="guide_back"] {
+  min-width: 175px;
 }
 
 /* Gradient page heading */
