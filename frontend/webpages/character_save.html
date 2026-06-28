@@ -120,6 +120,16 @@
         document.getElementById(`create-slot-${slot}`).style.opacity = '0.5';
         document.getElementById(`edit-slot-${slot}`).disabled = false;
         document.getElementById(`edit-slot-${slot}`).style.opacity = '1';
+        const playBtn = document.getElementById(`play-slot-${slot}`);
+        playBtn.disabled = false;
+        playBtn.style.opacity = '1';
+        playBtn.onclick = () => launchGame(slot);
+    }
+
+    function launchGame(slot) {
+        localStorage.setItem('selectedSlot', slot);
+        localStorage.setItem('autoPlay', 'true');
+        window.location.href = 'index.html';
     }
 
     async function loadPlayers() {
