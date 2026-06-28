@@ -49,7 +49,7 @@
     <!-- Footer -->
     <div class="row footer-row">
         <div class="col-12 text-center">
-            <button onclick="window.location='character_save.html'" id="startButton" class="btn ButtonHome btn-lg w-25">
+            <button id="startButton" class="btn ButtonHome btn-lg w-25">
                 <span data-key="play">JOUER</span>
             </button>
         </div>
@@ -59,6 +59,8 @@
     </div>
 </div>
 
+<script src="../js_client/phaser.js"></script>
+<script src="../js_client/main.js"></script>
 <script src="../js_client/session.js"></script>
 <script>
 (async () => {
@@ -71,6 +73,13 @@
         document.getElementById('welcomeUsername').textContent = `Bienvenue, ${me.username} !`;
     }
 })();
+
+if (localStorage.getItem('autoPlay') === 'true') {
+    localStorage.removeItem('autoPlay');
+    document.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('startButton').click();
+    });
+}
 </script>
 <script src="../js_client/traduction.js"></script>
 <script src="../js_client/script_language.js"></script>
