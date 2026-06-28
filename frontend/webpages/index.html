@@ -77,7 +77,9 @@
 if (localStorage.getItem('autoPlay') === 'true') {
     localStorage.removeItem('autoPlay');
     document.addEventListener('DOMContentLoaded', () => {
-        document.getElementById('startButton').click();
+        if (typeof startGame === 'function') {
+            startGame();
+        }
     });
 }
 </script>

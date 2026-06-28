@@ -30,51 +30,43 @@ var player;
 var lastDirection = 'down';
 var runAnim = 15;
 
+// --- Lancement du jeu ---
+function startGame() {
+    const uiContainer = document.querySelector('.container-fluid') || document.querySelector('body > div');
+    if (uiContainer) uiContainer.style.display = 'none';
+    document.body.classList.add('game-active');
+
+    let host = document.getElementById('phaser-host');
+    if (!host) {
+        host = document.createElement('div');
+        host.id = 'phaser-host';
+        host.style.position = 'fixed';
+        host.style.top = '0';
+        host.style.left = '0';
+        host.style.width = '100%';
+        host.style.height = '100%';
+        host.style.zIndex = '9999';
+        host.style.background = '#000';
+        document.body.appendChild(host);
+    } else {
+        host.style.display = 'block';
+    }
+
+    config.scale.parent = 'phaser-host';
+
+    if (!game) {
+        game = new Phaser.Game(config);
+    }
+}
+
 // --- Gestionnaire de démarrage ---
 document.addEventListener('DOMContentLoaded', function () {
     const startButton = document.getElementById('startButton');
-    const uiContainer = document.querySelector('.container-fluid') || document.querySelector('body > div');
     if (!startButton) {
         console.warn('Start button introuvable.');
         return;
     }
-
-    startButton.addEventListener('click', function () {
-        console.log('JOUER cliqué');
-
-        // masquer l'UI (si présente)
-        if (uiContainer) uiContainer.style.display = 'none';
-        document.body.classList.add('game-active');
-
-        // Créer / trouver un conteneur plein écran pour Phaser
-        let host = document.getElementById('phaser-host');
-        if (!host) {
-            host = document.createElement('div');
-            host.id = 'phaser-host';
-            host.style.position = 'fixed';
-            host.style.top = '0';
-            host.style.left = '0';
-            host.style.width = '100%';
-            host.style.height = '100%';
-            host.style.zIndex = '9999';
-            host.style.background = '#000';
-            document.body.appendChild(host);
-        } else {
-            // s'assurer qu'il est visible si déjà présent
-            host.style.display = 'block';
-        }
-
-        // assigner parent de scale pour que Phaser insère le canvas dans le host
-        config.scale.parent = 'phaser-host';
-
-        // lancer le jeu seulement une fois
-        if (!game) {
-            console.log('Création du jeu Phaser...');
-            game = new Phaser.Game(config);
-        } else {
-            console.log('Le jeu existe déjà.');
-        }
-    });
+    startButton.addEventListener('click', startGame);
 });
 
 const VIEW_WIDTH = 800;
