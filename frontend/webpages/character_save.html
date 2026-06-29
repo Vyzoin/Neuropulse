@@ -1,165 +1,295 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sauvegardes - Neuropulse</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sauvegardes - Neuropulse</title>
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+    crossorigin="anonymous"
+  >
+  <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
 
 <div class="container-fluid">
-    <div class="position-fixed top-0 start-0 p-3" style="z-index: 1000;">
-        <button onclick="window.location='index.html'" class="ButtonHome mt-0">Menu d'accueil</button>
+  <!-- Bouton retour accueil -->
+  <div class="position-fixed top-0 start-0 p-3" style="z-index: 1000;">
+    <button onclick="window.location='index.html'" class="ButtonHome mt-0">Menu d'accueil</button>
+  </div>
+
+  <!-- Titre -->
+  <div class="text-center mt-5 pt-4 mb-4">
+    <h1 style="background: linear-gradient(180deg, #e9f2ff 0%, #b19aff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 2.5rem; letter-spacing: 4px;">
+      CHOIX DE LA SAUVEGARDE
+    </h1>
+    <p class="text-white mt-2">Sélectionnez un slot pour commencer votre aventure</p>
+  </div>
+
+  <!-- Slots -->
+  <div class="row g-4 px-4 mb-5">
+    <!-- SLOT 1 -->
+    <div class="col-lg-4 col-md-6">
+      <div class="save-slot h-100">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h2>
+            <span style="background: linear-gradient(180deg, #e9f2ff 0%, #b19aff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+              SLOT 1
+            </span>
+          </h2>
+          <span id="badge-slot-1" class="badge bg-success">DISPONIBLE</span>
+        </div>
+        <div class="cyber-divider mb-3"></div>
+        <div
+          id="content-slot-1"
+          class="mb-3 p-3"
+          style="background: rgba(140, 50, 220, 0.1); border-radius: 8px; min-height: 120px;"
+        ></div>
+        <div class="d-grid gap-2">
+          <button id="create-slot-1" onclick="selectSlot(1)" class="btn btn-primary">
+            Créer un nouveau personnage
+          </button>
+          <button
+            id="edit-slot-1"
+            onclick="editCharacter(1)"
+            class="btn btn-secondary"
+            disabled
+            style="opacity: 0.5;"
+          >
+            Modifier le personnage
+          </button>
+          <button
+            id="play-slot-1"
+            class="ButtonHome w-100"
+            disabled
+            style="opacity: 0.5;"
+          >
+            JOUER
+          </button>
+        </div>
+      </div>
     </div>
 
-    <div class="text-center mt-5 pt-4 mb-4">
-        <h1 style="background: linear-gradient(180deg, #e9f2ff 0%, #b19aff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 2.5rem; letter-spacing: 4px;">
-            CHOIX DE LA SAUVEGARDE
-        </h1>
-        <p class="text-white mt-2">Sélectionnez un slot pour commencer votre aventure</p>
+    <!-- SLOT 2 -->
+    <div class="col-lg-4 col-md-6">
+      <div class="save-slot h-100">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h2>
+            <span style="background: linear-gradient(180deg, #e9f2ff 0%, #b19aff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+              SLOT 2
+            </span>
+          </h2>
+          <span id="badge-slot-2" class="badge bg-success">DISPONIBLE</span>
+        </div>
+        <div class="cyber-divider mb-3"></div>
+        <div
+          id="content-slot-2"
+          class="mb-3 p-3"
+          style="background: rgba(140, 50, 220, 0.1); border-radius: 8px; min-height: 120px;"
+        ></div>
+        <div class="d-grid gap-2">
+          <button id="create-slot-2" onclick="selectSlot(2)" class="btn btn-primary">
+            Créer un nouveau personnage
+          </button>
+          <button
+            id="edit-slot-2"
+            onclick="editCharacter(2)"
+            class="btn btn-secondary"
+            disabled
+            style="opacity: 0.5;"
+          >
+            Modifier le personnage
+          </button>
+          <button
+            id="play-slot-2"
+            class="ButtonHome w-100"
+            disabled
+            style="opacity: 0.5;"
+          >
+            JOUER
+          </button>
+        </div>
+      </div>
     </div>
 
-    <div class="row g-4 px-4 mb-5">
-        <div class="col-lg-4 col-md-6">
-            <div class="save-slot h-100">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h2><span style="background: linear-gradient(180deg, #e9f2ff 0%, #b19aff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">SLOT 1</span></h2>
-                    <span id="badge-slot-1" class="badge bg-success">DISPONIBLE</span>
-                </div>
-                <div class="cyber-divider mb-3"></div>
-                <div id="content-slot-1" class="mb-3 p-3" style="background: rgba(140, 50, 220, 0.1); border-radius: 8px; min-height: 120px;"></div>
-                <div class="d-grid gap-2">
-                    <button id="create-slot-1" onclick="selectSlot(1)" class="btn btn-primary">Créer un nouveau personnage</button>
-                    <button id="edit-slot-1" onclick="editCharacter(1)" class="btn btn-secondary" disabled style="opacity: 0.5;">Modifier le personnage</button>
-                    <button id="play-slot-1" class="ButtonHome w-100" disabled style="opacity: 0.5;">JOUER</button>
-                </div>
-            </div>
+    <!-- SLOT 3 -->
+    <div class="col-lg-4 col-md-6">
+      <div class="save-slot h-100">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h2>
+            <span style="background: linear-gradient(180deg, #e9f2ff 0%, #b19aff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+              SLOT 3
+            </span>
+          </h2>
+          <span id="badge-slot-3" class="badge bg-success">DISPONIBLE</span>
         </div>
-
-        <div class="col-lg-4 col-md-6">
-            <div class="save-slot h-100">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h2><span style="background: linear-gradient(180deg, #e9f2ff 0%, #b19aff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">SLOT 2</span></h2>
-                    <span id="badge-slot-2" class="badge bg-success">DISPONIBLE</span>
-                </div>
-                <div class="cyber-divider mb-3"></div>
-                <div id="content-slot-2" class="mb-3 p-3" style="background: rgba(140, 50, 220, 0.1); border-radius: 8px; min-height: 120px;"></div>
-                <div class="d-grid gap-2">
-                    <button id="create-slot-2" onclick="selectSlot(2)" class="btn btn-primary">Créer un nouveau personnage</button>
-                    <button id="edit-slot-2" onclick="editCharacter(2)" class="btn btn-secondary" disabled style="opacity: 0.5;">Modifier le personnage</button>
-                    <button id="play-slot-2" class="ButtonHome w-100" disabled style="opacity: 0.5;">JOUER</button>
-                </div>
-            </div>
+        <div class="cyber-divider mb-3"></div>
+        <div
+          id="content-slot-3"
+          class="mb-3 p-3"
+          style="background: rgba(140, 50, 220, 0.1); border-radius: 8px; min-height: 120px;"
+        ></div>
+        <div class="d-grid gap-2">
+          <button id="create-slot-3" onclick="selectSlot(3)" class="btn btn-primary">
+            Créer un nouveau personnage
+          </button>
+          <button
+            id="edit-slot-3"
+            onclick="editCharacter(3)"
+            class="btn btn-secondary"
+            disabled
+            style="opacity: 0.5;"
+          >
+            Modifier le personnage
+          </button>
+          <button
+            id="play-slot-3"
+            class="ButtonHome w-100"
+            disabled
+            style="opacity: 0.5;"
+          >
+            JOUER
+          </button>
         </div>
-
-        <div class="col-lg-4 col-md-6">
-            <div class="save-slot h-100">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h2><span style="background: linear-gradient(180deg, #e9f2ff 0%, #b19aff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">SLOT 3</span></h2>
-                    <span id="badge-slot-3" class="badge bg-success">DISPONIBLE</span>
-                </div>
-                <div class="cyber-divider mb-3"></div>
-                <div id="content-slot-3" class="mb-3 p-3" style="background: rgba(140, 50, 220, 0.1); border-radius: 8px; min-height: 120px;"></div>
-                <div class="d-grid gap-2">
-                    <button id="create-slot-3" onclick="selectSlot(3)" class="btn btn-primary">Créer un nouveau personnage</button>
-                    <button id="edit-slot-3" onclick="editCharacter(3)" class="btn btn-secondary" disabled style="opacity: 0.5;">Modifier le personnage</button>
-                    <button id="play-slot-3" class="ButtonHome w-100" disabled style="opacity: 0.5;">JOUER</button>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
+  </div>
 </div>
 
+<!-- Session / API -->
+<script src="../js_client/session.js"></script>
 <script>
-    const token = localStorage.getItem('token');
-    if (!token) window.location.href = 'login.html';
+  // Vérifie qu'on a un token, sinon renvoie vers login
+  const token = getToken();
+  if (!token) {
+    window.location.href = 'login.html';
+  }
 
-    function selectSlot(slot) {
-        localStorage.setItem('selectedSlot', slot);
-        window.location.href = 'create_character.html';
+  // Aller vers création / édition
+  function selectSlot(slot) {
+    localStorage.setItem('selectedSlot', slot);
+    window.location.href = 'create_character.html';
+  }
+
+  function editCharacter(slot) {
+    localStorage.setItem('selectedSlot', slot);
+    window.location.href = 'edit_character.html';
+  }
+
+  function emptyHtml() {
+    return `
+      <p class="text-center text-white-50 m-0">
+        <span style="font-size: 3rem; opacity: 0.3;">+</span><br>
+        Emplacement vide
+      </p>
+    `;
+  }
+
+  function renderEmpty(slot) {
+    document.getElementById(`badge-slot-${slot}`).textContent = 'DISPONIBLE';
+    document.getElementById(`badge-slot-${slot}`).className = 'badge bg-success';
+
+    document.getElementById(`content-slot-${slot}`).innerHTML = emptyHtml();
+
+    const btnCreate = document.getElementById(`create-slot-${slot}`);
+    const btnEdit   = document.getElementById(`edit-slot-${slot}`);
+    const btnPlay   = document.getElementById(`play-slot-${slot}`);
+
+    if (btnCreate) {
+      btnCreate.disabled = false;
+      btnCreate.style.opacity = '1';
     }
-
-    function editCharacter(slot) {
-        localStorage.setItem('selectedSlot', slot);
-        window.location.href = 'edit_character.html';
+    if (btnEdit) {
+      btnEdit.disabled = true;
+      btnEdit.style.opacity = '0.5';
+      btnEdit.onclick = null;
     }
-
-    function emptyHtml() {
-        return `
-            <p class="text-center text-white-50 m-0">
-                <span style="font-size: 3rem; opacity: 0.3;">👤</span><br>
-                Emplacement vide
-            </p>
-        `;
+    if (btnPlay) {
+      btnPlay.disabled = true;
+      btnPlay.style.opacity = '0.5';
+      btnPlay.onclick = null;
     }
+  }
 
-    function renderEmpty(slot) {
-        document.getElementById(`badge-slot-${slot}`).textContent = 'DISPONIBLE';
-        document.getElementById(`badge-slot-${slot}`).className = 'badge bg-success';
-        document.getElementById(`content-slot-${slot}`).innerHTML = emptyHtml();
-        document.getElementById(`create-slot-${slot}`).disabled = false;
-        document.getElementById(`create-slot-${slot}`).style.opacity = '1';
-        document.getElementById(`edit-slot-${slot}`).disabled = true;
-        document.getElementById(`edit-slot-${slot}`).style.opacity = '0.5';
+  function renderPlayer(slot, player) {
+    document.getElementById(`badge-slot-${slot}`).textContent = 'OCCUPÉ';
+    document.getElementById(`badge-slot-${slot}`).className = 'badge bg-warning text-dark';
+
+    document.getElementById(`content-slot-${slot}`).innerHTML = `
+      <div class="text-center text-white">
+        <div style="font-size: 3rem;">👤</div>
+        <strong>${player.firstname} ${player.name}</strong>
+        <div class="small mt-1">${player.sexe}</div>
+        <div class="small mt-1">Slot ${player.slot}</div>
+      </div>
+    `;
+
+    const btnCreate = document.getElementById(`create-slot-${slot}`);
+    const btnEdit   = document.getElementById(`edit-slot-${slot}`);
+    const btnPlay   = document.getElementById(`play-slot-${slot}`);
+
+    if (btnCreate) {
+      btnCreate.disabled = true;
+      btnCreate.style.opacity = '0.5';
+      btnCreate.onclick = null;
     }
-
-    function renderPlayer(slot, player) {
-        document.getElementById(`badge-slot-${slot}`).textContent = 'OCCUPÉ';
-        document.getElementById(`badge-slot-${slot}`).className = 'badge bg-warning text-dark';
-        document.getElementById(`content-slot-${slot}`).innerHTML = `
-            <div class="text-center text-white">
-                <div style="font-size: 3rem;">👤</div>
-                <strong>${player.firstname} ${player.name}</strong>
-                <div class="small mt-1">${player.sexe}</div>
-            </div>
-        `;
-        document.getElementById(`create-slot-${slot}`).disabled = true;
-        document.getElementById(`create-slot-${slot}`).style.opacity = '0.5';
-        document.getElementById(`edit-slot-${slot}`).disabled = false;
-        document.getElementById(`edit-slot-${slot}`).style.opacity = '1';
-        const playBtn = document.getElementById(`play-slot-${slot}`);
-        playBtn.disabled = false;
-        playBtn.style.opacity = '1';
-        playBtn.onclick = () => launchGame(slot);
+    if (btnEdit) {
+      btnEdit.disabled = false;
+      btnEdit.style.opacity = '1';
+      btnEdit.onclick = () => editCharacter(slot);
     }
-
-    function launchGame(slot) {
-        localStorage.setItem('selectedSlot', slot);
+    if (btnPlay) {
+      btnPlay.disabled = false;
+      btnPlay.style.opacity = '1';
+      btnPlay.onclick = () => {
+        // Enregistrer le personnage actif et demander le lancement auto du jeu
+        setActivePlayer(player);
+        localStorage.setItem('selectedSlot', player.slot);
         localStorage.setItem('autoPlay', 'true');
+
+        // Retour au menu / page de jeu
         window.location.href = 'index.html';
+      };
     }
+  }
 
-    async function loadPlayers() {
-        try {
-            renderEmpty(1);
-            renderEmpty(2);
-            renderEmpty(3);
+  async function loadPlayers() {
+    try {
+      // Réinitialiser les slots
+      renderEmpty(1);
+      renderEmpty(2);
+      renderEmpty(3);
 
-            const res = await fetch('http://localhost:3000/api/player/me', {
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            });
-
-            const data = await res.json();
-
-            if (data.success && Array.isArray(data.players)) {
-                data.players.forEach(player => {
-                    if (player.slot >= 1 && player.slot <= 3) {
-                        renderPlayer(player.slot, player);
-                    }
-                });
-            }
-        } catch (err) {
-            console.error(err);
+      const res = await fetch(`${API}/api/player/me`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
         }
-    }
+      });
+      const data = await res.json();
 
-    loadPlayers();
+      if (data.success && Array.isArray(data.players)) {
+        data.players.forEach(player => {
+          if (player.slot >= 1 && player.slot <= 3) {
+            renderPlayer(player.slot, player);
+          }
+        });
+      } else {
+        console.warn('Impossible de charger les personnages', data);
+      }
+    } catch (err) {
+      console.error('Erreur de chargement des personnages', err);
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', async () => {
+    const me = await requireAuth(); // protège la page
+    if (!me) return;
+    await loadPlayers();
+  });
 </script>
+
 <script src="../js_client/traduction.js"></script>
 <script src="../js_client/script_language.js"></script>
 </body>
