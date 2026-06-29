@@ -294,13 +294,17 @@ if (activePlayerData) {
   function addWall(x, y, w, h) {
     var rect = scene.add.rectangle(x + w / 2, y + h / 2, w, h, 0xff0000, alpha);
     walls.add(rect, false);
+    if (DEBUG_COLLISIONS) {
+      scene.add.text(x + 2, y + 2, `(${x},${y})\n${w}x${h}`, {
+        fontSize: '10px', fill: '#ffffff', backgroundColor: '#000000'
+      }).setDepth(100);
+    }
   }
 
   // --- Collisions générées depuis background_hitbox.png ---
   addWall(0, 0, 840, 210);
   addWall(0, 210, 780, 270);
   addWall(0, 480, 90, 480);
-  addWall(0, 1020, 90, 30);
   addWall(0, 1050, 300, 60);
   addWall(0, 1110, 330, 120);
   addWall(0, 1230, 300, 30);
@@ -310,7 +314,6 @@ if (activePlayerData) {
   addWall(0, 1620, 750, 120);
   addWall(0, 1740, 1200, 60);
   addWall(150, 540, 630, 420);
-  addWall(150, 1020, 60, 30);
   addWall(180, 480, 600, 60);
   addWall(300, 1560, 300, 60);
   addWall(330, 1320, 270, 150);
@@ -318,8 +321,8 @@ if (activePlayerData) {
   addWall(390, 1020, 210, 300);
   addWall(420, 1470, 180, 30);
   addWall(510, 1500, 90, 30);
-  addWall(630, 1410, 120, 90);
-  addWall(660, 1050, 120, 60);
+  addWall(660, 1410, 90, 90);
+  addWall(660, 1050, 90, 60);
   addWall(660, 1110, 90, 300);
   addWall(660, 1500, 90, 30);
   addWall(810, 300, 390, 660);
@@ -333,25 +336,25 @@ if (activePlayerData) {
   addWall(1290, 1110, 210, 30);
   addWall(1290, 1140, 240, 120);
   addWall(1290, 1290, 570, 60);
-  addWall(1290, 1350, 600, 30);
+  addWall(1290, 1350, 570, 30);
   addWall(1290, 1380, 570, 150);
   addWall(1290, 1590, 570, 60);
-  addWall(1290, 1650, 600, 30);
+  addWall(1290, 1650, 570, 30);
   addWall(1290, 1680, 570, 60);
-  addWall(1290, 1740, 600, 60);
+  addWall(1290, 1740, 570, 60);
   addWall(1320, 1050, 180, 60);
   addWall(1530, 1050, 210, 60);
   addWall(1560, 1110, 180, 150);
-  addWall(1770, 1050, 120, 210);
+  addWall(1770, 1050, 100, 210);
   addWall(1920, 0, 480, 240);
   addWall(1920, 300, 480, 240);
   addWall(1920, 540, 210, 420);
   addWall(1920, 1050, 480, 150);
-  addWall(1920, 1200, 330, 30);
-  addWall(1920, 1290, 300, 120);
+  addWall(1920, 1200, 300, 30);
+  addWall(1950, 1290, 270, 120);
   addWall(1920, 1620, 390, 180);
-  addWall(1950, 1020, 450, 30);
-  addWall(1950, 1230, 270, 30);
+  addWall(1920, 1020, 480, 30);
+  addWall(1920, 1230, 270, 30);
   addWall(1950, 1410, 270, 120);
   addWall(1950, 1590, 360, 30);
   addWall(1980, 240, 420, 60);
