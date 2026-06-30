@@ -72,15 +72,15 @@
                 <div class="cyber-divider mb-4"></div>
 
                 <div class="alert mb-4" style="background: rgba(220, 50, 50, 0.1); border: 1px solid rgba(220, 50, 50, 0.3); color: #ffb3b3;">
-                    <strong>⚠️ Attention :</strong> La modification du personnage ne modifie que les informations cosmétiques.
+                    <strong>Attention :</strong> La modification du personnage ne modifie que les informations cosmétiques.
                 </div>
 
                 <p id="saveMsg" class="text-center mb-3"></p>
 
                 <div class="d-grid gap-2">
-                    <button type="submit" class="ButtonHome w-100 mt-0">💾 Sauvegarder les modifications</button>
-                    <button type="button" onclick="window.location='character_save.html'" class="btn btn-secondary">❌ Annuler</button>
-                    <button type="button" class="btn btn-danger" onclick="confirmDelete()">🗑️ Supprimer ce personnage</button>
+                    <button type="submit" class="ButtonHome w-100 mt-0"> Sauvegarder les modifications</button>
+                    <button type="button" onclick="window.location='character_save.html'" class="btn btn-secondary"> Annuler</button>
+                    <button type="button" class="btn btn-danger" onclick="confirmDelete()"> Supprimer ce personnage</button>
                 </div>
             </form>
         </div>
@@ -170,7 +170,7 @@
 
             if (data.success) {
                 saveMsg.style.color = '#4ade80';
-                saveMsg.textContent = '✅ Modifications enregistrées avec succès';
+                saveMsg.textContent = 'Modifications enregistrées avec succès';
                 setTimeout(() => {
                     window.location.href = 'character_save.html';
                 }, 1000);

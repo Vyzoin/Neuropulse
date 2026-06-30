@@ -116,14 +116,17 @@ async function savePlayerState() {
 
   const maxX = VIEW_WIDTH * MAP_COLS;
   const maxY = VIEW_HEIGHT * MAP_ROWS;
-  const safeX = Phaser.Math.Clamp(player.x, margin, maxX - margin);
-  const safeY = Phaser.Math.Clamp(player.y, margin, maxY - margin);
+
+  const safeX = Math.round(Phaser.Math.Clamp(player.x, margin, maxX - margin));
+  const safeY = Math.round(Phaser.Math.Clamp(player.y, margin, maxY - margin));
+  const safeZoneX = Math.round(currentX);
+  const safeZoneY = Math.round(currentY);
 
   const body = {
     pos_x: safeX,
     pos_y: safeY,
-    zone_x: currentX,
-    zone_y: currentY,
+    zone_x: safeZoneX,
+    zone_y: safeZoneY,
     hp: 100,
     mana: 50
   };
@@ -138,6 +141,7 @@ async function savePlayerState() {
       },
       body: JSON.stringify(body)
     });
+
     if (!res.ok) {
       console.error('Erreur HTTP savePlayerState', res.status);
     } else {
@@ -265,7 +269,7 @@ function create() {
       currentX  = state.zone_x;
       currentY  = state.zone_y;
       scene.cameras.main.scrollX = currentX * VIEW_WIDTH;
-      scene.cameras.main.scrollY = currentY * VIEW_HEIGHT;
+      scene.cameras.main.scrollY = currentY * VIEW_HEIGHT; 
     }
     isInitializing = false;
   });
@@ -344,7 +348,7 @@ function create() {
   this.physics.add.collider(player, walls);
 }
 
-function pauseGame() {
+function pauseGame() { // Appelée depuis update() ou ESC
   isPaused = true;
   this.physics.pause();
   player.setVelocity(0, 0);
@@ -382,7 +386,7 @@ function pauseGame() {
     backgroundColor: '#3355aa',
     padding: { x: 18, y: 10 }
   });
-  resumeBtn.setOrigin(0.5, 0.5).setScrollFactor(0).setDepth(103);
+  resumeBtn.setOrigin(0.5, 0.5).setScrollFactor(0).setDepth(103); 
   resumeBtn.setInteractive({ useHandCursor: true });
   resumeBtn.on('pointerover', () => resumeBtn.setStyle({ fill: '#aaddff', backgroundColor: '#4466cc' }));
   resumeBtn.on('pointerout',  () => resumeBtn.setStyle({ fill: '#ffffff', backgroundColor: '#3355aa' }));

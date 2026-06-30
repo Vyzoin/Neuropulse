@@ -10,7 +10,7 @@ router.post('/', async (req, res) => {
     return res.status(400).json({ success: false, message: 'Champs manquants' });
   }
 
-  const slotNum = parseInt(slot) || 1;
+  const slotNum = parseInt(slot, 10) || 1;
 
   try {
     const existing = await pool.query(
@@ -131,16 +131,17 @@ router.delete('/:id', async (req, res) => {
     res.status(500).json({ success: false, message: 'Erreur serveur' });
   }
 });
+
 // GET /api/player/:id/state — Charger l'état de jeu du personnage
 router.get('/:id/state', async (req, res) => {
   const playerId = req.params.id;
 
   try {
-    // Vérifier que ce player appartient bien à l'utilisateur connecté
     const check = await pool.query(
       'SELECT id FROM player WHERE id = $1 AND user_id = $2',
       [playerId, req.user.userId]
     );
+
     if (check.rows.length === 0) {
       return res.status(403).json({ success: false, message: 'Non autorisé' });
     }
@@ -151,7 +152,6 @@ router.get('/:id/state', async (req, res) => {
     );
 
     if (result.rows.length === 0) {
-      // Aucun état → renvoyer des valeurs par défaut
       return res.json({
         success: true,
         state: {
@@ -171,6 +171,7 @@ router.get('/:id/state', async (req, res) => {
     res.status(500).json({ success: false, message: 'Erreur serveur' });
   }
 });
+
 // PUT /api/player/:id/state — Sauvegarder l'état de jeu du personnage
 router.put('/:id/state', async (req, res) => {
   const playerId = req.params.id;
@@ -181,8 +182,32 @@ router.put('/:id/state', async (req, res) => {
       'SELECT id FROM player WHERE id = $1 AND user_id = $2',
       [playerId, req.user.userId]
     );
+
     if (check.rows.length === 0) {
       return res.status(403).json({ success: false, message: 'Non autorisé' });
+    }
+
+    // Conversion et sécurisation des types
+    const posX = Math.round(Number(pos_x));
+    const posY = Math.round(Number(pos_y));
+    const zoneX = parseInt(zone_x, 10);
+    const zoneY = parseInt(zone_y, 10);
+    const hpValue = parseInt(hp, 10);
+    const manaValue = parseInt(mana, 10);
+
+    // Validation simple
+    if (
+      Number.isNaN(posX) ||
+      Number.isNaN(posY) ||
+      Number.isNaN(zoneX) ||
+      Number.isNaN(zoneY) ||
+      Number.isNaN(hpValue) ||
+      Number.isNaN(manaValue)
+    ) {
+      return res.status(400).json({
+        success: false,
+        message: 'Données de sauvegarde invalides'
+      });
     }
 
     const existing = await pool.query(
@@ -195,14 +220,14 @@ router.put('/:id/state', async (req, res) => {
         `INSERT INTO player_state
          (player_id, pos_x, pos_y, zone_x, zone_y, hp, mana, updated_at)
          VALUES ($1, $2, $3, $4, $5, $6, $7, NOW())`,
-        [playerId, pos_x, pos_y, zone_x, zone_y, hp, mana]
+        [playerId, posX, posY, zoneX, zoneY, hpValue, manaValue]
       );
     } else {
       await pool.query(
         `UPDATE player_state
          SET pos_x = $1, pos_y = $2, zone_x = $3, zone_y = $4, hp = $5, mana = $6, updated_at = NOW()
          WHERE player_id = $7`,
-        [pos_x, pos_y, zone_x, zone_y, hp, mana, playerId]
+        [posX, posY, zoneX, zoneY, hpValue, manaValue, playerId]
       );
     }
 
