@@ -184,21 +184,21 @@ function create() {
 
   // Animations
   const animDefs = [
-    { key: 'static_down_anim',  sprite: 'static_down'  },
-    { key: 'static_left_anim',  sprite: 'static_left'  },
-    { key: 'static_right_anim', sprite: 'static_right' },
-    { key: 'static_up_anim',    sprite: 'static_up'    },
-    { key: 'run_down_anim',     sprite: 'run_down',  frameRate: runAnim },
-    { key: 'run_left_anim',     sprite: 'run_left',  frameRate: runAnim },
-    { key: 'run_right_anim',    sprite: 'run_right', frameRate: runAnim },
-    { key: 'run_up_anim',       sprite: 'run_up',    frameRate: runAnim }
+    { key: 'static_down_anim',  sprite: 'static_down',  end: 3 },
+    { key: 'static_left_anim',  sprite: 'static_left',  end: 3 },
+    { key: 'static_right_anim', sprite: 'static_right', end: 3 },
+    { key: 'static_up_anim',    sprite: 'static_up',    end: 3 },
+    { key: 'run_down_anim',     sprite: 'run_down',  end: 7, frameRate: runAnim },
+    { key: 'run_left_anim',     sprite: 'run_left',  end: 7, frameRate: runAnim },
+    { key: 'run_right_anim',    sprite: 'run_right', end: 7, frameRate: runAnim },
+    { key: 'run_up_anim',       sprite: 'run_up',    end: 7, frameRate: runAnim }
   ];
 
   animDefs.forEach(a => {
     this.anims.create({
       key: a.key,
-      frames: this.anims.generateFrameNumbers(a.sprite, { start: 0, end: 7 }),
-      frameRate: a.frameRate || 10,
+      frames: this.anims.generateFrameNumbers(a.sprite, { start: 0, end: a.end }),
+      frameRate: a.frameRate || 7,
       repeat: -1
     });
   });
@@ -214,7 +214,7 @@ function create() {
   bgFull.setScale(Math.max(scaleX, scaleY));
 
   // Joueur (position par défaut, écrasée par loadPlayerState)
-  player = this.physics.add.sprite(1249, 260, 'static_down', 0);
+  player = this.physics.add.sprite(100, 1000, 'static_down', 0);
   player.setOrigin(0.5, 0.5);
   player.setCollideWorldBounds(true);
   player.play('static_down_anim');
@@ -246,8 +246,8 @@ function create() {
   this.physics.world.setBounds(0, 0, fullMapWidth, fullMapHeight);
   this.cameras.main.setBounds(0, 0, fullMapWidth, fullMapHeight);
 
-  currentX = 1;
-  currentY = 0;
+  currentX = 0;
+  currentY = 1;
   this.cameras.main.scrollX = currentX * VIEW_WIDTH;
   this.cameras.main.scrollY = currentY * VIEW_HEIGHT;
 
