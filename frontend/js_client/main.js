@@ -1,4 +1,4 @@
-// --- Config Phaser (scale adapté) ---
+// --- Config Phaser ---
 var config = {
   type: Phaser.AUTO,
   width: 800,
@@ -24,14 +24,26 @@ var config = {
   }
 };
 
-var game = null; // Le jeu ne se démarre pas immédiatement
+var game = null;
 var cursor;
 var player;
 var lastDirection = 'down';
 var runAnim = 15;
-
-// Personnage actif côté front
 var activePlayerData = null;
+var keyZ, keyQ, keyS, keyD;  // touches ZQSD déclarées globalement
+
+let isInitializing = true;
+
+// --- DOMContentLoaded unique ---
+document.addEventListener('DOMContentLoaded', function () {
+  activePlayerData = getActivePlayer();
+  console.log('Personnage actif en session :', activePlayerData);
+
+  const summary = document.getElementById('activePlayerSummary');
+  if (summary && activePlayerData) {
+    summary.textContent = `${activePlayerData.firstname} ${activePlayerData.name} (Slot ${activePlayerData.slot}, ${activePlayerData.sexe})`;
+  }
+});
 
 // --- Lancement du jeu ---
 function startGame() {
@@ -61,247 +73,205 @@ function startGame() {
     game = new Phaser.Game(config);
   }
 }
-document.addEventListener('DOMContentLoaded', function () {
-  // Récupère le personnage actif depuis la session
-  activePlayerData = getActivePlayer();
-  console.log('Personnage actif en session :', activePlayerData);
-});
-// --- Gestionnaire de démarrage ---
-document.addEventListener('DOMContentLoaded', function () {
-  (async () => {
-    // Vérifier que l'utilisateur est connecté
-    const me = await requireAuth();
-    if (!me) return;
 
-    // Vérifier qu'un personnage actif est présent
-    activePlayerData = requireActivePlayer();
-    if (!activePlayerData) return;
-
-    //const startButton = document.getElementById('startButton');
-    //if (!startButton) {
-    //  console.warn('Start button introuvable.');
-    //  return;
-    //}
-
-    // Optionnel : afficher un résumé du personnage avant de lancer le jeu
-    const summary = document.getElementById('activePlayerSummary');
-    if (summary) {
-      summary.textContent = `${activePlayerData.firstname} ${activePlayerData.name} (Slot ${activePlayerData.slot}, ${activePlayerData.sexe})`;
-    }
-
-    // On ne branche le bouton que si tout est OK
-    //startButton.addEventListener('click', startGame);
-  })();
-});
-
+// --- Constantes carte ---
 const VIEW_WIDTH = 800;
 const VIEW_HEIGHT = 600;
-
 const MAP_COLS = 3;
 const MAP_ROWS = 3;
 
 let currentX = 1;
 let currentY = 1;
-
 const margin = 5;
 
+// --- Chargement d'état ---
+async function loadPlayerState() {
+  if (!activePlayerData) return null;
+
+  try {
+    const token = getToken();
+    const res = await fetch(`${API}/api/player/${activePlayerData.id}/state`, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    });
+    const data = await res.json();
+    if (data.success && data.state) {
+      console.log('LOAD STATE', data.state);
+      return data.state;
+    }
+  } catch (err) {
+    console.error('Erreur loadPlayerState', err);
+  }
+
+  return null;
+}
+
+// --- Sauvegarde d'état ---
+async function savePlayerState() {
+  if (!activePlayerData || !player) return;
+
+  const maxX = VIEW_WIDTH * MAP_COLS;
+  const maxY = VIEW_HEIGHT * MAP_ROWS;
+  const safeX = Phaser.Math.Clamp(player.x, margin, maxX - margin);
+  const safeY = Phaser.Math.Clamp(player.y, margin, maxY - margin);
+
+  const body = {
+    pos_x: safeX,
+    pos_y: safeY,
+    zone_x: currentX,
+    zone_y: currentY,
+    hp: 100,
+    mana: 50
+  };
+
+  try {
+    const token = getToken();
+    const res = await fetch(`${API}/api/player/${activePlayerData.id}/state`, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body)
+    });
+    if (!res.ok) {
+      console.error('Erreur HTTP savePlayerState', res.status);
+    } else {
+      console.log('État sauvegardé', body);
+    }
+  } catch (err) {
+    console.error('Erreur savePlayerState', err);
+  }
+}
+
+window.addEventListener('beforeunload', () => {
+  savePlayerState();
+});
+
+// --- Scènes Phaser ---
 function preload() {
   console.log('preload start');
   this.load.image('background', '../assets/background.png');
-  this.load.spritesheet('static_down', '../assets/character/static_down.png', {
-    frameWidth: 96,
-    frameHeight: 80
-  });
-  this.load.spritesheet('static_left', '../assets/character/static_left.png', {
-    frameWidth: 96,
-    frameHeight: 80
-  });
-  this.load.spritesheet('static_right', '../assets/character/static_right.png', {
-    frameWidth: 96,
-    frameHeight: 80
-  });
-  this.load.spritesheet('static_up', '../assets/character/static_up.png', {
-    frameWidth: 96,
-    frameHeight: 80
-  });
-  this.load.spritesheet('run_down', '../assets/character/run_down.png', {
-    frameWidth: 96,
-    frameHeight: 80
-  });
-  this.load.spritesheet('run_left', '../assets/character/run_left.png', {
-    frameWidth: 96,
-    frameHeight: 80
-  });
-  this.load.spritesheet('run_right', '../assets/character/run_right.png', {
-    frameWidth: 96,
-    frameHeight: 80
-  });
-  this.load.spritesheet('run_up', '../assets/character/run_up.png', {
-    frameWidth: 96,
-    frameHeight: 80
-  });
+  this.load.spritesheet('static_down',  '../assets/character/static_down.png',  { frameWidth: 96, frameHeight: 80 });
+  this.load.spritesheet('static_left',  '../assets/character/static_left.png',  { frameWidth: 96, frameHeight: 80 });
+  this.load.spritesheet('static_right', '../assets/character/static_right.png', { frameWidth: 96, frameHeight: 80 });
+  this.load.spritesheet('static_up',    '../assets/character/static_up.png',    { frameWidth: 96, frameHeight: 80 });
+  this.load.spritesheet('run_down',  '../assets/character/run_down.png',  { frameWidth: 96, frameHeight: 80 });
+  this.load.spritesheet('run_left',  '../assets/character/run_left.png',  { frameWidth: 96, frameHeight: 80 });
+  this.load.spritesheet('run_right', '../assets/character/run_right.png', { frameWidth: 96, frameHeight: 80 });
+  this.load.spritesheet('run_up',    '../assets/character/run_up.png',    { frameWidth: 96, frameHeight: 80 });
 }
 
 function create() {
-  var MAP_COLS = 3;
-  var MAP_ROWS = 3;
-
-  var currentX = 1;
-  var currentY = 1;
-
-  var margin = 5;
-
   console.log('create start');
+
+  // Contrôles clavier — flèches ET ZQSD
   cursor = this.input.keyboard.createCursorKeys();
+  keyZ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
+  keyQ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
+  keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
+  keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
 
-  this.anims.create({
-    key: 'static_down_anim',
-    frames: this.anims.generateFrameNumbers('static_down', { start: 0, end: 7 }),
-    frameRate: 10,
-    repeat: -1
-  });
-  this.anims.create({
-    key: 'static_left_anim',
-    frames: this.anims.generateFrameNumbers('static_left', { start: 0, end: 7 }),
-    frameRate: 10,
-    repeat: -1
-  });
-  this.anims.create({
-    key: 'static_right_anim',
-    frames: this.anims.generateFrameNumbers('static_right', { start: 0, end: 7 }),
-    frameRate: 10,
-    repeat: -1
-  });
-  this.anims.create({
-    key: 'static_up_anim',
-    frames: this.anims.generateFrameNumbers('static_up', { start: 0, end: 7 }),
-    frameRate: 10,
-    repeat: -1
-  });
-  this.anims.create({
-    key: 'run_down_anim',
-    frames: this.anims.generateFrameNumbers('run_down', { start: 0, end: 7 }),
-    frameRate: runAnim,
-    repeat: -1
-  });
-  this.anims.create({
-    key: 'run_left_anim',
-    frames: this.anims.generateFrameNumbers('run_left', { start: 0, end: 7 }),
-    frameRate: runAnim,
-    repeat: -1
-  });
-  this.anims.create({
-    key: 'run_right_anim',
-    frames: this.anims.generateFrameNumbers('run_right', { start: 0, end: 7 }),
-    frameRate: runAnim,
-    repeat: -1
-  });
-  this.anims.create({
-    key: 'run_up_anim',
-    frames: this.anims.generateFrameNumbers('run_up', { start: 0, end: 7 }),
-    frameRate: runAnim,
-    repeat: -1
+  // Animations
+  const animDefs = [
+    { key: 'static_down_anim',  sprite: 'static_down'  },
+    { key: 'static_left_anim',  sprite: 'static_left'  },
+    { key: 'static_right_anim', sprite: 'static_right' },
+    { key: 'static_up_anim',    sprite: 'static_up'    },
+    { key: 'run_down_anim',     sprite: 'run_down',  frameRate: runAnim },
+    { key: 'run_left_anim',     sprite: 'run_left',  frameRate: runAnim },
+    { key: 'run_right_anim',    sprite: 'run_right', frameRate: runAnim },
+    { key: 'run_up_anim',       sprite: 'run_up',    frameRate: runAnim }
+  ];
+
+  animDefs.forEach(a => {
+    this.anims.create({
+      key: a.key,
+      frames: this.anims.generateFrameNumbers(a.sprite, { start: 0, end: 7 }),
+      frameRate: a.frameRate || 10,
+      repeat: -1
+    });
   });
 
-  // Position au centre de la carte entière (1200, 900)
-  const fullMapWidth = VIEW_WIDTH * MAP_COLS;
+  // Carte complète
+  const fullMapWidth  = VIEW_WIDTH  * MAP_COLS;
   const fullMapHeight = VIEW_HEIGHT * MAP_ROWS;
 
   const bgFull = this.add.image(fullMapWidth / 2, fullMapHeight / 2, 'background');
   bgFull.setOrigin(0.5, 0.5);
+  const scaleX = fullMapWidth  / bgFull.texture.source[0].width;
+  const scaleY = fullMapHeight / bgFull.texture.source[0].height;
+  bgFull.setScale(Math.max(scaleX, scaleY));
 
-  // Obtenir les dimensions originales de l'image
-  const originalWidth = bgFull.texture.source[0].width;
-  const originalHeight = bgFull.texture.source[0].height;
-
-  // Calculer l'échelle pour que l'image remplisse exactement la carte
-  const scaleX = fullMapWidth / originalWidth;
-  const scaleY = fullMapHeight / originalHeight;
-  const finalScale = Math.max(scaleX, scaleY); // Utiliser le plus grand pour couvrir complètement
-
-  bgFull.setScale(finalScale);
-
-  // Joueur positionné sur la rue centrale (entre les bâtiments)
+  // Joueur (position par défaut, écrasée par loadPlayerState)
   player = this.physics.add.sprite(1249, 260, 'static_down', 0);
   player.setOrigin(0.5, 0.5);
   player.setCollideWorldBounds(true);
   player.play('static_down_anim');
-  // Afficher le nom/prénom au-dessus du joueur
-if (activePlayerData) {
-  // Texte centré horizontalement sur le joueur, un peu au-dessus (y - 40)
-  const nameLabel = this.add.text(
-    player.x,
-    player.y - 40,
-    `${activePlayerData.firstname} ${activePlayerData.name}`,
-    {
-      fontSize: '18px',
-      fill: '#ffffff',
-      stroke: '#000000',
-      strokeThickness: 2
-    }
-  );
 
-  // Centrer le texte sur la tête du joueur
-  nameLabel.setOrigin(0.5, 0.5);
+  // Nom au-dessus de la tête
+  if (activePlayerData) {
+    const nameLabel = this.add.text(
+      player.x, player.y - 40,
+      `${activePlayerData.firstname} ${activePlayerData.name}`,
+      { fontSize: '18px', fill: '#ffffff', stroke: '#000000', strokeThickness: 2 }
+    );
+    nameLabel.setOrigin(0.5, 0.5);
+    this.events.on('update', () => {
+      nameLabel.x = player.x;
+      nameLabel.y = player.y - 40;
+    });
+  }
 
-  // Optionnel : lier le texte au joueur pour qu'il suive ses mouvements
-  this.physics.add.existing(nameLabel, false);
-  nameLabel.body.allowGravity = false;
-  nameLabel.body.setImmovable(true);
-
-  // Dans update(), on recale le texte sur le joueur
-  this.events.on('update', () => {
-    nameLabel.x = player.x;
-    nameLabel.y = player.y - 40;
-  });
-}
-
-  // Afficher l'identité du personnage actif en overlay
+  // Overlay identité (coin haut-gauche)
   if (activePlayerData) {
     this.add.text(
-      32,
-      32,
+      32, 32,
       `${activePlayerData.firstname} ${activePlayerData.name} (Slot ${activePlayerData.slot})`,
-      {
-        fontSize: '18px',
-        fill: '#ffffff',
-        stroke: '#000000',
-        strokeThickness: 2
-      }
+      { fontSize: '18px', fill: '#ffffff', stroke: '#000000', strokeThickness: 2 }
     );
   }
 
-  this.physics.world.setBounds(0, 0, VIEW_WIDTH * MAP_COLS, VIEW_HEIGHT * MAP_ROWS);
-  this.cameras.main.setBounds(0, 0, VIEW_WIDTH * MAP_COLS, VIEW_HEIGHT * MAP_ROWS);
+  // Monde physique et caméra
+  this.physics.world.setBounds(0, 0, fullMapWidth, fullMapHeight);
+  this.cameras.main.setBounds(0, 0, fullMapWidth, fullMapHeight);
 
-  // Caméra sur la zone (1,0) où démarre le joueur
   currentX = 1;
   currentY = 0;
   this.cameras.main.scrollX = currentX * VIEW_WIDTH;
   this.cameras.main.scrollY = currentY * VIEW_HEIGHT;
 
-  // --- Collisions ---
-  var DEBUG_COLLISIONS = false;
-  var alpha = DEBUG_COLLISIONS ? 0.35 : 0;
-
   // Hitbox réduite
   player.body.setSize(20, 16);
   player.body.setOffset(38, 54);
 
-  var walls = this.physics.add.staticGroup();
-  var scene = this;
+  const scene = this;
+
+  // Charger la position sauvegardée, puis déverrouiller update()
+  loadPlayerState().then(state => {
+    if (state) {
+      player.x = state.pos_x;
+      player.y = state.pos_y;
+      currentX  = state.zone_x;
+      currentY  = state.zone_y;
+      scene.cameras.main.scrollX = currentX * VIEW_WIDTH;
+      scene.cameras.main.scrollY = currentY * VIEW_HEIGHT;
+    }
+    isInitializing = false;
+  });
+
+  // Collisions
+  const DEBUG_COLLISIONS = false;
+  const alpha = DEBUG_COLLISIONS ? 0.35 : 0;
+  const walls = this.physics.add.staticGroup();
 
   function addWall(x, y, w, h) {
-    var rect = scene.add.rectangle(x + w / 2, y + h / 2, w, h, 0xff0000, alpha);
+    const rect = scene.add.rectangle(x + w / 2, y + h / 2, w, h, 0xff0000, alpha);
     walls.add(rect, false);
-    if (DEBUG_COLLISIONS) {
-      scene.add.text(x + 2, y + 2, `(${x},${y})\n${w}x${h}`, {
-        fontSize: '10px', fill: '#ffffff', backgroundColor: '#000000'
-      }).setDepth(100);
-    }
   }
 
-  // --- Collisions générées depuis background_hitbox.png ---
   addWall(0, 0, 840, 210);
   addWall(0, 210, 780, 270);
   addWall(0, 480, 90, 480);
@@ -367,22 +337,24 @@ if (activePlayerData) {
 }
 
 function update() {
-  if (cursor.left.isDown) {
+  if (isInitializing) return;
+
+  if (cursor.left.isDown || keyQ.isDown) {
     player.play('run_left_anim', true);
     player.setVelocityX(-100);
     player.setVelocityY(0);
     lastDirection = 'left';
-  } else if (cursor.right.isDown) {
+  } else if (cursor.right.isDown || keyD.isDown) {
     player.play('run_right_anim', true);
     player.setVelocityX(100);
     player.setVelocityY(0);
     lastDirection = 'right';
-  } else if (cursor.up.isDown) {
+  } else if (cursor.up.isDown || keyZ.isDown) {
     player.play('run_up_anim', true);
     player.setVelocityY(-100);
     player.setVelocityX(0);
     lastDirection = 'up';
-  } else if (cursor.down.isDown) {
+  } else if (cursor.down.isDown || keyS.isDown) {
     player.play('run_down_anim', true);
     player.setVelocityY(100);
     player.setVelocityX(0);
@@ -390,12 +362,11 @@ function update() {
   } else {
     player.setVelocity(0, 0);
     const idleAnim = {
-      down: 'static_down_anim',
-      up: 'static_up_anim',
-      left: 'static_left_anim',
+      down:  'static_down_anim',
+      up:    'static_up_anim',
+      left:  'static_left_anim',
       right: 'static_right_anim'
     }[lastDirection] || 'static_down_anim';
-
     player.play(idleAnim, true);
   }
 
@@ -403,41 +374,30 @@ function update() {
 }
 
 function checkZoneChange() {
-  if (player.x >= (currentX + 1) * VIEW_WIDTH - margin) {
-    changeZone.call(this, 1, 0);
-  }
-  if (player.x <= currentX * VIEW_WIDTH + margin) {
-    changeZone.call(this, -1, 0);
-  }
-  if (player.y >= (currentY + 1) * VIEW_HEIGHT - margin) {
-    changeZone.call(this, 0, 1);
-  }
-  if (player.y <= currentY * VIEW_HEIGHT + margin) {
-    changeZone.call(this, 0, -1);
-  }
+  if (player.x >= (currentX + 1) * VIEW_WIDTH - margin)  changeZone.call(this,  1,  0);
+  if (player.x <= currentX * VIEW_WIDTH + margin)         changeZone.call(this, -1,  0);
+  if (player.y >= (currentY + 1) * VIEW_HEIGHT - margin)  changeZone.call(this,  0,  1);
+  if (player.y <= currentY * VIEW_HEIGHT + margin)         changeZone.call(this,  0, -1);
 }
 
 function changeZone(dx, dy) {
   const newX = currentX + dx;
   const newY = currentY + dy;
 
-  // limites
   if (newX < 0 || newX >= MAP_COLS || newY < 0 || newY >= MAP_ROWS) return;
 
   currentX = newX;
   currentY = newY;
 
-  // déplacer la caméra doucement
   this.cameras.main.pan(
-    currentX * VIEW_WIDTH + VIEW_WIDTH / 2,
+    currentX * VIEW_WIDTH  + VIEW_WIDTH  / 2,
     currentY * VIEW_HEIGHT + VIEW_HEIGHT / 2,
     300,
     'Power2'
   );
 
-  // replacer le joueur pour qu'il ne reste pas collé au bord
-  if (dx === 1) player.x = currentX * VIEW_WIDTH + 10;
+  if (dx ===  1) player.x = currentX * VIEW_WIDTH + 10;
   if (dx === -1) player.x = (currentX + 1) * VIEW_WIDTH - 10;
-  if (dy === 1) player.y = currentY * VIEW_HEIGHT + 10;
+  if (dy ===  1) player.y = currentY * VIEW_HEIGHT + 10;
   if (dy === -1) player.y = (currentY + 1) * VIEW_HEIGHT - 10;
 }

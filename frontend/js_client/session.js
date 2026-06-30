@@ -92,4 +92,21 @@ function requireActivePlayer() {
 document.addEventListener('DOMContentLoaded', () => {
   const btnLogout = document.getElementById('navLogout');
   if (btnLogout) btnLogout.addEventListener('click', logout);
+  function setActivePlayer(player) {
+  localStorage.setItem('activePlayer', JSON.stringify(player));
+}
+
+function getActivePlayer() {
+  const raw = localStorage.getItem('activePlayer');
+  return raw ? JSON.parse(raw) : null;
+}
+
+function requireActivePlayer() {
+  const player = getActivePlayer();
+  if (!player) {
+    window.location.href = 'character_save.html';
+    return null;
+  }
+  return player;
+}
 });

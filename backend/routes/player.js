@@ -131,5 +131,86 @@ router.delete('/:id', async (req, res) => {
     res.status(500).json({ success: false, message: 'Erreur serveur' });
   }
 });
+// GET /api/player/:id/state — Charger l'état de jeu du personnage
+router.get('/:id/state', async (req, res) => {
+  const playerId = req.params.id;
+
+  try {
+    // Vérifier que ce player appartient bien à l'utilisateur connecté
+    const check = await pool.query(
+      'SELECT id FROM player WHERE id = $1 AND user_id = $2',
+      [playerId, req.user.userId]
+    );
+    if (check.rows.length === 0) {
+      return res.status(403).json({ success: false, message: 'Non autorisé' });
+    }
+
+    const result = await pool.query(
+      'SELECT * FROM player_state WHERE player_id = $1',
+      [playerId]
+    );
+
+    if (result.rows.length === 0) {
+      // Aucun état → renvoyer des valeurs par défaut
+      return res.json({
+        success: true,
+        state: {
+          pos_x: 1249,
+          pos_y: 260,
+          zone_x: 1,
+          zone_y: 0,
+          hp: 100,
+          mana: 50
+        }
+      });
+    }
+
+    res.json({ success: true, state: result.rows[0] });
+  } catch (err) {
+    console.error('ERREUR GET PLAYER STATE:', err);
+    res.status(500).json({ success: false, message: 'Erreur serveur' });
+  }
+});
+// PUT /api/player/:id/state — Sauvegarder l'état de jeu du personnage
+router.put('/:id/state', async (req, res) => {
+  const playerId = req.params.id;
+  const { pos_x, pos_y, zone_x, zone_y, hp, mana } = req.body;
+
+  try {
+    const check = await pool.query(
+      'SELECT id FROM player WHERE id = $1 AND user_id = $2',
+      [playerId, req.user.userId]
+    );
+    if (check.rows.length === 0) {
+      return res.status(403).json({ success: false, message: 'Non autorisé' });
+    }
+
+    const existing = await pool.query(
+      'SELECT id FROM player_state WHERE player_id = $1',
+      [playerId]
+    );
+
+    if (existing.rows.length === 0) {
+      await pool.query(
+        `INSERT INTO player_state
+         (player_id, pos_x, pos_y, zone_x, zone_y, hp, mana, updated_at)
+         VALUES ($1, $2, $3, $4, $5, $6, $7, NOW())`,
+        [playerId, pos_x, pos_y, zone_x, zone_y, hp, mana]
+      );
+    } else {
+      await pool.query(
+        `UPDATE player_state
+         SET pos_x = $1, pos_y = $2, zone_x = $3, zone_y = $4, hp = $5, mana = $6, updated_at = NOW()
+         WHERE player_id = $7`,
+        [pos_x, pos_y, zone_x, zone_y, hp, mana, playerId]
+      );
+    }
+
+    res.json({ success: true });
+  } catch (err) {
+    console.error('ERREUR SAVE PLAYER STATE:', err);
+    res.status(500).json({ success: false, message: 'Erreur serveur' });
+  }
+});
 
 module.exports = router;
