@@ -33,6 +33,8 @@ var activePlayerData = null;
 var keyZ, keyQ, keyS, keyD;  // touches ZQSD déclarées globalement
 
 let isInitializing = true;
+let isPaused = false;
+let pauseMenuGroup = null;
 
 // --- DOMContentLoaded unique ---
 document.addEventListener('DOMContentLoaded', function () {
@@ -173,6 +175,12 @@ function create() {
   keyQ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
   keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
   keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+
+  this.input.keyboard.on('keydown-ESC', function () {
+    if (isInitializing) return;
+    if (isPaused) resumeGame.call(this);
+    else pauseGame.call(this);
+  }, this);
 
   // Animations
   const animDefs = [
@@ -336,8 +344,82 @@ function create() {
   this.physics.add.collider(player, walls);
 }
 
+function pauseGame() {
+  isPaused = true;
+  this.physics.pause();
+  player.setVelocity(0, 0);
+  player.play('static_' + lastDirection + '_anim', true);
+
+  const scene = this;
+  pauseMenuGroup = scene.add.group();
+
+  // Fond semi-transparent
+  const overlay = scene.add.rectangle(400, 300, 800, 600, 0x000000, 0.65);
+  overlay.setScrollFactor(0).setDepth(100);
+  pauseMenuGroup.add(overlay);
+
+  // Bordure du panneau
+  const border = scene.add.rectangle(400, 300, 308, 228, 0x6655aa, 1);
+  border.setScrollFactor(0).setDepth(101);
+  pauseMenuGroup.add(border);
+
+  // Panneau principal
+  const panel = scene.add.rectangle(400, 300, 300, 220, 0x1a1a2e, 1);
+  panel.setScrollFactor(0).setDepth(102);
+  pauseMenuGroup.add(panel);
+
+  // Titre
+  const title = scene.add.text(400, 220, 'PAUSE', {
+    fontSize: '34px', fill: '#e0d0ff', fontStyle: 'bold',
+    stroke: '#000000', strokeThickness: 3
+  });
+  title.setOrigin(0.5, 0.5).setScrollFactor(0).setDepth(103);
+  pauseMenuGroup.add(title);
+
+  // Bouton Reprendre
+  const resumeBtn = scene.add.text(400, 295, '  Reprendre  ', {
+    fontSize: '20px', fill: '#ffffff',
+    backgroundColor: '#3355aa',
+    padding: { x: 18, y: 10 }
+  });
+  resumeBtn.setOrigin(0.5, 0.5).setScrollFactor(0).setDepth(103);
+  resumeBtn.setInteractive({ useHandCursor: true });
+  resumeBtn.on('pointerover', () => resumeBtn.setStyle({ fill: '#aaddff', backgroundColor: '#4466cc' }));
+  resumeBtn.on('pointerout',  () => resumeBtn.setStyle({ fill: '#ffffff', backgroundColor: '#3355aa' }));
+  resumeBtn.on('pointerdown', () => resumeGame.call(scene));
+  pauseMenuGroup.add(resumeBtn);
+
+  // Bouton Menu Principal
+  const menuBtn = scene.add.text(400, 360, '  Menu Principal  ', {
+    fontSize: '20px', fill: '#ffffff',
+    backgroundColor: '#7a2020',
+    padding: { x: 18, y: 10 }
+  });
+  menuBtn.setOrigin(0.5, 0.5).setScrollFactor(0).setDepth(103);
+  menuBtn.setInteractive({ useHandCursor: true });
+  menuBtn.on('pointerover', () => menuBtn.setStyle({ fill: '#ffbbbb', backgroundColor: '#aa3030' }));
+  menuBtn.on('pointerout',  () => menuBtn.setStyle({ fill: '#ffffff', backgroundColor: '#7a2020' }));
+  menuBtn.on('pointerdown', () => goToMainMenu());
+  pauseMenuGroup.add(menuBtn);
+}
+
+function resumeGame() {
+  isPaused = false;
+  if (pauseMenuGroup) {
+    pauseMenuGroup.getChildren().forEach(child => child.destroy());
+    pauseMenuGroup.clear(true, true);
+    pauseMenuGroup = null;
+  }
+  this.physics.resume();
+}
+
+async function goToMainMenu() {
+  await savePlayerState();
+  window.location.href = '../webpages/character_save.html';
+}
+
 function update() {
-  if (isInitializing) return;
+  if (isInitializing || isPaused) return;
 
   if (cursor.left.isDown || keyQ.isDown) {
     player.play('run_left_anim', true);
