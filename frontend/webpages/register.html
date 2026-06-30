@@ -46,7 +46,7 @@
 
 <script src="../js_client/session.js"></script>
 <script>
-// Si déjà connecté → redirige direct
+// Si déjà connecté on redirige direct
 (async () => {
     const me = await getMe();
     if (me) window.location.href = 'character_save.html';
@@ -79,7 +79,7 @@ document.getElementById('registerBtn').addEventListener('click', async () => {
         const data = await res.json();
 
         if (data.success) {
-            localStorage.setItem('token', data.token); // ← stocke le token
+            localStorage.setItem('token', data.token); // stocke le token
             window.location.href = 'create_character.html';
         } else {
             msg.style.color = '#f87171';
