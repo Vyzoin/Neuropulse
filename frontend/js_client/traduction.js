@@ -1,6 +1,6 @@
 window.traductions = {
     french: {
-        logout: "🔓 DÉCONNEXION",
+        logout: "DÉCONNEXION",
         home: "Menu d'accueil",
         settings: "PARAMETRES",
         guide: "GUIDE",
@@ -27,7 +27,7 @@ window.traductions = {
         register_button: "S'enregistrer",
         register_missing_fields: "Veuillez remplir tous les champs",
         password_mismatch: "Les mots de passe ne correspondent pas",
-        factory_reset: "🔄 Réinitialiser aux valeurs par défaut",
+        factory_reset: "Réinitialiser aux valeurs par défaut",
         guide_back: "Menu d'accueil",
         guide_title: "GUIDE DU JEU NEUROPULSE",
         guide_welcome: "Bienvenue dans Neuropulse",
@@ -134,7 +134,7 @@ window.traductions = {
         reset_all: "Réinitialiser tout"
     },
     english: {
-        logout:"🔓 LOGOUT",
+        logout:"LOGOUT",
         home: "Home",
         settings: "SETTINGS",
         guide: "GUIDE",
@@ -161,7 +161,7 @@ window.traductions = {
         register_button: "Register",
         register_missing_fields: "Please fill in all fields",
         password_mismatch: "Passwords do not match",
-        factory_reset:"🔄 Reset to default settings",
+        factory_reset:"Reset to default settings",
         guide_back: "Home",
         guide_title: "NEUROPULSE GAME GUIDE",
         guide_welcome: "Welcome to Neuropulse",
