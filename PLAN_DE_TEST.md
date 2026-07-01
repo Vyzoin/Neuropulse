@@ -106,7 +106,7 @@ Chaque cas suit la structure : **Précondition → Action → Résultat attendu 
 | **Précondition** | Backend démarré, email `test.a@mail.com` non existant en base |
 | **Étapes** | 1. `POST /api/auth/register` avec `{ email, username, password }` valides |
 | **Résultat attendu** | HTTP 201 · `{ success: true, token: "eyJ..." }` · Utilisateur présent en base |
-| **Statut** | ⏳ |
+| **Statut** | ✅ |
 
 ---
 
@@ -118,7 +118,7 @@ Chaque cas suit la structure : **Précondition → Action → Résultat attendu 
 | **Précondition** | Utilisateur test A déjà créé |
 | **Étapes** | 1. `POST /api/auth/register` avec le même email |
 | **Résultat attendu** | HTTP 400 · `{ success: false, message: "Email ou pseudo déjà utilisé" }` |
-| **Statut** | ⏳ |
+| **Statut** | ✅ |
 
 ---
 
@@ -130,7 +130,7 @@ Chaque cas suit la structure : **Précondition → Action → Résultat attendu 
 | **Précondition** | Utilisateur test A déjà créé |
 | **Étapes** | 1. `POST /api/auth/register` avec un email différent mais le même username |
 | **Résultat attendu** | HTTP 400 · `{ success: false, message: "Email ou pseudo déjà utilisé" }` |
-| **Statut** | ⏳ |
+| **Statut** | ✅ |
 
 ---
 
@@ -142,7 +142,7 @@ Chaque cas suit la structure : **Précondition → Action → Résultat attendu 
 | **Précondition** | Backend démarré |
 | **Étapes** | 1. `POST /api/auth/register` sans le champ `password` |
 | **Résultat attendu** | HTTP 400 · `{ success: false, message: "Champs manquants" }` |
-| **Statut** | ⏳ |
+| **Statut** | ✅ |
 
 ---
 
@@ -154,7 +154,7 @@ Chaque cas suit la structure : **Précondition → Action → Résultat attendu 
 | **Précondition** | Utilisateur test A créé |
 | **Étapes** | 1. `POST /api/auth/login` avec `{ email, password }` corrects |
 | **Résultat attendu** | HTTP 200 · `{ success: true, token: "eyJ..." }` |
-| **Statut** | ⏳ |
+| **Statut** | ✅ |
 
 ---
 
@@ -166,7 +166,7 @@ Chaque cas suit la structure : **Précondition → Action → Résultat attendu 
 | **Précondition** | Utilisateur test A créé |
 | **Étapes** | 1. `POST /api/auth/login` avec le bon email et un mauvais mot de passe |
 | **Résultat attendu** | HTTP 401 · `{ success: false, message: "Mot de passe incorrect" }` |
-| **Statut** | ⏳ |
+| **Statut** | ✅ |
 
 ---
 
@@ -178,7 +178,7 @@ Chaque cas suit la structure : **Précondition → Action → Résultat attendu 
 | **Précondition** | Backend démarré |
 | **Étapes** | 1. `POST /api/auth/login` avec un email inexistant |
 | **Résultat attendu** | HTTP 401 · `{ success: false, message: "Email introuvable" }` |
-| **Statut** | ⏳ |
+| **Statut** | ✅ |
 
 ---
 
@@ -190,7 +190,7 @@ Chaque cas suit la structure : **Précondition → Action → Résultat attendu 
 | **Précondition** | Token valide obtenu via login |
 | **Étapes** | 1. `GET /api/auth/me` avec `Authorization: Bearer <token>` |
 | **Résultat attendu** | HTTP 200 · `{ loggedIn: true, userId: <n>, username: "TestA" }` |
-| **Statut** | ⏳ |
+| **Statut** | ✅ |
 
 ---
 
@@ -202,7 +202,7 @@ Chaque cas suit la structure : **Précondition → Action → Résultat attendu 
 | **Précondition** | Backend démarré |
 | **Étapes** | 1. `GET /api/auth/me` sans header Authorization |
 | **Résultat attendu** | HTTP 200 · `{ loggedIn: false }` |
-| **Statut** | ⏳ |
+| **Statut** | ✅ |
 
 ---
 
@@ -214,7 +214,7 @@ Chaque cas suit la structure : **Précondition → Action → Résultat attendu 
 | **Précondition** | Backend démarré |
 | **Étapes** | 1. `GET /api/auth/me` avec `Authorization: Bearer token_bidon` |
 | **Résultat attendu** | HTTP 200 · `{ loggedIn: false }` |
-| **Statut** | ⏳ |
+| **Statut** | ✅ |
 
 ---
 
@@ -226,7 +226,7 @@ Chaque cas suit la structure : **Précondition → Action → Résultat attendu 
 | **Précondition** | Utilisateur connecté (token en localStorage) |
 | **Étapes** | 1. Cliquer sur le bouton "Déconnexion" dans la navbar |
 | **Résultat attendu** | Token supprimé du localStorage · Redirection vers `login.html` · Boutons "Connexion" et "Inscription" réaffichés |
-| **Statut** | ⏳ |
+| **Statut** | ✅ |
 
 ---
 
@@ -242,7 +242,7 @@ Chaque cas suit la structure : **Précondition → Action → Résultat attendu 
 | **Précondition** | Utilisateur connecté, aucun personnage dans le slot 1 |
 | **Étapes** | 1. `POST /api/player` avec `{ name:"Anderson", firstname:"Neo", sexe:"Masculin", slot:1 }` |
 | **Résultat attendu** | HTTP 201 · `{ success: true, player: { id, user_id, name, firstname, sexe, slot:1 } }` · Inventaire créé automatiquement en base |
-| **Statut** | ⏳ |
+| **Statut** | ✅ |
 
 ---
 
@@ -254,7 +254,7 @@ Chaque cas suit la structure : **Précondition → Action → Résultat attendu 
 | **Précondition** | Slot 1 déjà occupé (T-PLAY-01 exécuté) |
 | **Étapes** | 1. `POST /api/player` avec `slot:1` à nouveau |
 | **Résultat attendu** | HTTP 400 · `{ success: false, message: "Ce slot est déjà occupé" }` |
-| **Statut** | ⏳ |
+| **Statut** | ✅ |
 
 ---
 
@@ -266,7 +266,7 @@ Chaque cas suit la structure : **Précondition → Action → Résultat attendu 
 | **Précondition** | Utilisateur connecté |
 | **Étapes** | 1. `POST /api/player` sans le champ `sexe` |
 | **Résultat attendu** | HTTP 400 · `{ success: false, message: "Champs manquants" }` |
-| **Statut** | ⏳ |
+| **Statut** | ✅ |
 
 ---
 
@@ -278,7 +278,7 @@ Chaque cas suit la structure : **Précondition → Action → Résultat attendu 
 | **Précondition** | Backend démarré |
 | **Étapes** | 1. `POST /api/player` sans header Authorization |
 | **Résultat attendu** | HTTP 401 · `{ error: "Token manquant" }` |
-| **Statut** | ⏳ |
+| **Statut** | ✅ |
 
 ---
 
@@ -290,7 +290,7 @@ Chaque cas suit la structure : **Précondition → Action → Résultat attendu 
 | **Précondition** | Utilisateur connecté avec 2 personnages créés (slots 1 et 2) |
 | **Étapes** | 1. `GET /api/player/me` |
 | **Résultat attendu** | HTTP 200 · tableau de 2 personnages triés par slot ASC |
-| **Statut** | ⏳ |
+| **Statut** | ✅ |
 
 ---
 
@@ -302,7 +302,7 @@ Chaque cas suit la structure : **Précondition → Action → Résultat attendu 
 | **Précondition** | Personnage d'id connu appartenant à l'utilisateur connecté |
 | **Étapes** | 1. `GET /api/player/:id` |
 | **Résultat attendu** | HTTP 200 · `{ success: true, player: { ... } }` |
-| **Statut** | ⏳ |
+| **Statut** | ✅ |
 
 ---
 
@@ -314,7 +314,7 @@ Chaque cas suit la structure : **Précondition → Action → Résultat attendu 
 | **Précondition** | Utilisateur B connecté, id d'un personnage appartenant à l'utilisateur A |
 | **Étapes** | 1. `GET /api/player/<id_de_A>` avec le token de B |
 | **Résultat attendu** | HTTP 404 · `{ success: false, message: "Personnage introuvable" }` |
-| **Statut** | ⏳ |
+| **Statut** | ✅ |
 
 ---
 
@@ -326,7 +326,7 @@ Chaque cas suit la structure : **Précondition → Action → Résultat attendu 
 | **Précondition** | Personnage existant appartenant à l'utilisateur connecté |
 | **Étapes** | 1. `PUT /api/player/:id` avec `{ name:"Anderson", firstname:"Thomas", sexe:"Masculin" }` |
 | **Résultat attendu** | HTTP 200 · personnage retourné avec les nouvelles valeurs |
-| **Statut** | ⏳ |
+| **Statut** | ✅ |
 
 ---
 
@@ -338,7 +338,7 @@ Chaque cas suit la structure : **Précondition → Action → Résultat attendu 
 | **Précondition** | Utilisateur B connecté, id d'un personnage de A |
 | **Étapes** | 1. `PUT /api/player/<id_de_A>` avec le token de B |
 | **Résultat attendu** | HTTP 403 · `{ success: false, message: "Non autorisé" }` |
-| **Statut** | ⏳ |
+| **Statut** | ✅ |
 
 ---
 
@@ -350,7 +350,7 @@ Chaque cas suit la structure : **Précondition → Action → Résultat attendu 
 | **Précondition** | Personnage existant appartenant à l'utilisateur connecté |
 | **Étapes** | 1. `DELETE /api/player/:id` 2. `GET /api/player/:id` pour vérifier |
 | **Résultat attendu** | HTTP 200 au DELETE · HTTP 404 au GET · Inventaire supprimé en cascade |
-| **Statut** | ⏳ |
+| **Statut** | ✅ |
 
 ---
 
@@ -362,7 +362,7 @@ Chaque cas suit la structure : **Précondition → Action → Résultat attendu 
 | **Précondition** | Utilisateur B connecté, id d'un personnage de A |
 | **Étapes** | 1. `DELETE /api/player/<id_de_A>` avec le token de B |
 | **Résultat attendu** | HTTP 403 · `{ success: false, message: "Non autorisé" }` |
-| **Statut** | ⏳ |
+| **Statut** | ✅ |
 
 ---
 
@@ -374,7 +374,7 @@ Chaque cas suit la structure : **Précondition → Action → Résultat attendu 
 | **Précondition** | Utilisateur avec les slots 1, 2 et 3 déjà occupés |
 | **Étapes** | 1. Tenter `POST /api/player` avec `slot:4` |
 | **Résultat attendu** | HTTP 400 ou comportement équivalent — aucun 4e personnage créé |
-| **Statut** | ⏳ |
+| **Statut** | ❌ · HTTP 201 retourné — le backend ne valide pas le numéro de slot (slot 4 créé) |
 
 ---
 
@@ -388,7 +388,7 @@ Chaque cas suit la structure : **Précondition → Action → Résultat attendu 
 | **Précondition** | Personnage créé, aucune ligne dans `player_state` |
 | **Étapes** | 1. `GET /api/player/:id/state` |
 | **Résultat attendu** | HTTP 200 · état par défaut `{ pos_x:1249, pos_y:260, zone_x:1, zone_y:0, hp:100, mana:50 }` |
-| **Statut** | ⏳ |
+| **Statut** | ✅ |
 
 ---
 
@@ -400,7 +400,7 @@ Chaque cas suit la structure : **Précondition → Action → Résultat attendu 
 | **Précondition** | Personnage sans état existant |
 | **Étapes** | 1. `PUT /api/player/:id/state` avec `{ pos_x:500, pos_y:300, zone_x:0, zone_y:1, hp:80, mana:40 }` |
 | **Résultat attendu** | HTTP 200 · `{ success: true }` · Ligne créée dans `player_state` |
-| **Statut** | ⏳ |
+| **Statut** | ✅ |
 
 ---
 
@@ -412,7 +412,7 @@ Chaque cas suit la structure : **Précondition → Action → Résultat attendu 
 | **Précondition** | État existant (T-STATE-02 exécuté) |
 | **Étapes** | 1. `PUT /api/player/:id/state` avec de nouvelles coordonnées 2. `GET /api/player/:id/state` |
 | **Résultat attendu** | HTTP 200 · Une seule ligne dans `player_state` avec les nouvelles valeurs · `updated_at` mis à jour |
-| **Statut** | ⏳ |
+| **Statut** | ✅ |
 
 ---
 
@@ -424,7 +424,7 @@ Chaque cas suit la structure : **Précondition → Action → Résultat attendu 
 | **Précondition** | État sauvegardé à `{ pos_x:500, pos_y:300, zone_x:2, zone_y:1 }` |
 | **Étapes** | 1. Sélectionner le personnage dans `character_save.html` 2. Observer la position initiale du joueur dans Phaser |
 | **Résultat attendu** | Le personnage apparaît à x=500, y=300 dans la zone (2,1), caméra positionnée sur cette zone |
-| **Statut** | ⏳ |
+| **Statut** | ✅ |
 
 ---
 
@@ -436,7 +436,7 @@ Chaque cas suit la structure : **Précondition → Action → Résultat attendu 
 | **Précondition** | Jeu en cours, personnage déplacé loin de sa position de départ |
 | **Étapes** | 1. Fermer l'onglet ou naviguer vers une autre URL 2. Relancer le jeu avec le même personnage |
 | **Résultat attendu** | Le personnage réapparaît à la position où il se trouvait avant la fermeture |
-| **Statut** | ⏳ |
+| **Statut** | ✅ |
 
 ---
 
@@ -448,7 +448,7 @@ Chaque cas suit la structure : **Précondition → Action → Résultat attendu 
 | **Précondition** | Jeu en cours |
 | **Étapes** | 1. Appuyer sur ESC 2. Cliquer "Menu Principal" 3. Relancer le jeu avec le même personnage |
 | **Résultat attendu** | Position sauvegardée · Retour vers `character_save.html` · À la reprise, position restaurée |
-| **Statut** | ⏳ |
+| **Statut** | ✅ |
 
 ---
 
@@ -460,7 +460,7 @@ Chaque cas suit la structure : **Précondition → Action → Résultat attendu 
 | **Précondition** | Utilisateur B connecté, id d'un personnage de A |
 | **Étapes** | 1. `GET /api/player/<id_de_A>/state` avec le token de B |
 | **Résultat attendu** | HTTP 403 · `{ success: false, message: "Non autorisé" }` |
-| **Statut** | ⏳ |
+| **Statut** | ✅ |
 
 ---
 
@@ -474,7 +474,7 @@ Chaque cas suit la structure : **Précondition → Action → Résultat attendu 
 | **Précondition** | Aucun token dans localStorage |
 | **Étapes** | 1. Ouvrir `index.html` |
 | **Résultat attendu** | Boutons "Connexion" et "Inscription" visibles · "Déconnexion" masqué · Message d'accueil non connecté affiché |
-| **Statut** | ⏳ |
+| **Statut** | ✅ |
 
 ---
 
@@ -486,7 +486,7 @@ Chaque cas suit la structure : **Précondition → Action → Résultat attendu 
 | **Précondition** | Token valide dans localStorage |
 | **Étapes** | 1. Ouvrir `index.html` |
 | **Résultat attendu** | "Déconnexion" visible · "Bienvenue, TestA" affiché · "Connexion" et "Inscription" masqués |
-| **Statut** | ⏳ |
+| **Statut** | ✅ |
 
 ---
 
@@ -498,19 +498,19 @@ Chaque cas suit la structure : **Précondition → Action → Résultat attendu 
 | **Précondition** | Page `login.html` ouverte |
 | **Étapes** | 1. Cliquer "Se connecter" sans remplir les champs |
 | **Résultat attendu** | Message d'erreur affiché dans la page (pas d'appel API) |
-| **Statut** | ⏳ |
+| **Statut** | ✅ |
 
 ---
 
 ### T-FRONT-04 — Formulaire d'inscription (mots de passe différents)
 
 | Champ | Valeur |
-|---|---|
+|---|--|
 | **Priorité** | P2 |
 | **Précondition** | Page `register.html` ouverte |
 | **Étapes** | 1. Remplir tous les champs avec des mots de passe différents 2. Soumettre |
 | **Résultat attendu** | Message `"Les mots de passe ne correspondent pas"` · Aucun appel API envoyé |
-| **Statut** | ⏳ |
+| **Statut** | ✅ |
 
 ---
 
@@ -522,7 +522,7 @@ Chaque cas suit la structure : **Précondition → Action → Résultat attendu 
 | **Précondition** | Aucun token dans localStorage |
 | **Étapes** | 1. Naviguer directement vers `character_save.html` |
 | **Résultat attendu** | Redirection automatique vers `login.html` |
-| **Statut** | ⏳ |
+| **Statut** | ✅ |
 
 ---
 
@@ -534,7 +534,7 @@ Chaque cas suit la structure : **Précondition → Action → Résultat attendu 
 | **Précondition** | Connecté avec 1 personnage en slot 1, slots 2 et 3 vides |
 | **Étapes** | 1. Ouvrir `character_save.html` |
 | **Résultat attendu** | Slot 1 : nom du personnage + boutons "Jouer" et "Modifier" · Slots 2 et 3 : "Emplacement vide" + bouton "Créer" |
-| **Statut** | ⏳ |
+| **Statut** | ✅ |
 
 ---
 
@@ -546,7 +546,7 @@ Chaque cas suit la structure : **Précondition → Action → Résultat attendu 
 | **Précondition** | Slot 2 vide · Page `create_character.html` ouverte avec `slot=2` en paramètre |
 | **Étapes** | 1. Remplir prénom, nom et sexe 2. Cliquer "Créer le personnage" |
 | **Résultat attendu** | Appel `POST /api/player` · Retour vers `character_save.html` · Slot 2 désormais affiché avec le nouveau personnage |
-| **Statut** | ⏳ |
+| **Statut** | ✅ |
 
 ---
 
@@ -558,7 +558,7 @@ Chaque cas suit la structure : **Précondition → Action → Résultat attendu 
 | **Précondition** | Personnage existant en slot 1 |
 | **Étapes** | 1. Cliquer "Modifier" sur le slot 1 2. Changer le prénom 3. Enregistrer |
 | **Résultat attendu** | Appel `PUT /api/player/:id` · Retour vers `character_save.html` · Nouveau prénom affiché |
-| **Statut** | ⏳ |
+| **Statut** | ✅ |
 
 ---
 
@@ -570,7 +570,7 @@ Chaque cas suit la structure : **Précondition → Action → Résultat attendu 
 | **Précondition** | Personnage existant en slot 2 |
 | **Étapes** | 1. Aller sur `edit_character.html` pour le slot 2 2. Cliquer "Supprimer ce personnage" 3. Confirmer |
 | **Résultat attendu** | Appel `DELETE /api/player/:id` · Slot 2 redevient "Emplacement vide" |
-| **Statut** | ⏳ |
+| **Statut** | ✅ |
 
 ---
 
@@ -582,19 +582,19 @@ Chaque cas suit la structure : **Précondition → Action → Résultat attendu 
 | **Précondition** | Page `settings.html` ouverte, langue FR par défaut |
 | **Étapes** | 1. Sélectionner "English" dans la liste déroulante |
 | **Résultat attendu** | Tous les textes de la page sont mis à jour immédiatement en anglais · `localStorage.getItem('langue')` retourne `"en"` |
-| **Statut** | ⏳ |
+| **Statut** | ✅ |
 
 ---
 
 ### T-FRONT-11 — Persistance de la langue entre les pages
 
 | Champ | Valeur |
-|---|---|
+|---|--|
 | **Priorité** | P3 |
 | **Précondition** | Langue EN sélectionnée et sauvegardée (T-FRONT-10 exécuté) |
 | **Étapes** | 1. Naviguer vers `index.html` |
 | **Résultat attendu** | Page affichée en anglais sans action supplémentaire |
-| **Statut** | ⏳ |
+| **Statut** | ✅ |
 
 ---
 
@@ -608,7 +608,7 @@ Chaque cas suit la structure : **Précondition → Action → Résultat attendu 
 | **Précondition** | Personnage sélectionné (`activePlayer` en localStorage) |
 | **Étapes** | 1. Cliquer "JOUER" sur un slot occupé |
 | **Résultat attendu** | Canvas Phaser affiché en plein écran · Personnage visible avec son nom au-dessus · UI HTML masquée |
-| **Statut** | ⏳ |
+| **Statut** | ✅ |
 
 ---
 
@@ -620,7 +620,7 @@ Chaque cas suit la structure : **Précondition → Action → Résultat attendu 
 | **Précondition** | Jeu en cours |
 | **Étapes** | 1. Appuyer sur Z (haut), S (bas), Q (gauche), D (droite) |
 | **Résultat attendu** | Le personnage se déplace dans la direction correspondante · Animation de course jouée · Vitesse = 100 px/s |
-| **Statut** | ⏳ |
+| **Statut** | ✅ |
 
 ---
 
@@ -632,7 +632,7 @@ Chaque cas suit la structure : **Précondition → Action → Résultat attendu 
 | **Précondition** | Jeu en cours |
 | **Étapes** | 1. Appuyer sur les touches fléchées ↑ ↓ ← → |
 | **Résultat attendu** | Déplacement identique aux touches ZQSD |
-| **Statut** | ⏳ |
+| **Statut** | ✅ |
 
 ---
 
@@ -644,7 +644,7 @@ Chaque cas suit la structure : **Précondition → Action → Résultat attendu 
 | **Précondition** | Jeu en cours, personnage en mouvement |
 | **Étapes** | 1. Relâcher toutes les touches de déplacement |
 | **Résultat attendu** | Animation idle jouée dans la dernière direction regardée · Vitesse = 0 |
-| **Statut** | ⏳ |
+| **Statut** | ✅ |
 
 ---
 
@@ -656,7 +656,7 @@ Chaque cas suit la structure : **Précondition → Action → Résultat attendu 
 | **Précondition** | Jeu en cours |
 | **Étapes** | 1. Déplacer le personnage vers un bord de la carte (ex: bord haut) 2. Continuer d'appuyer sur la touche |
 | **Résultat attendu** | Le personnage s'arrête sur le mur et ne le traverse pas |
-| **Statut** | ⏳ |
+| **Statut** | ✅ |
 
 ---
 
@@ -668,7 +668,7 @@ Chaque cas suit la structure : **Précondition → Action → Résultat attendu 
 | **Précondition** | Jeu en cours, zone courante (0, 0) |
 | **Étapes** | 1. Déplacer le personnage jusqu'au bord droit de la zone |
 | **Résultat attendu** | Transition caméra (pan) vers la zone (1, 0) · Personnage repositionné au bord gauche de la nouvelle zone |
-| **Statut** | ⏳ |
+| **Statut** | ✅ |
 
 ---
 
@@ -680,7 +680,7 @@ Chaque cas suit la structure : **Précondition → Action → Résultat attendu 
 | **Précondition** | Jeu en cours, zone courante (0, 0) |
 | **Étapes** | 1. Déplacer le personnage vers le bord gauche ou le bord haut de la zone (0,0) |
 | **Résultat attendu** | Aucun changement de zone · Le personnage est bloqué par la bordure du monde |
-| **Statut** | ⏳ |
+| **Statut** | ✅ |
 
 ---
 
@@ -692,7 +692,7 @@ Chaque cas suit la structure : **Précondition → Action → Résultat attendu 
 | **Précondition** | Jeu en cours, chargement initial terminé |
 | **Étapes** | 1. Appuyer sur la touche ESC |
 | **Résultat attendu** | Overlay semi-transparent · Panneau "PAUSE" · Boutons "Reprendre" et "Menu Principal" affichés · Physique du jeu suspendue |
-| **Statut** | ⏳ |
+| **Statut** | ✅ |
 
 ---
 
@@ -704,7 +704,7 @@ Chaque cas suit la structure : **Précondition → Action → Résultat attendu 
 | **Précondition** | Menu pause ouvert |
 | **Étapes** | 1. Cliquer "Reprendre" (ou appuyer à nouveau sur ESC) |
 | **Résultat attendu** | Menu pause supprimé · Physique du jeu relancée · Déplacement à nouveau fonctionnel |
-| **Statut** | ⏳ |
+| **Statut** | ✅ |
 
 ---
 
@@ -728,7 +728,7 @@ Chaque cas suit la structure : **Précondition → Action → Résultat attendu 
 | **Précondition** | Personnage avec prénom "Neo" et nom "Anderson" |
 | **Étapes** | 1. Lancer le jeu |
 | **Résultat attendu** | Texte "Neo Anderson" affiché au-dessus du sprite · Texte "Neo Anderson (Slot X)" affiché en overlay coin haut-gauche |
-| **Statut** | ⏳ |
+| **Statut** | ✅ |
 
 ---
 
@@ -741,7 +741,7 @@ Chaque cas suit la structure : **Précondition → Action → Résultat attendu 
 | **Priorité** | P1 |
 | **Étapes** | 1. `GET /api/player/me` sans header Authorization |
 | **Résultat attendu** | HTTP 401 · `{ error: "Token manquant" }` |
-| **Statut** | ⏳ |
+| **Statut** | ✅ |
 
 ---
 
@@ -752,7 +752,7 @@ Chaque cas suit la structure : **Précondition → Action → Résultat attendu 
 | **Priorité** | P1 |
 | **Étapes** | 1. `GET /api/player/me` avec `Authorization: Bearer eyJfauxtoken` |
 | **Résultat attendu** | HTTP 403 · `{ error: "Token invalide ou expiré" }` |
-| **Statut** | ⏳ |
+| **Statut** | ✅ |
 
 ---
 
@@ -763,7 +763,7 @@ Chaque cas suit la structure : **Précondition → Action → Résultat attendu 
 | **Priorité** | P1 |
 | **Étapes** | 1. Avec le token de B, tenter GET / PUT / DELETE sur les ressources de A (player, state) |
 | **Résultat attendu** | HTTP 403 ou 404 sur toutes les tentatives · Aucune donnée de A modifiée |
-| **Statut** | ⏳ |
+| **Statut** | ✅ |
 
 ---
 
@@ -774,7 +774,7 @@ Chaque cas suit la structure : **Précondition → Action → Résultat attendu 
 | **Priorité** | P1 |
 | **Étapes** | 1. Créer un utilisateur 2. Lire directement la colonne `password` dans PostgreSQL |
 | **Résultat attendu** | La valeur commence par `$2b$` (hash bcrypt) · Le mot de passe en clair est introuvable |
-| **Statut** | ⏳ |
+| **Statut** | ✅ · Vérifié via le code source (`bcrypt` salt 10) et le comportement du login/mauvais mot de passe |
 
 ---
 
@@ -785,7 +785,7 @@ Chaque cas suit la structure : **Précondition → Action → Résultat attendu 
 | **Priorité** | P1 |
 | **Étapes** | 1. `POST /api/auth/login` avec `email: "' OR 1=1 --"` |
 | **Résultat attendu** | HTTP 401 · Requête rejetée · Aucune donnée exposée (requêtes paramétrées via `$1, $2…`) |
-| **Statut** | ⏳ |
+| **Statut** | ✅ |
 
 ---
 
