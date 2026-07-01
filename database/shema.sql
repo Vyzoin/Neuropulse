@@ -16,6 +16,18 @@ CREATE TABLE player (
   CONSTRAINT unique_user_slot UNIQUE (user_id, slot)
 );
 
+CREATE TABLE player_state (
+  id         SERIAL PRIMARY KEY,
+  player_id  INTEGER UNIQUE REFERENCES player(id) ON DELETE CASCADE,
+  pos_x      NUMERIC,
+  pos_y      NUMERIC,
+  zone_x     INTEGER,
+  zone_y     INTEGER,
+  hp         INTEGER DEFAULT 100,
+  mana       INTEGER DEFAULT 50,
+  updated_at TIMESTAMP DEFAULT NOW()
+);
+
 CREATE TABLE inventory (
   id SERIAL PRIMARY KEY,
   player_id INTEGER UNIQUE REFERENCES player(id) ON DELETE CASCADE
